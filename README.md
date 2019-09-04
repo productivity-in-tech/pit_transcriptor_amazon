@@ -1,7 +1,7 @@
 ## Version - 2019.09.03
-* Add Click for command-line usage
-* Made Pushover Notifications Optional with -n/--notifications flag
-* `ChannelIdentification` switch -c (--channels) 1/2
+* Add [Click]() for command-line usage
+* Made Pushover Notifications Optional with `-n/--notifications` flag
+* `ChannelIdentification` switch `-c (--channels) 1/2`
 
 ## Step 0
 1. Define your aws credentials in the ~/.aws/credentials
