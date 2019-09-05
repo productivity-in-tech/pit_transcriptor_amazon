@@ -1,0 +1,117 @@
+<html>
+<head>
+	<title>PIT Transcriptor</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hello Bulma!</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js">
+	</script>
+</head>
+<section class="container">
+	<section class="hero is-info is-medium">
+		<div class="hero-body">
+			<div class="container">
+				<h1 class="title is-1">
+					PIT Transcriptor 
+				</h1>
+			</div>
+		</div>
+	</section>
+	<section class="section">
+		<div class="container">
+			<p class="subtitle">
+				<em>PIT Transcriptor</em> is a tool designed to create transcriptions of <em>dev-centric</em> audio content. 
+			</p>
+		</div>
+	</section>
+	<section class="section">
+		<div class="tile is-ancestor">
+			<div class="tile is-parent is-vertical">
+				{% if message %} 
+				<div class="notification tile is-child is-success">
+					{{message}} 
+				</div>
+				{% endif %} 
+				<div class="tile is-child level">
+					<div class="level-item">
+						<form enctype="multipart/form-data" class="box" method='post'>
+							<div class="field is-grouped is-fullwidth">
+								<div class="control">
+									<input class="input" name="email" placeholder="Email">
+								</div>
+								<div class="file">
+									<label class="file-label"> 
+									<input class="file-input" type="file" name="audio_file">
+									<span class="file-cta"> <span class="file-icon"> <i class="fas fa-upload"></i> </span> <span class="file-label"> Choose a file… </span> </span> </label> 
+								</div>
+							</div>
+							<div class="field is-grouped">
+								<div class="control">
+									<button class="button is-link">Submit</button> 
+								</div>
+								<a class="button is-warning-outline" disabled>Unlock Unlimited Sizing</a><span class="icon is-large has-text-warning"><i class="fas fa-coins fa-lg"></i></span> 
+							</div>
+							<h2 class="subtitle has-text-info">
+								Transcribe less than 5MB for free! 
+							</h2>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="section">
+			<h2 class="subtitle is-4">
+				We are honest in how we intend to use your data. (Imagine That) 
+			</h2>
+			<div class="tile is-ancestor">
+				<div class="tile is-parent is-vertical">
+					<div class="tile is-parent">
+						<div class="tile message is-info is-child">
+							<div class="message-header">
+								<h2 class="subtitle has-text-light">
+									Your Email is required to notify you once your transcription is done. 
+								</h2>
+							</div>
+							<div class="message-body container">
+								<p>
+									If allowed (by opting-in) <strong>IS</strong> used to let you know about updates to the platform. 
+								</p>
+								<p>
+									You may be asked to join a newsletter <b>AT A LATER TIME,</b> but your email will not be added to any lists and will only be used to send your download links. 
+								</p>
+							</div>
+						</div>
+						<div class="tile is-parent">
+							<div class="tile message is-warning is-child">
+								<div class="message-header">
+									<h2 class="subtitle">
+										Your Audio <strong>IS</strong> Used to make our content better. 
+									</h2>
+								</div>
+								<div class="message-body">
+									The text is anonymized and any time the transcription is read by <a href="https://productivityintech.com/about" class="link">OUR TEAM</a> to identify words that will be used to make our code dictionaries better. This increases the accuracy of our transcription items. 
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tile is-parent">
+						<div class="tile is-child level">
+							<div class="level-item">
+								<h1 class="subtitle has-text-danger">
+									None of this data is sold or made available to Third-Parties! 
+								</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+		</section>
+	</section>
+	<footer class="footer">
+		<p>
+			PIT Transcriptor is a <a href="https://productivityintech.com" class="link">Productivity in Tech Project</a> 
+		</p>
+		<p>
+			Code is open-source and can be seen on <span class="icon"><i class="fab fa-github"></i></span> 
+	</footer>
+</html>

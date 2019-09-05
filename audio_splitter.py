@@ -41,19 +41,26 @@ def start_transcription(
     return key
 
 
+def _check(key):
+        """Calling check skips the transcription starting point
+and just checks the status for the file"""
+        job = transcribe.get_transcription_job(TranscriptionJobName=key)
+        job_status = job['TranscriptionJob']['TranscriptionJobStatus']
+
+        return job_status
+
 
 
 
 @click.command()
-@click.option('--notifications', '-n', is_flag=True)
 @click.option('--channels', type=Click.choice([1, 2]), default=1)
 @click.option('--check', '-c', is_flag=True)
 @click.argument('base_audio_file')
 def _main(
-        notifications,
         channels,
         base_audio_file,
         skip_upload,
+        check,
         ):
 
     # Amazon Information
@@ -62,16 +69,8 @@ def _main(
     transcribe = boto3.client('transcribe')
     key=Path(base_audio_file).name.replace(' ', '')
 
-    if check:
-        """Calling check skips the transcription starting point
-and just checks the status for the file"""
-        job = transcribe.get_transcription_job(TranscriptionJobName=key)
-        job_status = job['TranscriptionJob']['TranscriptionJobStatus']
-
-        if job_status == 'IN PROGRESS':
-            print(f'Job {key} still in progress. Try again later.')
-
-        else:
+   if check:
+       if _check(key) != 'IN_PROGRESS':
             job_uri = job['TranscriptionJob']['Transcript']['TranscriptFileUri']
             r = requests.get(job_uri)
             r.raise_for_status()
@@ -87,12 +86,6 @@ and just checks the status for the file"""
                 Bucket=bucket,
                 Key=key,
                 )
-
-    if notification:
-        pushover_data['message'] = 'File Uploaded. Beginning transcription'
-        pushover_data['title'] = 'file uploaded'
-        r = requests.post(pushover_url, data=pushover_data)
-        r.raise_for_status
 
     channel_count = {1: False, 2: True}
     return start_transcription(ChannelIdentification=channel_count[channels])
