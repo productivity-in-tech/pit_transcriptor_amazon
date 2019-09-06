@@ -9,7 +9,14 @@
 <div class="container">
  <h1 class="title is-2">{{job['TranscriptionJobName']}}</span></h1>
 <nav class="level">
- <span class="level-item has-text-dark"><a href="job['Transcript']['TranscriptFileUri']"><i class="fas fa-download fa-pulse"></i>
-
+ <span class="level-item icon is-large has-text-dark"><a href="{{job['Transcript']['TranscriptFileUri']}}"><i class="fas fa-download"></i>
+<div class="level-item"><div class="tag is-dark">Submitted:</div><div class="tag">{{job['CreationTime']}}</div></div>
+<div class="level-item"><div class="tag is-dark">Completed:</div><div class="tag">{{job['CompletionTime']}}</div></div>
+<div class="level-item"><div class="tag is-dark">Language:</div><div class="tag">{{flag[job['LanguageCode']]}}</div>
+{% if job['LanguageCode'] == 'en-US' %}
+🇺🇸
+{% elif %}
+{% endif %}
+</div></div>
  </section>
 {% endblock %}

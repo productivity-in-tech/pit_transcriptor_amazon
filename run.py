@@ -84,7 +84,25 @@ class Index:
 
 @api.route('/transcript/{jobName}')
 def get_transcript(req, resp, *, jobName):
-    job = transcribe.get_transcription_job(TranscriptionJobName=jobName)
-    resp.html = api.template('transcript.html', job=job['TranscriptionJob'])
+    flags = {
+    'en-US': 'US English',
+    'en-GB': 'British English',
+    'es-US': 'US Spanish',
+    'en-AU': 'Australian English',
+    'fr-CA': 'Canadian Friend',
+    'de-DE': 'German',
+    'pt-BR': 'Brazilian Portuguese',
+    'fr-FR': 'French',
+    'it-IT': 'Italian',
+    'ko-KR': 'Korean',
+    'es-ES': 'Spanish',
+    'en-IN': 'Indian English',
+    'hi-IN': 'Indian Hindi',
+    'ar-SA': 'Modern Standard Arabic',
+    'ru-RU': 'Russian',
+    'zh-CN':, 'Mandarin Chinese',
+    }
+    job = friendly_date(transcribe.get_transcription_job(TranscriptionJobName=jobName))
+    resp.html = api.template('transcript.html', job=job['TranscriptionJob'], flags=flags)
     
 api.run()
