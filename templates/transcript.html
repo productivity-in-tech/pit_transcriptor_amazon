@@ -3,15 +3,13 @@
 {% block title %}
 {{job['TranscriptionJobName']}} - PIT Transcriptor
 {% endblock %}
-<section class="hero is-info">
-	<div class="hero-body">
-		<div class="container">
-			<h1 class="title is-1">
-				PIT Transcriptor <em class="is-size-5">(Alpha)</em> 
-			</h1>
-		</div>
-	</div>
-</section>
+
 {% block content%}
- {{job['TranscriptionJobName']}}
+<section class="section">
+<div class="container">
+ <h1 class="title is-2">{{job['TranscriptionJobName']}}</span></h1>
+<nav class="level">
+ <span class="level-item has-text-dark"><a href="job['Transcript']['TranscriptFileUri']"><i class="fas fa-download fa-pulse"></i>
+
+ </section>
 {% endblock %}
