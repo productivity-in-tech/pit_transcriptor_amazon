@@ -9,157 +9,165 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js">
 	</script>
 </head>
-	<section class="hero is-info">
-		<div class="hero-body">
-			<div class="container">
-				<h1 class="title is-1">
-					PIT Transcriptor <em class="is-size-5">(Alpha)</em> 
-				</h1>
-			</div>
+<section class="hero is-info">
+	<div class="hero-body">
+		<div class="container">
+			<h1 class="title is-1">
+				PIT Transcriptor <em class="is-size-5">(Alpha)</em> 
+			</h1>
 		</div>
-	</section>
-	<section class="section">
-		<div class="box container">
-			<p class="subtitle">
-				<em>PIT Transcriptor</em> is a tool designed to create transcriptions of <em>dev-centric</em> audio content. 
-			</p>
-		</div>
-	</section>
-  <section id="message-center" class="section">
-  <div class="container">
+	</div>
+</section>
+<section class="section">
+	<div class="box container">
+		<p class="subtitle">
+			<em>PIT Transcriptor</em> is a tool designed to create transcriptions of <em>dev-centric</em> audio content. 
+		</p>
+	</div>
+</section>
+<section id="message-center" class="section">
+	<div class="container">
 		{% if message %} 
 		<div class="notification has-text-primary">
 			{{message}} 
 		</div>
 		{% endif %} 
-		</section>
-
-	 <section id="form-section" class="section">
-		<div class="container box">
-      <h1 class="title is-3">Upload a file and get started! Only <strong class="has-text-grey-light"><strike>$0.08</strike> <span class="has-text-success">$0.05</strong> per minute (while in alpha!)</h1>
-			<form enctype="multipart/form-data" method='post'>
-				<div class="field is-grouped is-fullwidth">
-					<div class="control">
-						<input class="input" name="email" placeholder="Email">
-					</div>
-					<div class="file">
-						<label class="file-label"> 
-						<input class="file-input" type="file" name="audio_file">
-						<span class="file-cta"> <span class="file-icon"> <i class="fas fa-upload"></i> </span> <span class="file-label"> Choose a file… </span> </span> </label> 
-					</div>
+</section>
+<section id="form-section" class="section">
+	<div class="container box">
+		<h1 class="title is-3">
+			Upload a file and get started! Only <strong class="has-text-grey-light"><strike>$0.08</strike> <span class="has-text-success">$0.05</strong> per minute (while in alpha!)
+		</h1>
+		<form enctype="multipart/form-data" method='post'>
+			<div class="field is-grouped is-fullwidth">
+				<div class="control">
+					<input class="input" name="email" placeholder="Email">
 				</div>
-				<div class="field">
-					<div class="control">
-						<button class="button is-link">Submit</button> 
-					</div>
+				<div class="file">
+					<label class="file-label"> 
+					<input class="file-input" type="file" name="audio_file">
+					<span class="file-cta"> <span class="file-icon"> <i class="fas fa-upload"></i> </span> <span class="file-label"> Choose a file… </span> </span> </label> 
 				</div>
-				</form>
+			</div>
+			<div class="field">
+				<div class="control">
+					<button class="button is-link">Submit</button> 
 				</div>
-				
-{% if not email %}
+			</div>
+		</form>
+	</div>
+	{% if not email %} 
 <!-- Pricing Goup -->
-<section id="pricing" class="box section container">
-				<div class="tile is-ancestor">
-					<div class="tile is-parent">
-						<div class="tile box is-child">
-							<h2 class="subtitle has-text-info">
-								Pay per file: 
-							</h2>
-							<h3 class="subtitle is-4>
-  								<strike class="has-text-grey-light">$5</strike>
-  								<strong class="has-text-success">$3.50</strong> /hr of Total Audio 
-							</h3>
-							<ul>
-								<li>Transcriptions available for 90 days</li>
-								<li>Our Developer Specific Custom Dictionary</li>
-							</ul>
-						</div>
-						<div class="tile box is-child">
-							<h2 class="subtitle is-primary">
-								MVP Access 
-							</h2>
-							5 hours of Audio per Month ($3.5 per additional hour) 
-						</div>
+	<section id="pricing" class="hero is-light section container">
+	<h2 class="title is-2">Here's what you get!</h2>
+		<div class="tile is-ancestor content">
+			<div class="tile is-parent">
+				<div class="tile box is-child">
+					<h2 class="subtitle is-2 has-text-info is-capitalized">
+						Pay per file: <span class="subtitle is-4"><strike class="has-text-grey-light">$0.08</strike> <strong class="has-text-success">$0.05</strong> / minute of Audio</span>
+					</h2>
+					<em class="has-text-primary">That's like $5 an hour!</em>
+					<ul>
+						<li>Transcriptions available for 90 days</li>
+						<li>Our Developer Specific Custom Dictionary</li>
+					</ul>
+				</div>
+			</div>
+			<div class="tile is-parent">
+				<div class="tile box is-child">
+					<h2 class="subtitle is-2 has-text-dark has-text-justified">
+						Get <span class="icon has-text-warning"><i class="fas fa-star"></i> </span> MVP Access <span class="icon has-text-warning"><i class="fas fa-star"></i></span><em class="is-size-4 has-text-grey"> (Coming Soon)</em> 
+					</h2>
+					<h2 class="subtitle has-text-centered"> $18/month | $180/year</h2>
+					<ul>
+					<li><span class="has-text-primary has-text-weight-bold">5</span> hours of Audio per Month ($3.5 per additional hour)</li>
+					<li>Transcripts Available <span class="is-uppercase has-text-info has-text-weight-bold">Forever!</span></li>
+					<li>Downloadable Audio</li>
+					<li>Custom Dictionaries (on top of ours! like a nice <span class="has-text-danger">🍒</span>)</li>
+					<li class="is-uppercase has-text-info has-text-weight-bold is-size-3">More features in development...</li>
+					</ul>
+					<div class="has-text-centered">
+					<a href="#" class="button is-large is-primary">Learn More</a>
 					</div>
 				</div>
-				</section>
-				
-				{% endif %}
-		{% if jobs %} 
-		<section class="section">
-			<div class="box">
-				<h2 class="subtitle is-5">
-					Your Queued Transcripts 
-				</h2>
-				<hr>
-				<ul>
-					{% for script in jobs %} 
-					<li> {% if script['TranscriptionJobStatus'] == 'IN_PROGRESS' %} <span class="column"><i class="fas fa-spinner fa-pulse"></i></span><span class="column"><a href="#" class="has-text-grey-light">{{script['TranscriptionJobName']}}</a><span class="tag">{{script['CreationTime']}}</span> {% elif script['TranscriptionJobStatus'] == 'COMPLETED' %} <span class="column"><a href="#" class="has-text-success">{{script['TranscriptionJobName']}}</a></span> 
-					<div class="tags has-addons">
-						<span class="tag is-success"><i class="fas fa-check"></i></span><span class="tag is-dark">{{script['CompletionTime']}}</span> 
-					</div>
-					{% else %} <a href="#" class="has-text-danger">{{script['TranscriptionJobName']}} </a> 
-					<div class="tags has-addons">
-						<span class="tag is-danger"><i class="fas fa-sad-tear"></i></span><span class="tag is-dark">Error</span> {% endif %} </li>
-					{% endfor %} 
-				</ul>
-		</section>
-		{% else %} 
-		<section class="section">
-			<div class="notification">
-				<h2 class="subtitle is-4">
-					We are honest in how we intend to use your data. (Imagine That) 
-				</h2>
-				<div class="tile is-ancestor">
-					<div class="tile is-parent is-vertical">
+			</div>
+		</div>
+	</section>
+	{% endif %} {% if jobs %} 
+	<section class="section">
+		<div class="box">
+			<h2 class="subtitle is-5">
+				Your Queued Transcripts 
+			</h2>
+			<hr>
+			<ul>
+				{% for script in jobs %} 
+				<li> {% if script['TranscriptionJobStatus'] == 'IN_PROGRESS' %} <span class="column"><i class="fas fa-spinner fa-pulse"></i></span><span class="column"><a href="#" class="has-text-grey-light">{{script['TranscriptionJobName']}}</a><span class="tag">{{script['CreationTime']}}</span> {% elif script['TranscriptionJobStatus'] == 'COMPLETED' %} <span class="column"><a href="#" class="has-text-success">{{script['TranscriptionJobName']}}</a></span> 
+				<div class="tags has-addons">
+					<span class="tag is-success"><i class="fas fa-check"></i></span><span class="tag is-dark">{{script['CompletionTime']}}</span> 
+				</div>
+				{% else %} <a href="#" class="has-text-danger">{{script['TranscriptionJobName']}} </a> 
+				<div class="tags has-addons">
+					<span class="tag is-danger"><i class="fas fa-sad-tear"></i></span><span class="tag is-dark">Error</span> {% endif %} </li>
+				{% endfor %} 
+			</ul>
+	</section>
+	{% else %} 
+	<section class="section">
+		<div class="notification">
+			<h2 class="subtitle is-4">
+				We are honest in how we intend to use your data. (Imagine That) 
+			</h2>
+			<div class="tile is-ancestor">
+				<div class="tile is-parent is-vertical">
+					<div class="tile is-parent">
+						<div class="tile message is-info is-child">
+							<div class="message-header">
+								<h2 class="subtitle has-text-light">
+									Your Email is required to notify you once your transcription is done. 
+								</h2>
+							</div>
+							<div class="message-body container">
+								<p>
+									If allowed (by opting-in) <strong>IS</strong> used to let you know about updates to the platform. 
+								</p>
+								<p>
+									You may be asked to join a newsletter <b>AT A LATER TIME,</b> but your email will not be added to any lists and will only be used to send your download links. 
+								</p>
+							</div>
+						</div>
 						<div class="tile is-parent">
-							<div class="tile message is-info is-child">
+							<div class="tile message is-warning is-child">
 								<div class="message-header">
-									<h2 class="subtitle has-text-light">
-										Your Email is required to notify you once your transcription is done. 
+									<h2 class="subtitle">
+										Your Audio <strong>IS</strong> Used to make our content better. 
 									</h2>
 								</div>
-								<div class="message-body container">
-									<p>
-										If allowed (by opting-in) <strong>IS</strong> used to let you know about updates to the platform. 
-									</p>
-									<p>
-										You may be asked to join a newsletter <b>AT A LATER TIME,</b> but your email will not be added to any lists and will only be used to send your download links. 
-									</p>
-								</div>
-							</div>
-							<div class="tile is-parent">
-								<div class="tile message is-warning is-child">
-									<div class="message-header">
-										<h2 class="subtitle">
-											Your Audio <strong>IS</strong> Used to make our content better. 
-										</h2>
-									</div>
-									<div class="message-body">
-										The text is anonymized and any time the transcription is read by <a href="https://productivityintech.com/about" class="link">OUR TEAM</a> to identify words that will be used to make our code dictionaries better. This increases the accuracy of our transcription items. 
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="tile is-parent">
-							<div class="tile is-child level">
-								<div class="level-item">
-									<h2 class="has-text-danger">
-										None of this data is sold or made available to Third-Parties! 
-										</h1>
+								<div class="message-body">
+									The text is anonymized and any time the transcription is read by <a href="https://productivityintech.com/about" class="link">OUR TEAM</a> to identify words that will be used to make our code dictionaries better. This increases the accuracy of our transcription items. 
 								</div>
 							</div>
 						</div>
 					</div>
+					<div class="tile is-parent">
+						<div class="tile is-child level">
+							<div class="level-item">
+								<h2 class="has-text-danger">
+									None of this data is sold or made available to Third-Parties! 
+									</h1>
+							</div>
+						</div>
+					</div>
 				</div>
-		</section>
-		{% endif %} 
+			</div>
 	</section>
-	<footer class="footer">
-		<p>
-			PIT Transcriptor is a <a href="https://productivityintech.com" class="link">Productivity in Tech Project</a> 
-		</p>
-		<p>
-			Code is open-source and can be seen on <span class="icon"><i class="fab fa-github"></i></span> 
-	</footer>
+	{% endif %} 
+</section>
+<footer class="footer">
+	<p>
+		PIT Transcriptor is a <a href="https://productivityintech.com" class="link">Productivity in Tech Project</a> 
+	</p>
+	<p>
+		Code is open-source and can be seen on <span class="icon"><i class="fab fa-github"></i></span> 
+</footer>
 </html>
