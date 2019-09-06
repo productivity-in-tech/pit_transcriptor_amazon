@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
+
 {% block title %}
 {{job['TranscriptionJobName']}} - PIT Transcriptor
 {% endblock %}
+<section class="hero is-info">
+	<div class="hero-body">
+		<div class="container">
+			<h1 class="title is-1">
+				PIT Transcriptor <em class="is-size-5">(Alpha)</em> 
+			</h1>
+		</div>
+	</div>
+</section>
 {% block content%}
-{{job['TranscriptionJobName']}}
+ {{job['TranscriptionJobName']}}
 {% endblock %}
