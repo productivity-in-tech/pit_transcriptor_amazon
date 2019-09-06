@@ -74,7 +74,7 @@ class Index:
         upload_message = f'{filename} has been uploaded and queued for \
                 transcription'
         jobs = check_for_jobs(email)
-        logging.debug(jobs)
+        logging.warn(jobs)
         resp.html = api.template(
                 'index.html',
                 jobs=jobs, 
