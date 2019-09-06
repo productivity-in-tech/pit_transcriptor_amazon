@@ -9,6 +9,7 @@ verify_ssl = true
 responder = "*"
 boto3 = "*"
 requests = "*"
+maya = "*"
 
 [requires]
 python_version = "3.7"

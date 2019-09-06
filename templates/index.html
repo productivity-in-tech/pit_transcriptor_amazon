@@ -65,16 +65,19 @@
 		<hr>
 		<ul>
 		{% for script in jobs %}
-		{{script}}
-		
-		{% if script['status'] == 'IN_PROGRESS' %}
-			<li><a href="#" class="has-grey-light">{{script-name}}</a><div class="tags has-addons"><span class="tag is-dark"><i class="fas fa-spinner fa-pulse"></i></span><span class="tag">Processing</span></div></li>
-		{% elif script['status'] == 'COMPLETED' %}
-			<li> <a href="#" class="has-text-success">{{script['name']}}</a><div class="tags has-addons"><span class="tag is-success"><i class="fas fa-check"></i></span><span class="tag has-text-success">Completed</span></li>
-		{% else %}
-			<li> <a href="#" class="has-text-danger">{{script['name']}}</a><div class="tags has-addons"><span class="tag is-danger"><i class="fas fa-sad-tear"></i></span><span class="tag has-text-danger">Error</span></li>
-		{% endif %}
-
+			<li>			
+			{% if script['TranscriptionJobStatus'] == 'IN_PROGRESS' %}
+			
+			<span class="column"><i class="fas fa-spinner fa-pulse"></i></span><span class="column"><a href="#" class="has-text-grey-light">{{script['TranscriptionJobName']}}</a><span class="tag">{{script['CreationTime']}}</span>
+			
+			{% elif script['TranscriptionJobStatus'] == 'COMPLETED' %}
+			
+			<span class="column"><a href="#" class="has-text-success">{{script['TranscriptionJobName']}}</a></span><div class="tags has-addons"><span class="tag is-success"><i class="fas fa-check"></i></span><span class="tag is-dark">{{script['CompletionTime']}}</span></div>
+			{% else %}
+			
+			<a href="#" class="has-text-danger">{{script['TranscriptionJobName']}} </a><div class="tags has-addons"><span class="tag is-danger"><i class="fas fa-sad-tear"></i></span><span class="tag is-dark">Error</span>
+			{% endif %}
+			</li>
 		{% endfor %}
 		</ul>
 		</section>
