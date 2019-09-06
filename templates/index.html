@@ -52,7 +52,7 @@
 			</div>
 		</form>
 	</div>
-	{% if not email %} 
+	{% if not jobs %} 
 <!-- Pricing Goup -->
 	<section id="pricing" class="hero is-light section container">
 	<h2 class="title is-2">Here's what you get!</h2>
@@ -88,29 +88,8 @@
 				</div>
 			</div>
 		</div>
-	</section>
-	{% endif %} {% if jobs %} 
-	<section class="section">
-		<div class="box container">
-			<h2 class="subtitle is-5">
-				Your Transcripts 
-			</h2>
-			<hr>
-			<ul>
-				{% for script in jobs %} 
-				<li> {% if script['TranscriptionJobStatus'] == 'IN_PROGRESS' %} <span class="column"><i class="fas fa-spinner fa-pulse"></i></span><span class="column"><a href="#" class="has-text-grey-light">{{script['TranscriptionJobName']}}</a><span class="tag">{{script['CreationTime']}}</span> {% elif script['TranscriptionJobStatus'] == 'COMPLETED' %} <span class="column"><a href="#" class="has-text-success">{{script['TranscriptionJobName']}}</a></span> 
-				<div class="tags has-addons">
-					<span class="tag is-success"><i class="fas fa-check"></i></span><span class="tag is-dark">{{script['CompletionTime']}}</span> 
-				</div>
-				{% else %} <a href="#" class="has-text-danger">{{script['TranscriptionJobName']}} </a> 
-				<div class="tags has-addons">
-					<span class="tag is-danger"><i class="fas fa-sad-tear"></i></span><span class="tag is-dark">Error</span> {% endif %} </li>
-				{% endfor %} 
-			</ul>
-	</section>
-	{% else %} 
-	<section class="section">
-		<div class="notification">
+	
+		<div class="container notification">
 			<h2 class="subtitle is-4">
 				We are honest in how we intend to use your data. (Imagine That) 
 			</h2>
@@ -157,8 +136,27 @@
 				</div>
 			</div>
 	</section>
-	{% endif %} 
-</section>
+	{% else %}
+	<section class="section">
+		<div class="box container">
+			<h2 class="subtitle is-5">
+				Your Transcripts 
+			</h2>
+			<hr>
+			<ul>
+				{% for script in jobs %} 
+				<li> {% if script['TranscriptionJobStatus'] == 'IN_PROGRESS' %} <span class="column"><i class="fas fa-spinner fa-pulse"></i></span><span class="column"><a href="#" class="has-text-grey-light">{{script['TranscriptionJobName']}}</a><span class="tag">{{script['CreationTime']}}</span> {% elif script['TranscriptionJobStatus'] == 'COMPLETED' %} <span class="column"><a href="#" class="has-text-success">{{script['TranscriptionJobName']}}</a></span> 
+				<div class="tags has-addons">
+					<span class="tag is-success"><i class="fas fa-check"></i></span><span class="tag is-dark">{{script['CompletionTime']}}</span> 
+				</div>
+				{% else %} <a href="#" class="has-text-danger">{{script['TranscriptionJobName']}} </a> 
+				<div class="tags has-addons">
+					<span class="tag is-danger"><i class="fas fa-sad-tear"></i></span><span class="tag is-dark">Error</span> {% endif %} </li>
+				{% endfor %} 
+			</ul>
+	</section>
+{% endif %}
+	
 <footer class="footer">
 	<p>
 		PIT Transcriptor is a <a href="https://productivityintech.com" class="link">Productivity in Tech Project</a> 
