@@ -9,7 +9,7 @@
 	</script>
 </head>
 <section class="container">
-	<section class="hero is-info is-medium">
+	<section class="hero is-info is-small">
 		<div class="hero-body">
 			<div class="container">
 				<h1 class="title is-1">
@@ -26,10 +26,8 @@
 		</div>
 	</section>
 	<section class="section">
-		<div class="tile is-ancestor">
-			<div class="tile is-parent is-vertical">
 				{% if message %} 
-				<div class="notification tile is-child is-success">
+				<div class="notification has-text-primary">
 					{{message}} 
 				</div>
 				{% endif %} 
@@ -60,7 +58,30 @@
 				</div>
 			</div>
 		</div>
+		{% if jobs %}
 		<section class="section">
+		<div class="box">
+		<h2 class="subtitle is-5">Your Queued Transcripts</h2>
+		<hr>
+		<ul>
+		{% for script in jobs %}
+		{{script}}
+		
+		{% if script['status'] == 'IN_PROGRESS' %}
+			<li><a href="#" class="has-grey-light">{{script-name}}</a><div class="tags has-addons"><span class="tag is-dark"><i class="fas fa-spinner fa-pulse"></i></span><span class="tag">Processing</span></div></li>
+		{% elif script['status'] == 'COMPLETED' %}
+			<li> <a href="#" class="has-text-success">{{script['name']}}</a><div class="tags has-addons"><span class="tag is-success"><i class="fas fa-check"></i></span><span class="tag has-text-success">Completed</span></li>
+		{% else %}
+			<li> <a href="#" class="has-text-danger">{{script['name']}}</a><div class="tags has-addons"><span class="tag is-danger"><i class="fas fa-sad-tear"></i></span><span class="tag has-text-danger">Error</span></li>
+		{% endif %}
+
+		{% endfor %}
+		</ul>
+		</section>
+		
+		{% else %}
+		<section class="section">
+			<div class="notification">
 			<h2 class="subtitle is-4">
 				We are honest in how we intend to use your data. (Imagine That) 
 			</h2>
@@ -98,14 +119,16 @@
 					<div class="tile is-parent">
 						<div class="tile is-child level">
 							<div class="level-item">
-								<h1 class="subtitle has-text-danger">
+								<h2 class="has-text-danger">
 									None of this data is sold or made available to Third-Parties! 
 								</h1>
 							</div>
 						</div>
 					</div>
 				</div>
+				</div>
 		</section>
+		{% endif %}
 	</section>
 	<footer class="footer">
 		<p>

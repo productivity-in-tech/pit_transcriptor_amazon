@@ -29,10 +29,10 @@ def start_transcription(
             )
     return key
 
-def make_key(file_path):
+def get_key(file_path):
     return Path(file_path).name.replace(' ', '')
 
-def get_job(key):
+def get_job(transcribe, key):
         return transcribe.get_transcription_job(TranscriptionJobName=key)
 
 
@@ -41,9 +41,6 @@ def check(job):
 and just checks the status for the file"""
         job_status = job['TranscriptionJob']['TranscriptionJobStatus']
         return job_status
-
-
-
 
 def get_transcription(job, key):
         job_uri = job['TranscriptionJob']['Transcript']['TranscriptFileUri']
