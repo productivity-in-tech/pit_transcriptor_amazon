@@ -82,9 +82,8 @@ class Index:
                 )
 
 
-@api.route('/transcript{jobName}')
+@api.route('/transcript/{jobName}')
 def get_transcript(req, resp, *, jobName):
-    job = transcribe.get_transcription_job(TranscriptionJobName=jobName)
+    job = transcribe.get_transcription_job()
     resp.html = api.template('transcript.html', job=job)
-    
 api.run()
