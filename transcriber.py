@@ -33,17 +33,18 @@ def get_key(file_path):
     return Path(file_path).name.replace(' ', '')
 
 def get_job(transcribe, key):
-        return transcribe.get_transcription_job(TranscriptionJobName=key)
+    return transcribe.get_transcription_job(TranscriptionJobName=key)
 
 
 def check(job):
-        """Calling check skips the transcription starting point
+    """Calling check skips the transcription starting point
 and just checks the status for the file"""
-        job_status = job['TranscriptionJob']['TranscriptionJobStatus']
-        return job_status
+    job_status = job['TranscriptionJob']['TranscriptionJobStatus']
+    return job_status
 
-def get_transcription(job, key):
-        job_uri = job['TranscriptionJob']['Transcript']['TranscriptFileUri']
-        r = requests.get(job_uri)
-        r.raise_for_status()
-        return r.json()
+def get_transcript(job):
+    job_uri = job['Transcript']['TranscriptFileUri']
+    r = requests.get(job_uri)
+    logging.debug(r.json())
+    r.raise_for_status()
+    return r.json()

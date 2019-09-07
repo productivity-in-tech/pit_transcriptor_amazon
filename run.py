@@ -1,5 +1,6 @@
 import transcriber
 import boto3
+import json
 import maya
 import os
 import responder
@@ -22,10 +23,12 @@ def friendly_date(job):
     job['CompletionTime'] = friendly_completion
     return job
 
+
 def check_for_jobs(email, transcribe=transcribe):
     if email:
         jobs = transcribe.list_transcription_jobs(JobNameContains=email)
         return map(friendly_date, jobs['TranscriptionJobSummaries'])
+
 
 api = responder.API()
 
@@ -82,29 +85,34 @@ class Index:
                 )
 
 
-@api.route('/transcript/{jobName}')
-def get_transcript(req, resp, *, jobName):
+@api.route('/transcriptions/{job_name}')
+def get_transcription_page(req, resp, *, job_name):
     flags = {
-        'en-US': 'US English',
-        'en-GB': 'British English',
-        'es-US': 'US Spanish',
-        'en-AU': 'Australian English',
-        'fr-CA': 'Canadian Friend',
-        'de-DE': 'German',
-        'pt-BR': 'Brazilian Portuguese',
-        'fr-FR': 'French',
-        'it-IT': 'Italian',
-        'ko-KR': 'Korean',
-        'es-ES': 'Spanish',
-        'en-IN': 'Indian English',
-        'hi-IN': 'Indian Hindi',
-        'ar-SA': 'Modern Standard Arabic',
-        'ru-RU': 'Russian',
-        'zh-CN': 'Mandarin Chinese',
-        }
-    job = transcribe.get_transcription_job(jobName['TranscriptionJob'])
-    job = friendly_date(job)
-    logging.debug(job)
-    resp.html = api.template('transcript.html', job=job, flags=flags)
+            'en-US': 'US English',
+            'en-GB': 'British English',
+            'es-US': 'US Spanish',
+            'en-AU': 'Australian English',
+            'fr-CA': 'Canadian Friend',
+            'de-DE': 'German',
+            'pt-BR': 'Brazilian Portuguese',
+            'fr-FR': 'French',
+            'it-IT': 'Italian',
+            'ko-KR': 'Korean',
+            'es-ES': 'Spanish',
+            'en-IN': 'Indian English',
+            'hi-IN': 'Indian Hindi',
+            'ar-SA': 'Modern Standard Arabic',
+            'ru-RU': 'Russian',
+            'zh-CN': 'Mandarin Chinese',
+            }
+    job = transcribe.get_transcription_job(TranscriptionJobName=job_name)
+    job = friendly_date(job['TranscriptionJob'])
+    transcript = transcriber.get_transcript(job)
+    resp.html = api.template(
+            'transcript.html',
+            job=job,
+            flags=flags,
+            transcript = transcript,
+            )
 
 api.run()

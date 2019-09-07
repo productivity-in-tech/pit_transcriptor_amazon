@@ -1,36 +1,77 @@
-{% extends 'base.html' %} {% block title %} {{job['TranscriptionJobName']}} - PIT Transcriptor {% endblock %} {% block content%} 
+{% extends 'base.html' %} {% block title %} PIT Transcriptor {% endblock %} {% block content%} 
 <section class="section">
 	<div class="container">
-		<h1 class="title is-2">
-			{{job['TranscriptionJobName']}}</span> 
-		</h1>
-		<nav class="level">
-			<span class="level-item icon is-large has-text-dark"><a href="{{job['Transcript']['TranscriptFileUri']}}"><i class="fas fa-download"></i> 
-			<div class="level-item tags has-addons">
-				<div class="tag is-dark">
-					Submitted: 
+		<div class="card">
+			<header class="card-header">
+				<h1 class="card-header-title">
+					{{job['TranscriptionJobName']}} 
+					<div class="icon is-large has-text-dark">
+						<a href="{{job['Transcript']['TranscriptFileUri']}}"><i class="fas fa-download"></i></a> 
+					</div>
+				</h1>
+			</header>
+			<div class="card-content">
+				<div class="media">
+					<div class="media-left">
+						<audio controls>
+							<source src="{{job['Media']['MediaFileUri']}}">Your Browser Does Not Support this Element</source> 
+						</audio>
+					</div>
+					<div class="media-right content">
+					  <p id="transcript"></p>
+					</div>
 				</div>
-				<div class="tag">
-					{{job['CreationTime']}} 
+				<div class="card-footer">
+					<div class="card-footer-item column is-2">
+						<div class="tags has-addons">
+							<div class="tag is-primary">
+								Submitted: 
+							</div>
+							<div class="tag">
+								{{job['CreationTime']}} 
+							</div>
+						</div>
+					</div>
+					<div class="card-footer-item is-2">
+						<div class="tags has-addons">
+							<div class="tag is-dark">
+								Completed: 
+							</div>
+							<div class="tag">
+								{{job['CompletionTime']}} 
+							</div>
+						</div>
+					</div>
+					<div class="card-footer-item is-2">
+						<div class="tags has-addons">
+							<div class="tag is-dark">
+								Language: 
+							</div>
+							<div class="tag">
+								{{flags[job['LanguageCode']]}} 
+							</div>
+						</div>
+					</div>
+					<div class="card-footer-item is-2">
+						<div class="tags has-addons">
+							<div class="tag is-dark">
+								FileType: 
+							</div>
+							<div class="tag">
+								{{job['MediaFormat']}} 
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="level-item tags has-addons">
-				<div class="tag is-dark">
-					Completed: 
-				</div>
-				<div class="tag">
-					{{job['CompletionTime']}} 
-				</div>
+		</div>
+		<div class="section">
+			<div class="container content">
 			</div>
-			<div class="level-item">
-				<div class="tag is-dark">
-					Language: 
-				</div>
-				<div class="tag">
-					{{flag[job['LanguageCode']]}} 
-				</div>
-			</div>
-		</nav>
-	</div>
+		</div>
 </section>
+<script>
+  var json={{transcript|safe}};
+  document.query('#transcript')[0]
+</script>
 {% endblock %}
