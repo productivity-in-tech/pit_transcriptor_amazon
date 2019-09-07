@@ -146,11 +146,11 @@ PIT Transcriptor
 					<span class="tag">{{script['CreationTime']}}</span>
 					
 					{% elif script['TranscriptionJobStatus'] == 'COMPLETED' %}
-					<span class="column"><a href="/transcripts/{{script['TranscriptionJobName']}}" class="has-text-success">{{script['TranscriptionJobName']}}</a></span> 
+					<span class="column"><a href="/transcript/{{script['TranscriptionJobName']}}" class="has-text-success">{{script['TranscriptionJobName']}}</a></span> 
 					<div class="tags has-addons">
 						<span class="tag is-success"><i class="fas fa-check"></i></span><span class="tag is-dark">{{script['CompletionTime']}}</span> 
 					</div>
-					{% else %} <a href="#" class="has-text-danger">{{script['TranscriptionJobName']}} </a> 
+					{% else %}{{script['TranscriptionJobName']}}
 					<div class="tags has-addons">
 						<span class="tag is-danger"><i class="fas fa-sad-tear"></i></span><span class="tag is-dark">Error</span> {% endif %} </li>
 					{% endfor %} 

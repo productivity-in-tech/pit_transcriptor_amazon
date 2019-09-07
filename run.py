@@ -17,16 +17,16 @@ transcribe = boto3.client('transcribe')
 def friendly_date(job):
     friendly_creation = maya.parse(job['CreationTime']).slang_time()
     job['CreationTime'] = friendly_creation
-    
+
     friendly_completion = maya.parse(job['CompletionTime']).slang_time()
     job['CompletionTime'] = friendly_completion
     return job
-    
-def check_for_jobs(email, transcribe=transcribe): 
+
+def check_for_jobs(email, transcribe=transcribe):
     if email:
         jobs = transcribe.list_transcription_jobs(JobNameContains=email)
         return map(friendly_date, jobs['TranscriptionJobSummaries'])
-    
+
 api = responder.API()
 
 def escape_email(req):
@@ -52,7 +52,7 @@ class Index:
                         Bucket=bucket,
                         Key=key,
                         )
-                        
+
             transcriber.start_transcription(
                     storage=storage,
                     transcribe=transcribe,
@@ -62,7 +62,7 @@ class Index:
                     lang='en-US',
                     )
 
-        
+
         email = escape_email(req)
         data = await req.media(format='files')
         filename = data['audio_file']['filename']
@@ -77,7 +77,7 @@ class Index:
         logging.warn(jobs)
         resp.html = api.template(
                 'index.html',
-                jobs=jobs, 
+                jobs=jobs,
                 message=upload_message,
                 )
 
@@ -85,24 +85,25 @@ class Index:
 @api.route('/transcript/{jobName}')
 def get_transcript(req, resp, *, jobName):
     flags = {
-    'en-US': 'US English',
-    'en-GB': 'British English',
-    'es-US': 'US Spanish',
-    'en-AU': 'Australian English',
-    'fr-CA': 'Canadian Friend',
-    'de-DE': 'German',
-    'pt-BR': 'Brazilian Portuguese',
-    'fr-FR': 'French',
-    'it-IT': 'Italian',
-    'ko-KR': 'Korean',
-    'es-ES': 'Spanish',
-    'en-IN': 'Indian English',
-    'hi-IN': 'Indian Hindi',
-    'ar-SA': 'Modern Standard Arabic',
-    'ru-RU': 'Russian',
-    'zh-CN':, 'Mandarin Chinese',
-    }
-    job = friendly_date(transcribe.get_transcription_job(TranscriptionJobName=jobName))
-    resp.html = api.template('transcript.html', job=job['TranscriptionJob'], flags=flags)
-    
+        'en-US': 'US English',
+        'en-GB': 'British English',
+        'es-US': 'US Spanish',
+        'en-AU': 'Australian English',
+        'fr-CA': 'Canadian Friend',
+        'de-DE': 'German',
+        'pt-BR': 'Brazilian Portuguese',
+        'fr-FR': 'French',
+        'it-IT': 'Italian',
+        'ko-KR': 'Korean',
+        'es-ES': 'Spanish',
+        'en-IN': 'Indian English',
+        'hi-IN': 'Indian Hindi',
+        'ar-SA': 'Modern Standard Arabic',
+        'ru-RU': 'Russian',
+        'zh-CN': 'Mandarin Chinese',
+        }
+    job = transcribe.get_transcription_job(jobName['TranscriptionJob'])
+    job = friendly_date(job)
+    resp.html = api.template('transcript.html', job=job, flags=flags)
+
 api.run()
