@@ -74,7 +74,7 @@ class Index:
         upload_message = f'{filename} has been uploaded and queued for \
                 transcription'
         jobs = check_for_jobs(email)
-        logging.warn(jobs)
+        logging.debug(jobs)
         resp.html = api.template(
                 'index.html',
                 jobs=jobs,
@@ -104,6 +104,7 @@ def get_transcript(req, resp, *, jobName):
         }
     job = transcribe.get_transcription_job(jobName['TranscriptionJob'])
     job = friendly_date(job)
+    logging.debug(job)
     resp.html = api.template('transcript.html', job=job, flags=flags)
 
 api.run()
