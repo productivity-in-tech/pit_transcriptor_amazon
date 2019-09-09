@@ -72,11 +72,9 @@ class Index:
         upload_file(data, filename=filename, key=key)
         upload_message = f'{filename} has been uploaded and queued for \
                 transcription'
-        jobs = check_for_jobs(email)
         logging.debug(jobs)
         resp.html = api.template(
                 'index.html',
-                jobs=jobs,
                 message=upload_message,
                 )
 
