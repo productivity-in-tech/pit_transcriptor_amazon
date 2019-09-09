@@ -48,7 +48,7 @@ class Index:
                 storage.upload_fileobj(
                         temp_file,
                         Bucket=bucket,
-                        Key=('-').join(fake.words(nb=6, unique=False)),
+                        Key=key,
                         )
 
             transcriber.start_transcription(
@@ -63,8 +63,8 @@ class Index:
         data = await req.media(format='files')
         filename = Path(data['audio_file']['filename'])
         logging.debug(data['audio_file']['content'])
-        logging.warning(f'filename - {filename.suffix}')
-        key = '-'.join(fake.words(nb=6, unique=True)) + filename.suffix
+        key = '-'.join(fake.words(nb=6, unique=True)) filename.suffix
+        logging.warning(f'key - {key}')
 
 
         upload_file(data, key=key)
