@@ -1,7 +1,7 @@
+from faker import Faker
 from pathlib import Path
 import transcriber
 import boto3
-import faker
 import json
 import maya
 import os

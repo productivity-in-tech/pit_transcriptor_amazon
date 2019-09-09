@@ -10,7 +10,7 @@ responder = "*"
 boto3 = "*"
 requests = "*"
 maya = "*"
-faker = "*"
+Faker = "*"
 
 [requires]
 python_version = "3.7"
