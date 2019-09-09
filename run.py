@@ -23,11 +23,14 @@ transcribe = boto3.client('transcribe')
 fake = Faker()
 
 def friendly_date(job):
-    friendly_creation = maya.parse(job['CreationTime']).slang_time()
-    job['CreationTime'] = friendly_creation
+    if 'CreationTime' in job:
+        friendly_creation = maya.parse(job['CreationTime']).slang_time()
+        job['CreationTime'] = friendly_creation
 
-    friendly_completion = maya.parse(job['CompletionTime']).slang_time()
-    job['CompletionTime'] = friendly_completion
+    if 'CompletionTime' in job:
+        friendly_completion = maya.parse(job['CompletionTime']).slang_time()
+        job['CompletionTime'] = friendly_completion
+
     return job
 
 
@@ -95,14 +98,27 @@ def get_transcription_page(req, resp, *, job_name):
             'ru-RU': 'Russian',
             'zh-CN': 'Mandarin Chinese',
             }
-    job = transcribe.get_transcription_job(TranscriptionJobName=job_name)
-    job = friendly_date(job['TranscriptionJob'])
-    transcript = transcriber.get_transcript(job)
-    resp.html = api.template(
-            'transcript.html',
-            job=job,
-            flags=flags,
-            transcript = transcript,
-            )
+    try:
+        job = transcribe.get_transcription_job(TranscriptionJobName=job_name)
+        status = job['TranscriptionJobStatus']
+
+    except:
+        status = 'Uploading to S3'
+
+    if status == 'Uploading to S3':
+        resp.html = api.template(
+                'transcript_still_uploading.html'
+                job_name=job_name,
+                )
+    else:
+        job = friendly_date(job['TranscriptionJob'])
+        transcript = transcriber.get_transcript(job)
+        resp.html = api.template(
+                'transcript.html',
+                job=job,
+                flags=flags,
+                transcript = transcript,
+                )
+
 
 api.run()
