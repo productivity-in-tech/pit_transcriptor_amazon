@@ -9,6 +9,7 @@ import maya
 import os
 import responder
 import requests
+import stripe
 import tempfile
 import logging
 import urllib.parse
@@ -77,6 +78,11 @@ class Index:
                 filename=filename,
                 job_name=key,
                 )
+
+@api.route('/setup-transcription/{job_name}')
+def setup_transcription(req, resp, *, job_name):
+    stripe.checkout.Session.Create()
+
 
 @api.route('/transcriptions/{job_name}')
 def get_transcription_page(req, resp, *, job_name):

@@ -15,21 +15,29 @@ PIT Transcriptor
     <div class="notification has-text-primary">
       {{message}} 
     </div>
-    {% endif %} 
     <div class="container box">
       {{filename}} has been uploaded and queued up as <b><a
                                                            href="/transcriptions/{{job_name}}">{{job_name}}</a></b>.
+ 
+    {% endif %} 
       <h1 class="title is-3">
         Upload a file and get started! Only <strong class="has-text-grey-light"><strike>$0.08</strike> <span class="has-text-success">$0.05</strong> per minute (while in alpha!) 
       </h1>
-      <div class="modal" id="fileSubmission">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-          <h2 class="subtitle is-1 has-text-white">Uploading Your File</h2>
-          <progress class="progress is-medium is-warning" max="100"></progress>
-        </div>
-      </div>
     </div>
+
+<div class="modal" id="fileSubmission">
+	<div class="modal-background">
+	</div>
+	<div class="modal-content">
+		<h2 class="subtitle is-1 has-text-white">
+			Uploading Your File
+		</h2>
+		<div id="uploadedFileData"></div>
+		<progress class="progress is-medium is-warning" max="100">%45</progress> 
+	</div>
+</div>
+
+
     <form enctype="multipart/form-data" method='post'>
       <div class="field is-grouped is-fullwidth">
         <div class="control">
@@ -140,12 +148,30 @@ PIT Transcriptor
   </section>
   <script>
     var inputFile = document.querySelector('#inputFile');
-var selectedFile = document.querySelector('#selectedFile');
+    var selectedFile = document.querySelector('#selectedFile');
 
-var getFileName = function () {
-  var filename = inputFile.value.split('\\').pop();
-  selectedFile.innerText = filename;
-}
+
+function setUploadFileData () {
+  var file = this.files[0];
+  var player = document.createElement('audio');
+  player.preload = 'metadata';
+  var filename = getFileName();
+    player.onloadedmetadata = function () {
+      duration = player.duration;
+      document.querySelector('#uploadedFileData').innerHTML = `
+      <h2 class="subtitle is-5">` + filename + `
+      <ul>
+      <li>File Duration: ' + duration;</li>
+      </ul>
+      `
+      }
+  
+
+  }
+  function getFileName () {
+    var filename = inputFile.value.split('\\').pop();
+    return filename;
+    }
 
 var displayUpload = function () {
   var fileSubmission = document.querySelector('#fileSubmission');
