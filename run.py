@@ -35,10 +35,6 @@ def check_for_jobs(email, transcribe=transcribe):
 
 api = responder.API()
 
-def escape_email(req):
-    return req.params.get('email', '').replace('@', 'AT').replace('.', '_')
-
-
 @api.route('/')
 class Index:
 
