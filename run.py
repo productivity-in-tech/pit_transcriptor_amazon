@@ -63,7 +63,7 @@ class Index:
         data = await req.media(format='files')
         filename = Path(data['audio_file']['filename'])
         logging.debug(data['audio_file']['content'])
-        key = '-'.join(fake.words(nb=6, unique=True)) filename.suffix
+        key = '-'.join(fake.words(nb=6, unique=True)) + filename.suffix
         logging.warning(f'key - {key}')
 
 
