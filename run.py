@@ -1,3 +1,4 @@
+from pathlib import Path
 import transcriber
 import boto3
 import faker
@@ -45,14 +46,14 @@ class Index:
 
     async def on_post(self, req, resp):
         @api.background.task
-        def upload_file(data, filename, key):
+        def upload_file(data, key):
             with tempfile.TemporaryFile() as temp_file:
                 temp_file.write(data['audio_file']['content'])
                 temp_file.seek(0)
                 storage.upload_fileobj(
                         temp_file,
                         Bucket=bucket,
-                        Key=('-').join(fake.words(nb=6, unique=False))
+                        Key=('-').join(fake.words(nb=6, unique=False)),
                         )
 
             transcriber.start_transcription(
@@ -67,7 +68,7 @@ class Index:
         data = await req.media(format='files')
         filename = data['audio_file']['filename']
         logging.debug(data['audio_file']['content'])
-        key = transcriber.get_key(filename)
+        key = '-'.join(fake.words(nb=6, unique=True)) + Path(filename).suffix
 
 
         upload_file(data, filename=filename, key=key)
