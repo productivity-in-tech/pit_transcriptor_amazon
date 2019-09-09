@@ -58,9 +58,9 @@ class Index:
                     )
 
         data = await req.media(format='files')
-        filename = data['audio_file']['filename']
+        filename = Path(data['audio_file']['filename'])
         logging.debug(data['audio_file']['content'])
-        key = '-'.join(fake.words(nb=6, unique=True)) + Path(filename).suffix
+        key = '-'.join(fake.words(nb=6, unique=True)) + filename.suffix
 
 
         upload_file(data, key=key)

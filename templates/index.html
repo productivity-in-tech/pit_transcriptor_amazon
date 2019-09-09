@@ -23,10 +23,8 @@ PIT Transcriptor
       <div class="modal" id="fileSubmission">
         <div class="modal-background"></div>
         <div class="modal-content">
-          <h2 class="subtitle is-5">Uploading Your File</h2>
-          <div class="modal" id="uploading">
-            <progress class="progress is-medium is-warning" max="100"></progress>
-          </div>
+          <h2 class="subtitle is-1 has-text-white">Uploading Your File</h2>
+          <progress class="progress is-medium is-warning" max="100"></progress>
         </div>
       </div>
     </div>
@@ -41,7 +39,6 @@ PIT Transcriptor
             <span class="file-cta"> <span class="file-icon"> <i class="fas fa-upload"></i> </span> <span class="file-label"> Choose a file… </span> </span> </label> 
           <span class="file-name is-italic" id="selectedFile">No File Selected</span>
         </div>
-
       </div>
 
       <div class="field">
@@ -141,17 +138,17 @@ PIT Transcriptor
   </section>
   <script>
     var inputFile = document.querySelector('#inputFile');
-    var selectedFile = document.querySelector('#selectedFile');
+var selectedFile = document.querySelector('#selectedFile');
 
-    var getFileName = function () {
-      var filename = inputFile.value.split('\\').pop();
-      selectedFile.innerText = filename;
-      }
+var getFileName = function () {
+  var filename = inputFile.value.split('\\').pop();
+  selectedFile.innerText = filename;
+}
 
-    var displayUpload = function () {
-      var fileSubmission = document.querySelector('#fileSubmission');
-        fileSubmission.className += "is-active";
-    }
+var displayUpload = function () {
+  var fileSubmission = document.querySelector('#fileSubmission');
+  fileSubmission.className += "is-active";
+}
   </script>
   {% endblock %}
 
