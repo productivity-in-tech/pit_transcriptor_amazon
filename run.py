@@ -68,13 +68,12 @@ class Index:
 
 
         upload_file(data, key=key)
-        upload_message = f'{filename} has been uploaded and queued for \
-                transcription'
         resp.html = api.template(
                 'index.html',
                 message=upload_message,
+                filename=filename,
+                job_name=key,
                 )
-
 
 @api.route('/transcriptions/{job_name}')
 def get_transcription_page(req, resp, *, job_name):
