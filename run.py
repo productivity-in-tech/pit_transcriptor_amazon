@@ -99,7 +99,8 @@ def get_transcription_page(req, resp, *, job_name):
             'zh-CN': 'Mandarin Chinese',
             }
     try:
-        job = transcribe.get_transcription_job(TranscriptionJobName=job_name)
+        job =
+        transcribe.get_transcription_job(TranscriptionJobName=job_name)['TranscriptionJob']
         status = job['TranscriptionJobStatus']
 
     except:
@@ -111,7 +112,7 @@ def get_transcription_page(req, resp, *, job_name):
                 job_name=job_name,
                 )
     else:
-        job = friendly_date(job['TranscriptionJob'])
+        job = friendly_date(job)
         transcript = transcriber.get_transcript(job)
         resp.html = api.template(
                 'transcript.html',
