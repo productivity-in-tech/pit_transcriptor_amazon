@@ -28,12 +28,6 @@ def friendly_date(job):
     return job
 
 
-def check_for_jobs(email, transcribe=transcribe):
-    if email:
-        jobs = transcribe.list_transcription_jobs(JobNameContains=email)
-        return map(friendly_date, jobs['TranscriptionJobSummaries'])
-
-
 api = responder.API()
 
 @api.route('/')
@@ -72,7 +66,6 @@ class Index:
         upload_file(data, filename=filename, key=key)
         upload_message = f'{filename} has been uploaded and queued for \
                 transcription'
-        logging.debug(jobs)
         resp.html = api.template(
                 'index.html',
                 message=upload_message,
