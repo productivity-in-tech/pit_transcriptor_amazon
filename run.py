@@ -1,5 +1,6 @@
 import transcriber
 import boto3
+import faker
 import json
 import maya
 import os
@@ -14,6 +15,8 @@ logging.basicConfig(level=logging.WARNING)
 bucket= os.environ['BUCKET_NAME']
 storage = boto3.client('s3',)
 transcribe = boto3.client('transcribe')
+
+fake = Faker()
 
 def friendly_date(job):
     friendly_creation = maya.parse(job['CreationTime']).slang_time()
@@ -53,7 +56,7 @@ class Index:
                 storage.upload_fileobj(
                         temp_file,
                         Bucket=bucket,
-                        Key=key,
+                        Key=('-').join(fake.words(nb=6, unique=False))
                         )
 
             transcriber.start_transcription(
@@ -65,12 +68,10 @@ class Index:
                     lang='en-US',
                     )
 
-
-        email = escape_email(req)
         data = await req.media(format='files')
         filename = data['audio_file']['filename']
         logging.debug(data['audio_file']['content'])
-        key = email + transcriber.get_key(filename)
+        key = transcriber.get_key(filename)
 
 
         upload_file(data, filename=filename, key=key)
