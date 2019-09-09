@@ -107,7 +107,7 @@ def get_transcription_page(req, resp, *, job_name):
 
     if status == 'Uploading to S3':
         resp.html = api.template(
-                'transcript_still_uploading.html'
+                'transcript_still_uploading.html',
                 job_name=job_name,
                 )
     else:
