@@ -1,5 +1,7 @@
 from faker import Faker
 from pathlib import Path
+from sendgrid import SendDrigAPIClient
+
 import transcriber
 import boto3
 import json
@@ -10,6 +12,7 @@ import requests
 import tempfile
 import logging
 import urllib.parse
+
 
 logging.basicConfig(level=logging.WARNING)
 # Amazon Information
@@ -60,7 +63,7 @@ class Index:
         data = await req.media(format='files')
         filename = Path(data['audio_file']['filename'])
         logging.debug(data['audio_file']['content'])
-        logging.warning(filename)
+        logging.warning(f'filename - {filename.suffix}')
         key = '-'.join(fake.words(nb=6, unique=True)) + filename.suffix
 
 
