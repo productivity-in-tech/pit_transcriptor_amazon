@@ -7,11 +7,7 @@ PIT Transcriptor
 <section class="section">
 	<div class="box container">
 		<p class="subtitle">
-			{% if jobs %}
-			Welcome Back,
-			{% else %}
 			<em>PIT Transcriptor</em> is a tool designed to create transcriptions of <em>dev-centric</em> audio content. 
-			{% endif %}
 		</p>
 	</div>
 	<div class="container">
@@ -45,7 +41,6 @@ PIT Transcriptor
 				</div>
 			</form>
 		</div>
-		{% if not jobs %} 
 <!-- Pricing Goup -->
 		<section id="pricing" class="hero is-light section container">
 			<h2 class="title is-2">
@@ -134,35 +129,6 @@ PIT Transcriptor
 					</div>
 				</div>
 		</section>
-		{% else %} 
-		<section class="section">
-			<div class="box container">
-				<h2 class="subtitle is-5">
-					Your Transcripts 
-				</h2>
-				<hr>
-				<ul>
-					{% for script in jobs %} 
-					<li> 
-					{% if script['TranscriptionJobStatus'] == 'IN_PROGRESS' %} <span class="column"><i class="fas fa-spinner fa-pulse"></i></span>
-					<span class="column"><span class="has-text-grey-light">{{script['TranscriptionJobName']}}</span>
-					<span class="tag">{{script['CreationTime']}}</span>
-					
-					{% elif script['TranscriptionJobStatus'] == 'COMPLETED' %}
-					<span class="column"><a href="/transcriptions/{{script['TranscriptionJobName']}}" class="has-text-success">{{script['TranscriptionJobName']}}</a></span> 
-					<div class="tags has-addons">
-						<span class="tag is-success"><i class="fas fa-check"></i></span><span class="tag is-dark">{{script['CompletionTime']}}</span> 
-					</div>
-					{% else %}{{script['TranscriptionJobName']}}
-					<div class="tags has-addons">
-						<span class="tag is-danger"><i class="fas fa-sad-tear"></i></span><span class="tag is-dark">Error</span> {% endif %} </li>
-					{% endfor %} 
-				</ul>
-		</section>
-
-
-
-		{% endif %}
 		<script>
 		var inputFile = document.querySelector('#inputFile');
 		var selectedFile = document.querySelector('#selectedFile');

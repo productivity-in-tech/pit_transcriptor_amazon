@@ -40,9 +40,7 @@ api = responder.API()
 class Index:
 
     def on_get(self, req, resp):
-        jobs = check_for_jobs(escape_email(req))
-        logging.debug(jobs)
-        resp.html = api.template('index.html', jobs=jobs)
+        resp.html = api.template('index.html')
 
     async def on_post(self, req, resp):
         @api.background.task
