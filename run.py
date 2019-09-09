@@ -1,6 +1,6 @@
 from faker import Faker
 from pathlib import Path
-from sendgrid import SendDrigAPIClient
+from sendgrid import SendGridAPIClient
 
 import transcriber
 import boto3
