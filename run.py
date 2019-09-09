@@ -99,8 +99,8 @@ def get_transcription_page(req, resp, *, job_name):
             'zh-CN': 'Mandarin Chinese',
             }
     try:
-        job =
-        transcribe.get_transcription_job(TranscriptionJobName=job_name)['TranscriptionJob']
+        job = transcribe.get_transcription_job(TranscriptionJobName=job_name) \
+                ['TranscriptionJob']
         status = job['TranscriptionJobStatus']
 
     except:
