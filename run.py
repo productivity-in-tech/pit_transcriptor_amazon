@@ -63,7 +63,7 @@ class Index:
         key = '-'.join(fake.words(nb=6, unique=True)) + Path(filename).suffix
 
 
-        upload_file(data, filename=filename, key=key)
+        upload_file(data, key=key)
         upload_message = f'{filename} has been uploaded and queued for \
                 transcription'
         resp.html = api.template(
