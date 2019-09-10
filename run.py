@@ -67,28 +67,22 @@ async def setup_transcription(req, resp):
         temp_file.seek(0)
         upload_file(temp_file, key=key)
 
-
     minutes = math.ceil(length/60)
-
     logging.debug(f'length - {minutes} minutes')
-
     stripe.api_key = os.environ['STRIPE_SECRET_KEY_TEST']
-
-    logging.debug(stripe.api_key)
+    line_item = {
+            'name': 'PIT-transcription',
+            'description': f'Transcription {filename}',
+            'amount': 5,
+            'currency': 'usd',
+            'quantity': minutes,
+            },
 
     session = stripe.checkout.Session.create(
             cancel_url = os.environ['URL_ROOT'] + '/cancel',
             success_url = os.environ['URL_ROOT'] + '/submit',
             payment_method_types = ['card'],
-            line_items = [
-                    {
-                        'name': 'PIT-transcription',
-                        'description': 'PIT Transcription Services from Productivity in Tech',
-                        'amount': 5,
-                        'currency': 'usd',
-                        'quantity': minutes,
-                    }
-                ],
+            line_items = [line_item],
             )
 
     resp.html = api.template(
