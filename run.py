@@ -82,7 +82,9 @@ class Index:
 @api.route('/setup-transcription/{job_name}')
 def setup_transcription(req, resp, *, job_name):
     stripe.checkout.Session.Create()
-
+    resp.html = api.templte(
+    'get_transcription_settings.html',
+    request = req)
 
 @api.route('/transcriptions/{job_name}')
 def get_transcription_page(req, resp, *, job_name):
