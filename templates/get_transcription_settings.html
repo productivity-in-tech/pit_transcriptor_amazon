@@ -7,7 +7,7 @@
         <h2 class="title is-2">Settings for {{filename}}</h2>
     </div>
 
-		<form class="form box" onsubmit="loadCheckout">
+		<form class="form box" onsubmit="">
     <div class="field">
 			<div class="control">
         <label class="label">Email: </label>
@@ -63,7 +63,8 @@
     </div>
 		<div class="field">
 		<div class="control">
-			<input type="submit" class="button is-success">Pay ${{cost}} and Begin!</button>
+			<button class="button is-success" onclick="loadCheckout">Pay ${{cost}}
+        & Begin Transcription!</button>
 		</div>
 		</div>
 </form>
