@@ -78,7 +78,7 @@ async def setup_transcription(req, resp):
 
     session = stripe.checkout.Session.create(
             cancel_url = os.environ['URL_ROOT'] + '/cancel',
-            success_url = os.environ['URL_ROOT'] + '/submit',
+            success_url = os.environ['URL_ROOT'] + '/submit?key=' + key,
             payment_method_types = ['card'],
             line_items = [line_item],
             )
@@ -97,7 +97,7 @@ async def setup_transcription(req, resp):
                     )
 
     upload_file(data, key)
-    resp.headers['xkey'] = key
+    resp.headers['key'] = key
     resp.html = api.template(
             'get_transcription_settings.html',
             filename=filename,
@@ -121,7 +121,7 @@ async def post_submit(req, resp):
             )
 
 
-    transcribe(req.headers['xkey'])
+    transcribe(req.params['key'])
     resp.html = api.template(
         'transcription_still_uploading.html',
         )
