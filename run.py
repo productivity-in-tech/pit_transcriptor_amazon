@@ -54,6 +54,14 @@ async def setup_transcription(req, resp):
         temp_file.write(data['audio_file']['content'])
         temp_file.seek(0)
         length = mutagen.File(temp_file).info.length
+    
+    @api.background.task()
+    def upload_file():
+            storage.upload_fileobj(
+            temp_file,
+            Bucket=bucket,
+            Key=key,
+            )
 
     minutes = math.ceil(length/60)
 
@@ -79,40 +87,28 @@ async def setup_transcription(req, resp):
             )
 
     filename = data['audio_file']['filename']
-    resp.media['audio_file'] = data['audio_file']
+    key = '-'.join(faker.words(nb=4, unique=False)) + Path(filename).suffix
+    upload_file(data, key=key)
     resp.html = api.template(
             'get_transcription_settings.html',
             filename=filename,
             session_id=session['id'],
             stripe_public_key=os.environ['STRIPE_PUBLIC_KEY_TEST'],
             cost= '{:,.2f}'.format(.05 * minutes),
+            key=key,
             )
 
 @api.route('/submit')
 async def post_submit(req, resp):
-    @api.background.task
-    def upload_file(data, key):
-        with tempfile.TemporaryFile() as temp_file:
-            temp_file.write(data['audio_file']['content'])
-            temp_file.seek(0)
-            storage.upload_fileobj(
-                    temp_file,
-                    Bucket=bucket,
-                    Key=key,
-                    )
+    transcriber.start_transcription(
+            storage=storage,
+            transcribe=transcribe,
+            bucket=bucket,
+            key=key,
+            ChannelIdentification=False,
+            lang='en-US',
+            )
 
-        transcriber.start_transcription(
-                storage=storage,
-                transcribe=transcribe,
-                bucket=bucket,
-                key=key,
-                ChannelIdentification=False,
-                lang='en-US',
-                )
-
-    filename = data['audio_file']['filename']
-    key = '-'.join(faker.words(nb=4, unique=False)) + Path(filename).suffix
-    upload_file(data, key=key)
     resp.html = api.template(
             'index.html',
             filename=filename,
