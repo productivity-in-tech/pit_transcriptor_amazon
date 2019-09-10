@@ -50,18 +50,24 @@ async def setup_transcription(req, resp):
     data = await req.media(format='files')
     logging.warning(data['audio_file']['filename'])
 
+    @api.background.task()
+    def upload_file(temp_file, key):
+            storage.upload_fileobj(
+            temp_file,
+            Key,
+            Bucket=bucket,
+            )
+
+    filename = data['audio_file']['filename']
+    key = '-'.join(faker.words(nb=4, unique=False)) + Path(filename).suffix
+
     with tempfile.TemporaryFile() as temp_file:
         temp_file.write(data['audio_file']['content'])
         temp_file.seek(0)
         length = mutagen.File(temp_file).info.length
-    
-    @api.background.task()
-    def upload_file():
-            storage.upload_fileobj(
-            temp_file,
-            Bucket=bucket,
-            Key=key,
-            )
+        temp_file.seek(0)
+        upload_file(temp_file, key=key)
+
 
     minutes = math.ceil(length/60)
 
@@ -86,9 +92,6 @@ async def setup_transcription(req, resp):
                 ],
             )
 
-    filename = data['audio_file']['filename']
-    key = '-'.join(faker.words(nb=4, unique=False)) + Path(filename).suffix
-    upload_file(data, key=key)
     resp.html = api.template(
             'get_transcription_settings.html',
             filename=filename,
