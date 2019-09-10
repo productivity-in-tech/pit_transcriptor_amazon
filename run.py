@@ -48,7 +48,7 @@ def index(req, resp):
 async def setup_transcription(req, resp):
 
     data = await req.media(format='files')
-    logging.debug(data['audio_file']['filename'])
+    logging.warning(data['audio_file']['filename'])
 
     with tempfile.TemporaryFile() as temp_file:
         temp_file.write(data['audio_file']['content'])
