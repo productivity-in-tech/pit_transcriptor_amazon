@@ -7,7 +7,7 @@
         <h2 class="title is-2">Settings for {{filename}}</h2>
     </div>
 
-		<form class="form box" onsubmit="">
+		<form class="form box" onsubmit="loadCheckout">
     <div class="field">
 			<div class="control">
         <label class="label">Email: </label>
@@ -27,7 +27,7 @@
 			</div>
 
 			<div class="control">
-        <input type="checkbox" name="ChannelSpeakerDetection" value="Yes" checked>
+        <input type="checkbox" name="ChannelSpeakerDetection" value="Yes">
         <label class="checkbox">One Speaker Per Channel</label>
 			</div>
 		</div>
@@ -38,13 +38,6 @@
         min="1" max="10">
 			</div>
 
-			<div class="field">
-		<div class="control">
-        <label class="checkbox">Speakers on their own channel
-        <input type=checkbox" value="0">
-        </label>
-    </div>
-    </div>
     <div class="field">
         <label class="label">Language:</label>
 					<div class="select">
@@ -70,7 +63,7 @@
     </div>
 		<div class="field">
 		<div class="control">
-			<button type="button" class="button is-success">Pay ${{cost}} and Begin!</button>
+			<input type="submit" class="button is-success">Pay ${{cost}} and Begin!</button>
 		</div>
 		</div>
 </form>
