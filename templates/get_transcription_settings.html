@@ -22,22 +22,21 @@
 			<div class="control">
 			</div>
 			<div class="control">
-        <input type="checkbox" value="1">
+        <input type="checkbox" name="MultipleSpeakers" value="Yes" checked>
         <label class="checkbox"> Multiple Speakers</label>
 			</div>
 
 			<div class="control">
-        <input type="checkbox" value="1">
+        <input type="checkbox" name="ChannelSpeakerDetection" value="Yes" checked>
         <label class="checkbox">One Speaker Per Channel</label>
 			</div>
 		</div>
 
-			<div class="field is-grouped">
 			<div class="control">
 				<label class="label">Number of Speakers</label>
-				<input class="input" type="number" >
+				<input class="input" type="number" name="MaxNumberOfSpeakers" value="1"
+        min="1" max="10">
 			</div>
-		</div>
 
 			<div class="field">
 		<div class="control">
