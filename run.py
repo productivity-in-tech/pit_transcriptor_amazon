@@ -97,7 +97,7 @@ async def setup_transcription(req, resp):
                     )
 
     upload_file(data, key)
-    resp.params['key'] = key
+    resp.headers['Xkey'] = key
     resp.html = api.template(
             'get_transcription_settings.html',
             filename=filename,
@@ -121,7 +121,7 @@ async def post_submit(req, resp):
             )
 
 
-    transcribe(req['key'])
+    transcribe(req.headers['Xkey'])
     resp.html = api.template(
         'transcription_still_uploading.html',
         )
