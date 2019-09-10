@@ -1,0 +1,32 @@
+  <script>
+    var inputFile = document.querySelector('#inputFile');
+    var selectedFile = document.querySelector('#selectedFile');
+
+
+function setUploadFileData () {
+  var file = this.files[0];
+  var player = document.createElement('audio');
+  player.preload = 'metadata';
+  var filename = getFileName();
+    player.onloadedmetadata = function () {
+      duration = player.duration;
+      document.querySelector('#uploadedFileData').innerHTML = `
+      <h2 class="subtitle is-5">` + filename + `
+      <ul>
+      <li>File Duration: ' + duration;</li>
+      </ul>
+      `
+      }
+  
+
+  }
+  function getFileName () {
+    var filename = inputFile.value.split('\\').pop();
+    return filename;
+    }
+
+var displayUpload = function () {
+  var fileSubmission = document.querySelector('#fileSubmission');
+  fileSubmission.className += "is-active";
+}
+  </script>
