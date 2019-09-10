@@ -6,8 +6,10 @@
     <div class="content">
         <h2 class="title is-2">Settings for {{filename}}</h2>
     </div>
+    </div>
 
-		<form class="form box">
+<div class="container box">
+		<form class="form">
     <div class="field">
 			<div class="control">
         <label class="label">Email: </label>
@@ -63,12 +65,12 @@
     </div>
 		<div class="field">
 		<div class="control">
-			<button class="button is-success" onclick="loadCheckout">Pay ${{cost}}
-        & Begin Transcription!</button>
 		</div>
 		</div>
 </form>
 </div>
+			<button class="button is-success" onclick="loadCheckout">Pay ${{cost}}
+        & Begin Transcription!</button>
 </section>
 
 <script src="https://js.stripe.com/v3/"></script>
