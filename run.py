@@ -102,7 +102,7 @@ async def setup_transcription(req, resp):
             'get_transcription_settings.html',
             filename=filename,
             session_id=session['id'],
-            cost='{:,.2f}'.format(transcription_cost * minutes),
+            cost='{:,.2f}'.format(.01 * transcription_cost * minutes),
             stripe_public_key=stripe_public_key,
             )
 
