@@ -3,7 +3,24 @@
 {% block content %}
 <section class="section">
 <div class="container">
+    <div class="content">
+        <h2 class="title is-2">Settings for {{filename}}</h2>
+    </div>
+
 <form>
+    <div class="field">
+        <label class="label"> Email: </label>
+        <input class="input" type="email">
+    </div>
+    <div class="field is-grouped">
+        <label class="checkbox"> Multiple Speakers
+        <input type="checkbox" value="true">
+        </label>
+    
+        <label class="checkbox">Speakers on their own channel<</label>
+    </div>      
+      
+    </div>
     <div class="field">
         <label class="label">Language:</label>
         <div class="select">
@@ -28,6 +45,8 @@
         </div>
     </div>
 </form>
+
+
 </div>
 </section>
 {% endblock %}
