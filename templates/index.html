@@ -30,12 +30,6 @@ PIT Transcriptor
 		<div class="container">
 		<form class="box" enctype="multipart/form-data" action="/setup-transcription" method='post'>
 
-<div class="" id="fileSubmission">
-    <h1 class="title is-2 has-text-white">Getting Audio Length
-      <progress class="progress is-warning" max="100">%45</progress>
-    </h1>
-  </div>
-</div>
 
 					<div class="section">
 				<div class="field is-grouped is-fullwidth">
@@ -52,6 +46,12 @@ PIT Transcriptor
 							<div class="control">
 								<button class="button is-link" id="fileSubmit" disabled onclick="displayUpload()">Submit</button>
 						</div>
+
+              <div class="is-hidden" id="fileSubmission">
+                  <h1 class="title is-2">Getting Audio Length
+                    <progress class="progress is-warning" max="100">%45</progress>
+                  </h1>
+                </div>
 
 						</div>
 					</div>
@@ -73,7 +73,7 @@ function getFileName () {
 
 var displayUpload = function () {
 	var fileSubmission = document.querySelector('#fileSubmission');
-	fileSubmission.className += "is-active";
+	fileSubmission.className = "";
 }
 </script>
 {% endblock %}
