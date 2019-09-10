@@ -77,8 +77,8 @@ async def setup_transcription(req, resp):
                     }
                 ],
             )
+
     filename = data['audio_file']['filename']
-    resp.media = req.media
     resp.html = api.template(
             'get_transcription_settings.html',
             filename=filename,
