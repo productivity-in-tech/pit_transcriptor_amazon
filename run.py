@@ -109,10 +109,11 @@ async def post_submit(req, resp):
                 lang='en-US',
                 )
 
+    filename = data['audio_file']['filename']
+    key = '-'.join(faker.words(nb=4, unique=False)) + Path(filename).suffix
     upload_file(data, key=key)
     resp.html = api.template(
             'index.html',
-            message=upload_message,
             filename=filename,
             job_name=key,
             )
