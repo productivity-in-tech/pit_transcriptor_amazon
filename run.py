@@ -59,7 +59,7 @@ async def setup_transcription(req, resp):
 
     logging.debug(f'length - {minutes} minutes')
 
-    stripe.api_key = os.environ['STRIPE_API_TOKEN']
+    stripe.api_key = os.environ['STRIPE_SECRET_KEY_TEST']
 
     logging.debug(stripe.api_key)
 
@@ -82,7 +82,7 @@ async def setup_transcription(req, resp):
             'get_transcription_settings.html',
             filename=filename,
             session_id=session['id'],
-            stripe_public_key=os.environ['STRIPE_PUBLIC_KEY'],
+            stripe_public_key=os.environ['STRIPE_PUBLIC_KEY_TEST'],
             cost= '{:,.2f}'.format(.05 * minutes),
             )
 
