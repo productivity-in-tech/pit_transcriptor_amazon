@@ -18,12 +18,15 @@ import urllib.parse
 
 
 logging.basicConfig(level=logging.WARNING)
+fake = Faker()
+
+api = responder.API()
+
 # Amazon Information
 bucket= os.environ['BUCKET_NAME']
 storage = boto3.client('s3',)
 transcribe = boto3.client('transcribe')
 
-fake = Faker()
 
 def friendly_date(job):
     if 'CreationTime' in job:
@@ -37,8 +40,6 @@ def friendly_date(job):
     return job
 
 
-api = responder.API()
-
 @api.route('/')
 def index(req, resp):
         resp.html = api.template('index.html')
@@ -48,7 +49,7 @@ def index(req, resp):
 async def setup_transcription(req, resp):
 
     data = await req.media(format='files')
-    logging.warning(data['audio_file']['filename'])
+    logging.debug(data['audio_file']['filename'])
 
     @api.background.task()
     def upload_file(temp_file, key):
