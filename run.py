@@ -51,13 +51,13 @@ async def setup_transcription(req, resp):
     data = await req.media(format='files')
     logging.debug(data['audio_file']['filename'])
 
-    @api.background.task()
-    def upload_file(temp_file, key):
-            storage.upload_fileobj(
-            temp_file,
-            Key=key,
-            Bucket=bucket,
-            )
+#    @api.background.task()
+#    def upload_file(temp_file, key):
+#            storage.upload_fileobj(
+#            temp_file,
+#            Key=key,
+#            Bucket=bucket,
+#            )
 
     filename = data['audio_file']['filename']
     key = '-'.join(faker.words(nb=4, unique=False)) + Path(filename).suffix
