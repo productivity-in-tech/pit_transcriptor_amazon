@@ -47,37 +47,25 @@ def index(req, resp):
 
 @api.route('/setup-transcription')
 async def setup_transcription(req, resp):
-
     data = await req.media(format='files')
-    logging.debug(data['audio_file']['filename'])
-
-    @api.background.task()
-    def upload_file(temp_file, key):
-            storage.upload_fileobj(
-            temp_file,
-            Key=key,
-            Bucket=bucket,
-            )
-
     filename = data['audio_file']['filename']
-    key = '-'.join(fake.words(nb=4, unique=False)) + Path(filename).suffix
+    logging.debug(filename)
 
     with tempfile.TemporaryFile() as temp_file:
         temp_file.write(data['audio_file']['content'])
         temp_file.seek(0)
         length = mutagen.File(temp_file).info.length
-#        upload_file(temp_file, key=key)
 
     minutes = math.ceil(length/60)
-    logging.debug(f'length - {minutes} minutes')
+    logging.warn(f'length - {minutes} minutes')
     stripe.api_key = os.environ['STRIPE_SECRET_KEY_TEST']
     line_item = {
             'name': 'PIT-transcription',
-            'description': f'Transcription {filename}',
-            'amount': 5,
+            'description': f'Transcription: {filename}',
+            'amount': 8,
             'currency': 'usd',
             'quantity': minutes,
-            },
+            }
 
     session = stripe.checkout.Session.create(
             cancel_url = os.environ['URL_ROOT'] + '/cancel',
@@ -86,30 +74,44 @@ async def setup_transcription(req, resp):
             line_items = [line_item],
             )
 
+    resp.media = req.media
     resp.html = api.template(
             'get_transcription_settings.html',
             filename=filename,
             session_id=session['id'],
             stripe_public_key=os.environ['STRIPE_PUBLIC_KEY_TEST'],
             cost= '{:,.2f}'.format(.05 * minutes),
-            key=key,
             )
 
 @api.route('/submit')
 async def post_submit(req, resp):
-    transcriber.start_transcription(
-            storage=storage,
-            transcribe=transcribe,
-            bucket=bucket,
-            key=key,
-            ChannelIdentification=False,
-            lang='en-US',
-            )
 
+#    @api.background.task()
+#    def upload_file(temp_file, key):
+#        storage.upload_fileobj(
+#            temp_file,
+#            Key=key,
+#            Bucket=bucket,
+#            )
+#
+#        transcriber.start_transcription(
+#            storage=storage,
+#            transcribe=transcribe,
+#            bucket=bucket,
+#            key=key,
+#            ChannelIdentification=False,
+#            lang='en-US',
+#            )
+#
+#    data = await req.media(format='files')
+#
+#    key = '-'.join(fake.words(nb=4, unique=False)) + Path(filename).suffix
+#    filename = data['audio_file']['filename']
+#
+#    upload_file(temp_file, key=key)
+#
     resp.html = api.template(
-            'index.html',
-            filename=filename,
-            job_name=key,
+            'transcription_still_uploading.html',
             )
 
 @api.route('/transcriptions/{job_name}')
