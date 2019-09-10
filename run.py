@@ -5,7 +5,9 @@ from sendgrid import SendGridAPIClient
 import transcriber
 import boto3
 import json
+import math
 import maya
+import mutagen
 import os
 import responder
 import requests
@@ -38,53 +40,81 @@ def friendly_date(job):
 api = responder.API()
 
 @api.route('/')
-class Index:
-
-    def on_get(self, req, resp):
+def index(req, resp):
         resp.html = api.template('index.html')
 
-    async def on_post(self, req, resp):
-        @api.background.task
-        def upload_file(data, key):
-            with tempfile.TemporaryFile() as temp_file:
-                temp_file.write(data['audio_file']['content'])
-                temp_file.seek(0)
-                storage.upload_fileobj(
-                        temp_file,
-                        Bucket=bucket,
-                        Key=key,
-                        )
 
-            transcriber.start_transcription(
-                    storage=storage,
-                    transcribe=transcribe,
-                    bucket=bucket,
-                    key=key,
-                    ChannelIdentification=False,
-                    lang='en-US',
+@api.route('/setup-transcription')
+async def setup_transcription(req, resp):
+
+    data = await req.media(format='files')
+    logging.debug(data['audio_file']['filename'])
+
+    with tempfile.TemporaryFile() as temp_file:
+        temp_file.write(data['audio_file']['content'])
+        temp_file.seek(0)
+        length = mutagen.File(temp_file).info.length
+
+    minutes = math.ceil(length/60)
+
+    logging.debug(f'length - {minutes} minutes')
+
+    stripe.api_key = os.environ['STRIPE_API_TOKEN']
+
+    logging.debug(stripe.api_key)
+
+    session = stripe.checkout.Session.create(
+            cancel_url = os.environ['URL_ROOT'] + '/cancel',
+            success_url = os.environ['URL_ROOT'] + '/submit',
+            payment_method_types = ['card'],
+            line_items = [
+                    {
+                        'name': 'PIT-transcription',
+                        'description': 'PIT Transcription Services from Productivity in Tech',
+                        'amount': 5,
+                        'currency': 'usd',
+                        'quantity': minutes,
+                    }
+                ],
+            )
+    filename = data['audio_file']['filename']
+    resp.html = api.template(
+            'get_transcription_settings.html',
+            filename=filename,
+            session_id=session['id'],
+            stripe_public_key=os.environ['STRIPE_PUBLIC_KEY'],
+            cost= '{:,.2f}'.format(.05 * minutes),
+            )
+
+@api.route('/submit')
+async def post_submit(req, resp):
+    @api.background.task
+    def upload_file(data, key):
+        with tempfile.TemporaryFile() as temp_file:
+            temp_file.write(data['audio_file']['content'])
+            temp_file.seek(0)
+            storage.upload_fileobj(
+                    temp_file,
+                    Bucket=bucket,
+                    Key=key,
                     )
 
-        data = await req.media(format='files')
-        filename = Path(data['audio_file']['filename'])
-        logging.debug(data['audio_file']['content'])
-        key = '-'.join(fake.words(nb=6, unique=True)) + filename.suffix
-        logging.warning(f'key - {key}')
-
-
-        upload_file(data, key=key)
-        resp.html = api.template(
-                'index.html',
-                message=upload_message,
-                filename=filename,
-                job_name=key,
+        transcriber.start_transcription(
+                storage=storage,
+                transcribe=transcribe,
+                bucket=bucket,
+                key=key,
+                ChannelIdentification=False,
+                lang='en-US',
                 )
 
-@api.route('/setup-transcription/{job_name}')
-def setup_transcription(req, resp, *, job_name):
-    stripe.checkout.Session.Create()
-    resp.html = api.templte(
-    'get_transcription_settings.html',
-    request = req)
+    upload_file(data, key=key)
+    resp.html = api.template(
+            'index.html',
+            message=upload_message,
+            filename=filename,
+            job_name=key,
+            )
 
 @api.route('/transcriptions/{job_name}')
 def get_transcription_page(req, resp, *, job_name):

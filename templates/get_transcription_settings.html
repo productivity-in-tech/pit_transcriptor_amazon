@@ -7,24 +7,41 @@
         <h2 class="title is-2">Settings for {{filename}}</h2>
     </div>
 
-<form>
+		<form class="form box" onsubmit="return stripe.redirectToCheckout({sessionId: '{{session_id}}'}).then(function(result){})">
     <div class="field">
-        <label class="label"> Email: </label>
+			<div class="control">
+        <label class="label">Email: </label>
         <input class="input" type="email">
-    </div>
+			</div>
+		</div>
+
     <div class="field is-grouped">
-        <label class="checkbox"> Multiple Speakers
+			<div class="control">
+			<label class="label">Speaker Options: </label>
+			</div>
+			<div class="control">
         <input type="checkbox" value="true">
-        </label>
-    
-        <label class="checkbox">Speakers on their own channel<</label>
-    </div>      
-      
-    </div>
-    <div class="field">
+        <label class="checkbox"> Multiple Speakers</label>
+			</div>
+
+			<div class="control">
+        <input type="checkbox" value="true">
+        <label class="checkbox">One Speaker Per Channel</label>
+			</div>
+		</div>
+
+			<div class="field is-grouped">
+			<div class="control">
+				<label class="label">Number of Speakers</label>
+				<input class="input" type="number" >
+			</div>
+		</div>
+
+		<div class="control">
+			<div class="field">
         <label class="label">Language:</label>
-        <div class="select">
-            <select>           
+					<div class="select">
+            <select>
                 <option class="option" value="en-US">US English</option>
                 <option class="option" value="en-GB">British English</option>
                 <option class="option" value="en-AU">Australian English</option>
@@ -41,12 +58,21 @@
                 <option class="option" value="en-IN">Indian English</option>
                 <option class="option" value="hi-IN">Indian Hindi</option>
                 <option class="option" value="zh-CN">Mandarin Chinese</option>
-            </section>
+            </select>
         </div>
     </div>
+		<div class="field">
+		<div class="control">
+			<button type="button" class="button is-success">Pay ${{cost}} and Begin!</button>
+		</div>
+		</div>
 </form>
-
-
 </div>
 </section>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+		var stripe = Stripe('{{stripe_public_key}}');
+</script>
+
 {% endblock %}

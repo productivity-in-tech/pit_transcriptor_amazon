@@ -12,6 +12,8 @@ requests = "*"
 maya = "*"
 Faker = "*"
 sendgrid = "*"
+mutagen = "*"
+stripe = "*"
 
 [requires]
 python_version = "3.7"
