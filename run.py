@@ -19,14 +19,14 @@ import urllib.parse
 
 logging.basicConfig(level=logging.WARNING)
 fake = Faker()
-
 api = responder.API()
 
 # Amazon Information
 bucket= os.environ['BUCKET_NAME']
 storage = boto3.client('s3',)
 transcribe = boto3.client('transcribe')
-
+stripe.api_key = os.environ['STRIPE_SECRET_KEY_TEST']
+stripe_public_key = os.environ['STRIPE_PUBLIC_KEY_TEST']
 
 def friendly_date(job):
     if 'CreationTime' in job:
@@ -39,30 +39,39 @@ def friendly_date(job):
 
     return job
 
+@api.route('/login')
+def login(req, resp):
+    resp.html('index.html')
 
 @api.route('/')
 def index(req, resp):
-        resp.html = api.template('index.html')
+    resp.html = api.template('index.html')
 
 
 @api.route('/setup-transcription')
 async def setup_transcription(req, resp):
+    transcription_cost = 8
     data = await req.media(format='files')
-    filename = data['audio_file']['filename']
-    logging.debug(filename)
+
+    if not 'audio_file' in data:
+        logging.warning('No Audio File Detected')
+        resp.html('index.html')
+        return
 
     with tempfile.TemporaryFile() as temp_file:
         temp_file.write(data['audio_file']['content'])
         temp_file.seek(0)
         length = mutagen.File(temp_file).info.length
+        minutes = math.ceil(length/60)
+        logging.warning(f'length - {minutes} minutes')
 
-    minutes = math.ceil(length/60)
-    logging.warn(f'length - {minutes} minutes')
-    stripe.api_key = os.environ['STRIPE_SECRET_KEY_TEST']
+
+    filename = data['audio_file']['filename']
+    key = '-'.join(fake.words(nb=4, unique=False)) + Path(filename).suffix
     line_item = {
             'name': 'PIT-transcription',
-            'description': f'Transcription: {filename}',
-            'amount': 8,
+            'description': f'Transcription: {filename}\n{key}',
+            'amount': transcription_cost,
             'currency': 'usd',
             'quantity': minutes,
             }
@@ -74,45 +83,48 @@ async def setup_transcription(req, resp):
             line_items = [line_item],
             )
 
-    resp.media = req.media
+    logging.info(session)
+
+    @api.background.task
+    def upload_file(data, key):
+        with tempfile.TemporaryFile() as temp_file:
+            temp_file.write(data['audio_file']['content'])
+            temp_file.seek(0)
+            storage.upload_fileobj(
+                    temp_file,
+                    Key=key,
+                    Bucket=bucket,
+                    )
+
+    upload_file(data, key)
+    resp.params['key'] = key
     resp.html = api.template(
             'get_transcription_settings.html',
             filename=filename,
             session_id=session['id'],
-            stripe_public_key=os.environ['STRIPE_PUBLIC_KEY_TEST'],
-            cost= '{:,.2f}'.format(.05 * minutes),
+            cost='{:,.2f}'.format(transcription_cost * minutes),
+            stripe_public_key=stripe_public_key,
             )
 
 @api.route('/submit')
 async def post_submit(req, resp):
 
-#    @api.background.task()
-#    def upload_file(temp_file, key):
-#        storage.upload_fileobj(
-#            temp_file,
-#            Key=key,
-#            Bucket=bucket,
-#            )
-#
-#        transcriber.start_transcription(
-#            storage=storage,
-#            transcribe=transcribe,
-#            bucket=bucket,
-#            key=key,
-#            ChannelIdentification=False,
-#            lang='en-US',
-#            )
-#
-#    data = await req.media(format='files')
-#
-#    key = '-'.join(fake.words(nb=4, unique=False)) + Path(filename).suffix
-#    filename = data['audio_file']['filename']
-#
-#    upload_file(temp_file, key=key)
-#
-    resp.html = api.template(
-            'transcription_still_uploading.html',
+    @api.background.task
+    def transcribe(key):
+        transcriber.start_transcription(
+            storage=storage,
+            transcribe=transcribe,
+            bucket=bucket,
+            Key=key,
+            ChannelIdentification=False,
+            lang='en-US',
             )
+
+
+    transcribe(req['key'])
+    resp.html = api.template(
+        'transcription_still_uploading.html',
+        )
 
 @api.route('/transcriptions/{job_name}')
 def get_transcription_page(req, resp, *, job_name):
