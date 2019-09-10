@@ -7,7 +7,7 @@
         <h2 class="title is-2">Settings for {{filename}}</h2>
     </div>
 
-		<form class="form box" onsubmit="return stripe.redirectToCheckout({sessionId: '{{session_id}}'}).then(function(result){})">
+		<form class="form box" onsubmit="">
     <div class="field">
 			<div class="control">
         <label class="label">Email: </label>
@@ -15,13 +15,14 @@
 			</div>
 		</div>
 
+    <div class="field">
+			<label class="label">Speaker Options: </label>
+    </div>
     <div class="field is-grouped">
 			<div class="control">
-			<label class="label">Speaker Options: </label>
 			</div>
 			<div class="control">
         <input type="checkbox" value="true">
-<<<<<<< HEAD
         <label class="checkbox"> Multiple Speakers</label>
 			</div>
 
@@ -79,7 +80,11 @@
 
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-		var stripe = Stripe('{{stripe_public_key}}');
+  function loadCheckout() {
+    stripe.redirectToCheckout({sessionId:
+    '{{session_id}}'}).then(function(result){})
+    };
+  var stripe = Stripe('{{stripe_public_key}}')
 </script>
 
 {% endblock %}
