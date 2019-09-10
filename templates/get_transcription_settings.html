@@ -70,16 +70,15 @@
 </form>
 </div>
 <div class="container">
-			<button class="button is-success" onclick="loadCheckout()">Pay ${{cost}}
+			<button class="button is-success" id="transcriptionPay">Pay ${{cost}}
         & Begin Transcription!</button>
 </div>
 </section>
 
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-  function loadCheckout() {
-    stripe.redirectToCheckout({sessionId:
-    '{{session_id}}'}).then(function(result){})
+  document.querySelector.click = function () {
+    stripe.redirectToCheckout({sessionId: '{{session_id}}'}).then(function(result){})
     };
   var stripe = Stripe('{{stripe_public_key}}')
 </script>
