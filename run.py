@@ -54,7 +54,7 @@ async def setup_transcription(req, resp):
     def upload_file(temp_file, key):
             storage.upload_fileobj(
             temp_file,
-            Key,
+            Key=key,
             Bucket=bucket,
             )
 
@@ -63,7 +63,6 @@ async def setup_transcription(req, resp):
 
     with tempfile.TemporaryFile() as temp_file:
         temp_file.write(data['audio_file']['content'])
-        temp_file.seek(0)
         length = mutagen.File(temp_file).info.length
         temp_file.seek(0)
         upload_file(temp_file, key=key)
