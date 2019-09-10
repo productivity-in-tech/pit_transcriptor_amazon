@@ -64,8 +64,8 @@ async def setup_transcription(req, resp):
 
     with tempfile.TemporaryFile() as temp_file:
         temp_file.write(data['audio_file']['content'])
-        length = mutagen.File(temp_file).info.length
         temp_file.seek(0)
+        length = mutagen.File(temp_file).info.length
 #        upload_file(temp_file, key=key)
 
     minutes = math.ceil(length/60)
