@@ -6,4 +6,4 @@ install:
   make
 
 script:
-  - make dev
+  - make test

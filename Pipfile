@@ -8,16 +8,6 @@ verify_ssl = true
 [packages]
 responder = "*"
 boto3 = "*"
-requests = "*"
-maya = "*"
-Faker = "*"
-sendgrid = "*"
-mutagen = "*"
-stripe = "*"
-authlib = "*"
-redis = "*"
-celery = "*"
-zappa = "*"
 
 [requires]
 python_version = "3.7"

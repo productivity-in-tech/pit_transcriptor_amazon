@@ -4,7 +4,6 @@ from sendgrid import SendGridAPIClient
 
 import transcriber
 import boto3
-import celery
 import json
 import math
 import maya
@@ -199,5 +198,10 @@ def get_transcription_page(req, resp, *, job_name):
                 'transcript_still_uploading.html',
                 job_name=job_name,
                 )
+
+
+@api.route('/transcription-update')
+def transcription_update(req, resp):
+    print(req, resp)
 
 api.run()
