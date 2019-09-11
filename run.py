@@ -202,6 +202,7 @@ def get_transcription_page(req, resp, *, job_name):
 
 @api.route('/transcriptionUpdate')
 async def transcription_update(req, resp):
-    await print(req.media())
+    d = await req.media()
+    print(d)
 
 api.run()
