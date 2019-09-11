@@ -1,0 +1,9 @@
+{
+    "dev": {
+        "app_function": "run.api",
+        "profile_name": null,
+        "project_name": "pit-transcriptor",
+        "runtime": "python3.7",
+        "s3_bucket": "pit-transcriptions"
+    }
+}
