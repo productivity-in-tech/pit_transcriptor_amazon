@@ -17,6 +17,7 @@ stripe = "*"
 authlib = "*"
 redis = "*"
 celery = "*"
+zappa = "*"
 
 [requires]
 python_version = "3.7"

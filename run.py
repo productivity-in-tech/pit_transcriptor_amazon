@@ -24,8 +24,8 @@ fake = Faker()
 api = responder.API()
 
 # Amazon Information
-bucket= os.environ['BUCKET_NAME']
-storage = boto3.client('s3',)
+bucket= os.environ.get('BUCKET_NAME', True)
+storage = boto3.client('s3')
 transcribe = boto3.client('transcribe')
 stripe.api_key = os.environ['STRIPE_SECRET_KEY_TEST']
 stripe_public_key = os.environ['STRIPE_PUBLIC_KEY_TEST']
