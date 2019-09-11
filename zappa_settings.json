@@ -5,6 +5,5 @@
         "project_name": "pit-transcriptor",
         "runtime": "python3.7",
         "s3_bucket": "pit-transcriptions",
-	"aws_region": "us-east-1"
     }
 }
