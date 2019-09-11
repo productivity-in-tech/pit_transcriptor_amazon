@@ -3,4 +3,4 @@ init:
 	pipenv install
 
 dev:
-	pipenv run zappa deploy dev
+	pipenv run zappa update dev
