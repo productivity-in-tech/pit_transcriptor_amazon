@@ -200,7 +200,7 @@ def get_transcription_page(req, resp, *, job_name):
                 )
 
 
-@api.route('/transcription-update')
+@api.route('/transcriptionUpdate')
 def transcription_update(req, resp):
     requests.get(req['headers']['SubscribeURL'])
 
