@@ -18,6 +18,8 @@ authlib = "*"
 redis = "*"
 celery = "*"
 zappa = "*"
+flask = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"
