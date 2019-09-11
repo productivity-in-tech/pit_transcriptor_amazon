@@ -6,13 +6,28 @@
 				<h1 class="card-header-title">
 					{{job['TranscriptionJobName']}} 
 					<div class="icon is-large has-text-dark">
-						<a href="{{job['Transcript']['TranscriptFileUri']}}"><i class="fas fa-download"></i></a> 
+
+						{% if status == "COMPLETE" %}
+							<a href="{{job['Transcript']['TranscriptFileUri']}}"><i class="fas fa-download"></i></a> 
+
+						{% elif status == "IN_PROGRESS" %}
+							<span class="has-text-is-grey-lighter">
+								<i class="fas fa-spinner fa-pulse" alt="loading"></i>
+							</span>
+
+						{% elif status == "FAILED" %}
+							<span class="has-text-is-danger">
+								<i class="fas fa-skull-crossbones" alt="Failed"></i>
+							</span>
+							{% endif %}
 					</div>
 				</h1>
 			</header>
+
 			<div class="card-content">
 				<div class="media">
 					<div class="media-left">
+		{% if job['Media'] %}
 						<audio controls>
 							<source src="{{job['Media']['MediaFileUri']}}">Your Browser Does Not Support this Element</source> 
 						</audio>
@@ -20,6 +35,12 @@
 					<div class="media-right content">
             <h2 class="subtitle is-3 is-italic has-text-grey-light"> Per Line
               Review Coming Soon!</h2>
+					</div>
+						{% else %}
+					<div class="media-right content">
+						<h2 class="subtitle is-3 is-italic has-text-grey-light"> We are generating your transcript!</h2>
+					</div>
+						{% endif %}
 					</div>
 				</div>
 				<div class="card-footer">
@@ -39,7 +60,11 @@
 								Completed: 
 							</div>
 							<div class="tag">
-								{{job['CompletionTime']}} 
+								{% if job['Media'] %}
+									{{job['CompletionTime']}}
+									{% else %}
+									<span class="has-text-warning">In Progress</span>
+									{% endif %}
 							</div>
 						</div>
 					</div>

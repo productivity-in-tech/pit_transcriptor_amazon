@@ -15,6 +15,8 @@ sendgrid = "*"
 mutagen = "*"
 stripe = "*"
 authlib = "*"
+redis = "*"
+celery = "*"
 
 [requires]
 python_version = "3.7"

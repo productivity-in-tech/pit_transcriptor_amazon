@@ -4,6 +4,7 @@ from sendgrid import SendGridAPIClient
 
 import transcriber
 import boto3
+import celery
 import json
 import math
 import maya
@@ -12,6 +13,7 @@ import os
 import responder
 import requests
 import stripe
+import time
 import tempfile
 import logging
 import urllib.parse
@@ -39,9 +41,36 @@ def friendly_date(job):
 
     return job
 
+@api.background.task
+def start_transcription(key):
+    """replace with celery task to check transcription status"""
+    all_objects = storage.list_objects_v2(
+            Bucket=bucket,
+            MaxKeys=1,
+            Prefix=key,
+            )
+
+    while 'Contents' not in all_objects:
+        time.sleep(30)
+        all_objects = storage.list_objects_v2(
+                Bucket=bucket,
+                MaxKeys=1,
+                Prefix=key,
+                )
+
+    transcriber.start_transcription(
+        storage=storage,
+        transcribe=transcribe,
+        bucket=bucket,
+        key=key,
+        ChannelIdentification=False,
+        lang='en-US',
+        )
+
 @api.route('/login')
 def login(req, resp):
     resp.html('index.html')
+
 
 @api.route('/')
 def index(req, resp):
@@ -70,7 +99,7 @@ async def setup_transcription(req, resp):
     key = '-'.join(fake.words(nb=4, unique=False)) + Path(filename).suffix
     line_item = {
             'name': 'PIT-transcription',
-            'description': f'Transcription: {filename}\n{key}',
+            'description': f'Transcription: {filename}-{key}',
             'amount': transcription_cost,
             'currency': 'usd',
             'quantity': minutes,
@@ -78,7 +107,11 @@ async def setup_transcription(req, resp):
 
     session = stripe.checkout.Session.create(
             cancel_url = os.environ['URL_ROOT'] + '/cancel',
-            success_url = os.environ['URL_ROOT'] + '/submit?key=' + key,
+            success_url = '{}{}{}'.format(
+                    os.environ['URL_ROOT'],
+                    '/submit?checkout_id={CHECKOUT_SESSION_ID}&key=',
+                    key,
+                    ),
             payment_method_types = ['card'],
             line_items = [line_item],
             )
@@ -86,7 +119,8 @@ async def setup_transcription(req, resp):
     logging.info(session)
 
     @api.background.task
-    def upload_file(data, key):
+    def upload_file(data, key, filename):
+        """TODO: REPLACE WITH CELERY TASK TO UPLOAD FILE"""
         with tempfile.TemporaryFile() as temp_file:
             temp_file.write(data['audio_file']['content'])
             temp_file.seek(0)
@@ -94,9 +128,14 @@ async def setup_transcription(req, resp):
                     temp_file,
                     Key=key,
                     Bucket=bucket,
+                    ExtraArgs={
+                        'Metadata': {
+                                'filename': filename,
+                                },
+                        },
                     )
 
-    upload_file(data, key)
+    upload_file(data, key=key, filename=filename)
     resp.headers['key'] = key
     resp.html = api.template(
             'get_transcription_settings.html',
@@ -108,66 +147,57 @@ async def setup_transcription(req, resp):
 
 @api.route('/submit')
 async def post_submit(req, resp):
-
-    @api.background.task
-    def transcribe(key):
-        transcriber.start_transcription(
-            storage=storage,
-            transcribe=transcribe,
-            bucket=bucket,
-            key=key,
-            ChannelIdentification=False,
-            lang='en-US',
-            )
-
-
-    transcribe(req.params['key'])
+    key = req.params['key']
+    start_transcription(key)
     resp.html = api.template(
         'transcription_still_uploading.html',
+        key_url=f'/transcriptions/{key}',
         )
 
 @api.route('/transcriptions/{job_name}')
 def get_transcription_page(req, resp, *, job_name):
-    flags = {
-            'en-US': 'US English',
-            'en-GB': 'British English',
-            'es-US': 'US Spanish',
-            'en-AU': 'Australian English',
-            'fr-CA': 'Canadian Friend',
-            'de-DE': 'German',
-            'pt-BR': 'Brazilian Portuguese',
-            'fr-FR': 'French',
-            'it-IT': 'Italian',
-            'ko-KR': 'Korean',
-            'es-ES': 'Spanish',
-            'en-IN': 'Indian English',
-            'hi-IN': 'Indian Hindi',
-            'ar-SA': 'Modern Standard Arabic',
-            'ru-RU': 'Russian',
-            'zh-CN': 'Mandarin Chinese',
-            }
-    try:
-        job = transcribe.get_transcription_job(TranscriptionJobName=job_name) \
+    if 'Contents' in storage.list_objects_v2(
+                Bucket=bucket,
+                MaxKeys=1,
+                Prefix=key,
+                ):
+            job = transcribe.get_transcription_job(TranscriptionJobName=job_name) \
                 ['TranscriptionJob']
-        status = job['TranscriptionJobStatus']
 
-    except:
-        status = 'Uploading to S3'
+            status = job['TranscriptionJobStatus']
+            job = friendly_date(job)
 
-    if status == 'Uploading to S3':
+            flags = {
+                'en-US': 'US English',
+                'en-GB': 'British English',
+                'es-US': 'US Spanish',
+                'en-AU': 'Australian English',
+                'fr-CA': 'Canadian Friend',
+                'de-DE': 'German',
+                'pt-BR': 'Brazilian Portuguese',
+                'fr-FR': 'French',
+                'it-IT': 'Italian',
+                'ko-KR': 'Korean',
+                'es-ES': 'Spanish',
+                'en-IN': 'Indian English',
+                'hi-IN': 'Indian Hindi',
+                'ar-SA': 'Modern Standard Arabic',
+                'ru-RU': 'Russian',
+                'zh-CN': 'Mandarin Chinese',
+                }
+
+            resp.html = api.template(
+                    'transcript.html',
+                    job=job,
+                    flags=flags,
+                    transcript = transcript,
+                    status = status,
+                    )
+
+    else:
         resp.html = api.template(
                 'transcript_still_uploading.html',
                 job_name=job_name,
                 )
-    else:
-        job = friendly_date(job)
-        transcript = transcriber.get_transcript(job)
-        resp.html = api.template(
-                'transcript.html',
-                job=job,
-                flags=flags,
-                transcript = transcript,
-                )
-
 
 api.run()

@@ -43,8 +43,9 @@ and just checks the status for the file"""
     return job_status
 
 def get_transcript(job):
-    job_uri = job['Transcript']['TranscriptFileUri']
-    r = requests.get(job_uri)
-    logging.debug(r.json())
-    r.raise_for_status()
-    return r.json()
+    if 'TranscriptFileUri' in job['Transcript']:
+        job_uri = job['Transcript']['TranscriptFileUri']
+        r = requests.get(job_uri)
+        logging.debug(r.json())
+        r.raise_for_status()
+        return r.json()
