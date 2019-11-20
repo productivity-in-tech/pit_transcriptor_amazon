@@ -8,7 +8,7 @@
 					<div class="icon is-large has-text-dark">
 
 						{% if status == "COMPLETED" %}
-							<a href="{{job['Transcription']['TranscriptFileUri']}}"><i class="fas fa-download"></i></a> 
+							<a href="{{job['Transcript']['TranscriptFileUri']}}"><i class="fas fa-download"></i></a> 
 
 						{% elif status == "IN_PROGRESS" %}
 							<span class="has-text-is-grey-lighter">
