@@ -167,7 +167,7 @@ def get_transcription_page(req, resp, *, job_name):
         status = job['TranscriptionJobStatus']
         job = friendly_date(job)
 
-        transcription_uri=  job['Transcript']['TranscriptionURI']
+        transcription_uri=  job['Transcript']['TranscriptFileURI']
         transcript = json_builder.build_transcript(transcription_uri)
         resp.html = api.template(
                     'transcript.html',
