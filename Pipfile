@@ -8,6 +8,8 @@ verify_ssl = true
 [packages]
 responder = "*"
 boto3 = "*"
+click = "*"
+stripe = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
