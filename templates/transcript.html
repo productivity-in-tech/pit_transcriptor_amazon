@@ -7,6 +7,7 @@
 					{{job['TranscriptionJobName']}} 
 					<div class="icon is-large has-text-dark">
 
+            {{status}}
 						{% if status == "COMPLETE" %}
 							<a href="{{job['Transcription']['TranscriptFileUri']}}"><i class="fas fa-download"></i></a> 
 
