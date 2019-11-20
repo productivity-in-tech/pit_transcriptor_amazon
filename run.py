@@ -158,7 +158,7 @@ def get_transcription_page(req, resp, *, job_name):
     if 'Contents' in storage.list_objects_v2(
                 Bucket=bucket,
                 MaxKeys=1,
-                Prefix=key,
+                Prefix=job_name,
                 ):
             job = transcribe.get_transcription_job(TranscriptionJobName=job_name) \
                 ['TranscriptionJob']
