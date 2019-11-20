@@ -16,6 +16,24 @@ import requests
 bucket = os.environ.get("BUCKET_NAME", True)
 storage = boto3.client("s3")
 transcribe = boto3.client("transcribe")
+flags = {
+    'en-US': 'US English',
+    'en-GB': 'British English',
+    'es-US': 'US Spanish',
+    'en-AU': 'Australian English',
+    'fr-CA': 'Canadian Friend',
+    'de-DE': 'German',
+    'pt-BR': 'Brazilian Portuguese',
+    'fr-FR': 'French',
+    'it-IT': 'Italian',
+    'ko-KR': 'Korean',
+    'es-ES': 'Spanish',
+    'en-IN': 'Indian English',
+    'hi-IN': 'Indian Hindi',
+    'ar-SA': 'Modern Standard Arabic',
+    'ru-RU': 'Russian',
+    'zh-CN': 'Mandarin Chinese',
+    }
 
 @click.command()
 @click.argument("key")

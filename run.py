@@ -2,6 +2,7 @@ from faker import Faker
 from pathlib import Path
 from sendgrid import SendGridAPIClient
 
+import json_builder
 import transcriber
 import boto3
 import json
@@ -160,36 +161,20 @@ def get_transcription_page(req, resp, *, job_name):
                 MaxKeys=1,
                 Prefix=job_name,
                 ):
-            job = transcribe.get_transcription_job(TranscriptionJobName=job_name) \
-                ['TranscriptionJob']
+        job = transcribe.get_transcription_job(TranscriptionJobName=job_name) \
+            ['TranscriptionJob']
 
-            status = job['TranscriptionJobStatus']
-            job = friendly_date(job)
+        status = job['TranscriptionJobStatus']
+        job = friendly_date(job)
 
-            flags = {
-                'en-US': 'US English',
-                'en-GB': 'British English',
-                'es-US': 'US Spanish',
-                'en-AU': 'Australian English',
-                'fr-CA': 'Canadian Friend',
-                'de-DE': 'German',
-                'pt-BR': 'Brazilian Portuguese',
-                'fr-FR': 'French',
-                'it-IT': 'Italian',
-                'ko-KR': 'Korean',
-                'es-ES': 'Spanish',
-                'en-IN': 'Indian English',
-                'hi-IN': 'Indian Hindi',
-                'ar-SA': 'Modern Standard Arabic',
-                'ru-RU': 'Russian',
-                'zh-CN': 'Mandarin Chinese',
-                }
-
-            resp.html = api.template(
+        transcription_uri=  job['Trancscript']['TranscriptionURI']
+        transcript = json_builder.build_transcript(transcription_uri)
+        resp.html = api.template(
                     'transcript.html',
                     job=job,
-                    flags=flags,
+                    flags=transcriber.flags,
                     status = status,
+                    transcript=transcript,
                     )
 
     else:
