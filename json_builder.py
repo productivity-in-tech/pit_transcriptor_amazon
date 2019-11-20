@@ -5,7 +5,7 @@ import re
 import sys
 
 
-def build_transcript(json_file)
+def build_transcript(json_file):
     transcript_json = json.load(json_file)
     logging.debug(transcript_json['results']['transcripts'][0]['transcript'])
 
