@@ -189,7 +189,6 @@ def get_transcription_page(req, resp, *, job_name):
                     'transcript.html',
                     job=job,
                     flags=flags,
-                    transcript = transcript,
                     status = status,
                     )
 
