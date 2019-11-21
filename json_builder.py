@@ -1,4 +1,4 @@
-from jinja import Markup
+from jinja2 import Markup
 from markdown import markdown
 import datetime
 import json
