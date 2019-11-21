@@ -13,6 +13,7 @@ stripe = "*"
 certifi = "*"
 markdown = "*"
 sendgrid = "*"
+maya = "*"
 
 [requires]
 python_version = "3.8"
