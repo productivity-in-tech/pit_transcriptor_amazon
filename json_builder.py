@@ -1,4 +1,5 @@
-import markdown
+from jinja import Markup
+from markdown import markdown
 import datetime
 import json
 import logging
@@ -39,5 +40,5 @@ def build_transcript(transcript_json):
 
     content = ' '.join(text_lines)
     content, count = re.subn(r' (?=[\.\,\?\!])', '', content)
-    return markdown.markdown(content)
+    return Markup(markdown(content))
 
