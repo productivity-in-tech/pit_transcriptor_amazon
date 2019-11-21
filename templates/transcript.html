@@ -1,107 +1,101 @@
 {% extends 'base.html' %} {% block title %} PIT Transcriptor {% endblock %} {% block content%} 
 <section class="section">
-	<div class="container">
-		<div class="card">
-			<header class="card-header">
-<div class="level">
-  <div class="level-item">
-					{{job['TranscriptionJobName']}} 
-  </div>
-  <div class="level-item">
-          {% if status == "COMPLETED" %}
-					<div class="icon is-large has-text-dark">
-							<a href="{{job['Transcript']['TranscriptFileUri']}}"><i class="fas fa-download"></i></a> 
+  <div class="container">
+    <div class="card">
+      <header class="card-header">
+        <div class="level">
+          <div class="level-item">
+            <h1 class="subtitle">{{job['TranscriptionJobName']}}</h1>
           </div>
+          {% if status == "COMPLETED" %}
+          <div class="level-item">
+            <div class="icon is-large has-text-dark">
+              <a href="{{job['Transcript']['TranscriptFileUri']}}"><i class="fas fa-download"></i></a> 
+            </div>
+          </div>
+
+          <div class="level-item">
+            <audio controls>
+              <source src="{{job['Media']['MediaFileUri']}}">Your Browser Does Not Support this Element</source> 
+            </audio>
+          </div>
+
+          {% elif status == "IN_PROGRESS" %}
+          <div class="level-item">
+            <span class="has-text-is-grey-lighter">
+              <i class="fas fa-spinner fa-pulse" alt="loading"></i>
+            </span>
+          </div>
+
+          {% elif status == "FAILED" %}
+          <div class="level-item">
+            <span class="has-text-is-danger">
+              <i class="fas fa-skull-crossbones" alt="Failed"></i>
+            </span>
+          </div>
+          {% endif %}
+        </div>
+      </header>
+      <div class="card-footer">
+        <div class="card-footer-item column is-2">
+          <div class="tags has-addons">
+            <div class="tag is-primary">
+              Submitted: 
+            </div>
+            <div class="tag">
+              {{job['CreationTime']}} 
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-item is-2">
+          <div class="tags has-addons">
+            <div class="tag is-dark">
+              Completed: 
+            </div>
+            <div class="tag">
+              {% if job['Media'] %}
+              {{job['CompletionTime']}}
+              {% else %}
+              <span class="has-text-warning">In Progress</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-item is-2">
+          <div class="tags has-addons">
+            <div class="tag is-dark">
+              Language: 
+            </div>
+            <div class="tag">
+              {{flags[job['LanguageCode']]}} 
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-item is-2">
+          <div class="tags has-addons">
+            <div class="tag is-dark">
+              FileType: 
+            </div>
+            <div class="tag">
+              {{job['MediaFormat']}} 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="level-item">
-						<audio controls>
-							<source src="{{job['Media']['MediaFileUri']}}">Your Browser Does Not Support this Element</source> 
-						</audio>
+
+  {% if status == "COMPLETED" %}
+  <div >
+    <h2 class="subtitle">Transcription Text</h2>
+    <div>
+      {{transcript}}
+    </div>
   </div>
-						{% elif status == "IN_PROGRESS" %}
-            <div class="level-item">
-							<span class="has-text-is-grey-lighter">
-								<i class="fas fa-spinner fa-pulse" alt="loading"></i>
-							</span>
-            </div>
-
-						{% elif status == "FAILED" %}
-            <div class="level-item">
-							<span class="has-text-is-danger">
-								<i class="fas fa-skull-crossbones" alt="Failed"></i>
-							</span>
-            </div>
-            {% endif %}
-
-					</div>
-			</header>
-
-						{% if status == "COMPLETED" %}
-            <div> 
-            <h2>Transcription Text</h2>
-          <div>
-            {{transcript}}
-            </div>
-					</div>
-						{% else %}
-					<div class="media-right content">
-						<h2 class="subtitle is-3 is-italic has-text-grey-light"> We are generating your transcript!</h2>
-					</div>
-					</div>
-				</div>
-        {% endif %}
-
-				<div class="card-footer">
-					<div class="card-footer-item column is-2">
-						<div class="tags has-addons">
-							<div class="tag is-primary">
-								Submitted: 
-							</div>
-							<div class="tag">
-								{{job['CreationTime']}} 
-							</div>
-						</div>
-					</div>
-					<div class="card-footer-item is-2">
-						<div class="tags has-addons">
-							<div class="tag is-dark">
-								Completed: 
-							</div>
-							<div class="tag">
-								{% if job['Media'] %}
-									{{job['CompletionTime']}}
-									{% else %}
-									<span class="has-text-warning">In Progress</span>
-									{% endif %}
-							</div>
-						</div>
-					</div>
-					<div class="card-footer-item is-2">
-						<div class="tags has-addons">
-							<div class="tag is-dark">
-								Language: 
-							</div>
-							<div class="tag">
-								{{flags[job['LanguageCode']]}} 
-							</div>
-						</div>
-					</div>
-					<div class="card-footer-item is-2">
-						<div class="tags has-addons">
-							<div class="tag is-dark">
-								FileType: 
-							</div>
-							<div class="tag">
-								{{job['MediaFormat']}} 
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="section">
-			<div class="container content">
-			</div>
-		</div>
+  {% else %}
+  <div class="">
+    <h2 class="subtitle is-3 is-italic has-text-grey-light"> We are generating your transcript!</h2>
+  </div>
+  {% endif %}
 </section>
 {% endblock %}
