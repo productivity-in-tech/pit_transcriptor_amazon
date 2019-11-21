@@ -1,3 +1,4 @@
+import markdown
 import datetime
 import json
 import logging
@@ -29,7 +30,7 @@ def build_transcript(transcript_json):
                         text_lines.append(f'\n\n{speaker}: {start_time}\n')
 
                     if float(item['alternatives'][0]['confidence']) < 0.85:
-                        content = f'%%{content}'
+                        content = f'**{content}**'
 
                 elif text_lines[-1] == content:
                         continue
@@ -38,5 +39,5 @@ def build_transcript(transcript_json):
 
     content = ' '.join(text_lines)
     content, count = re.subn(r' (?=[\.\,\?\!])', '', content)
-    return content
+    return markdown.markdown(content)
 
