@@ -10,6 +10,12 @@
 						{% if status == "COMPLETED" %}
 							<a href="{{job['Transcript']['TranscriptFileUri']}}"><i class="fas fa-download"></i></a> 
 
+		{% if job['Media'] %}
+						<audio controls>
+							<source src="{{job['Media']['MediaFileUri']}}">Your Browser Does Not Support this Element</source> 
+						</audio>
+						{% endif %}
+
 						{% elif status == "IN_PROGRESS" %}
 							<span class="has-text-is-grey-lighter">
 								<i class="fas fa-spinner fa-pulse" alt="loading"></i>
@@ -24,25 +30,21 @@
 				</h1>
 			</header>
 
-			<div class="card-content">
-				<div class="media">
-					<div class="media-left">
-		{% if job['Media'] %}
-						<audio controls>
-							<source src="{{job['Media']['MediaFileUri']}}">Your Browser Does Not Support this Element</source> 
-						</audio>
-					</div>
-					<div class="media-right content">
+						{% if status == "COMPLETED" %}
+            <div> 
             <h2>Transcription Text</h2>
+          <div>
             {{transcript}}
+            </div>
 					</div>
 						{% else %}
 					<div class="media-right content">
 						<h2 class="subtitle is-3 is-italic has-text-grey-light"> We are generating your transcript!</h2>
 					</div>
-						{% endif %}
 					</div>
 				</div>
+        {% endif %}
+
 				<div class="card-footer">
 					<div class="card-footer-item column is-2">
 						<div class="tags has-addons">
