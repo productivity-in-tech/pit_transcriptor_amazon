@@ -16,6 +16,7 @@ sendgrid = "*"
 maya = "*"
 mutagen = "*"
 faker = "*"
+flask = "*"
 
 [requires]
 python_version = "3.8"

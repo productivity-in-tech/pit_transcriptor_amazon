@@ -15,24 +15,26 @@ import responder
 import s3
 import transcriber
 from faker import Faker
+from flask import Flask, render_template
+
 
 logging.basicConfig(level=logging.WARNING)
 fake = Faker()
-api = responder.API()
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 
-@api.route("/")
-def index(req, resp):
-    resp.html = api.template("index.html")
-
-
-@api.route("/setup-transcription")
+@app.route("/setup-transcription")
 async def setup_transcription(req, resp):
     transcription_cost = 8
     data = await req.media(format="files")
 
 
-@api.route("/submit")
+@app.route("/submit")
 async def post_submit(req, resp):
     if not "audio_file" in data:
         key = req.params["key"]
@@ -41,7 +43,7 @@ async def post_submit(req, resp):
         insert = {"$set", {f"transcriptions.{key}.job": job}}
         collection.find_one_and_update({"email": email}, insert)
         sendgrid.email
-        resp.html = api.template(
+        resp.html = app.template(
             "transcription_still_uploading.html", key_url=f"/transcriptions/{key}"
         )
 
@@ -50,7 +52,7 @@ async def post_submit(req, resp):
         resp.html("index.html")
 
 
-@api.route("/transcriptions/{key}")
+@app.route("/transcriptions/{key}")
 def get_transcription_page(req, resp, *, key):
     transcription = transcription_collection.find_one({"key": key})
     job = transcription["TranscriptionJob"]
@@ -68,7 +70,7 @@ def get_transcription_page(req, resp, *, key):
     else:
         transcript = ""
 
-    resp.html = api.template(
+    resp.html = app.template(
         "transcript.html",
         job=job,
         flags=transcriber.flags,
@@ -76,4 +78,5 @@ def get_transcription_page(req, resp, *, key):
         transcript=transcript,
     )
 
-api.run()
+if __name__ == "__main__":
+    app.run()
