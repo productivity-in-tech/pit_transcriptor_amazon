@@ -11,8 +11,6 @@ import maya
 
 import celery_tasker
 import json_builder
-import mutagen
-import requests
 import responder
 import s3
 import transcriber
@@ -77,3 +75,5 @@ def get_transcription_page(req, resp, *, key):
         status=status,
         transcript=transcript,
     )
+
+api.run()
