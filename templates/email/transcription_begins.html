@@ -1,0 +1,27 @@
+<h1>The transcription for {{filename}} has been uploaded and transcription has begun.</h1>
+
+{% set TRANSCRIPTION_URL = URL_ROOT + '/transcriptions/' + key %}
+<p>
+You can view the status page for transcription at <a href="{{TRANSCRIPTION_URL}}">{{TRANSCRIPTION_URL}}</a>.
+</p>
+
+<p>
+You will recieve an email once the transcription has been completed.
+</p>
+
+<hr>
+<div style="font-size: .5em;">
+  <p>
+    You have received this email because your email address was used to submit {{filename}}.
+  </p>
+  <p>
+  {% set CANCEL_URL = URL_ROOT + '/cancel/' + key %}
+  If believe that you have recieved this in error please click this <a href="{{CANCEL_URL}}">cancel_url</a>. You will
+  not be charged until the transcription is completed.
+  </p>
+
+  <p>
+  Refunds are submitted upon request at <a href="mailto:admin@transcriptor.productivityintech.com">admin@transcriptor.productivityintech.com.
+</a>.
+  </p>
+</div>

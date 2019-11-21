@@ -12,6 +12,8 @@ click = "*"
 stripe = "*"
 certifi = "*"
 markdown = "*"
+sendgrid = "*"
+urllib2 = "*"
 
 [requires]
 python_version = "3.8"
