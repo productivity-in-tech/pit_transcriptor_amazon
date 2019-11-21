@@ -3,31 +3,37 @@
 	<div class="container">
 		<div class="card">
 			<header class="card-header">
-				<h1 class="card-header-title">
+<div class="level">
+  <div class="level-item">
 					{{job['TranscriptionJobName']}} 
+  </div>
+  <div class="level-item">
+          {% if status == "COMPLETED" %}
 					<div class="icon is-large has-text-dark">
-
-						{% if status == "COMPLETED" %}
 							<a href="{{job['Transcript']['TranscriptFileUri']}}"><i class="fas fa-download"></i></a> 
-
-		{% if job['Media'] %}
+          </div>
+  </div>
+  <div class="level-item">
 						<audio controls>
 							<source src="{{job['Media']['MediaFileUri']}}">Your Browser Does Not Support this Element</source> 
 						</audio>
-						{% endif %}
-
+  </div>
 						{% elif status == "IN_PROGRESS" %}
+            <div class="level-item">
 							<span class="has-text-is-grey-lighter">
 								<i class="fas fa-spinner fa-pulse" alt="loading"></i>
 							</span>
+            </div>
 
 						{% elif status == "FAILED" %}
+            <div class="level-item">
 							<span class="has-text-is-danger">
 								<i class="fas fa-skull-crossbones" alt="Failed"></i>
 							</span>
-							{% endif %}
+            </div>
+            {% endif %}
+
 					</div>
-				</h1>
 			</header>
 
 						{% if status == "COMPLETED" %}
