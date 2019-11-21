@@ -14,6 +14,7 @@ certifi = "*"
 markdown = "*"
 sendgrid = "*"
 maya = "*"
+mutagen = "*"
 
 [requires]
 python_version = "3.8"
