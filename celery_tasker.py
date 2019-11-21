@@ -1,6 +1,6 @@
 import mutagen
 import tempfile
-from s3 import s3_storage
+from s3 import storage
 from sendgrid_email import send_update_email
 
 def start_transcription(key, filename, language):
