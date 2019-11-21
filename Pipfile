@@ -17,6 +17,7 @@ maya = "*"
 mutagen = "*"
 faker = "*"
 flask = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"

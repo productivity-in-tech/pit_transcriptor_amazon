@@ -79,4 +79,4 @@ def get_transcription_page(req, resp, *, key):
     )
 
 if __name__ == "__main__":
-    app.run()
+    app.run(threaded=True, port=5000)
