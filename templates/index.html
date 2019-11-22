@@ -15,46 +15,21 @@ PIT Transcriptor
     <div class="notification has-text-primary">
       {{message}}
     </div>
-    <div class="container box">
+    <div class="hero is-small">
       {{filename}} has been uploaded and queued up as <b><a
-                                                           href="/transcriptions/{{job_name}}">{{job_name}}</a></b>.
+     href="/transcriptions/{{job_name}}">{{job_name}}</a></b>.
 
-                                                       {% endif %}
-                                                       <h1 class="title is-3">
-                                                         Upload a file and get started! Only <strong class="has-text-grey-light"><strike>$0.08</strike> <span class="has-text-success">$0.05</strong> per minute (while in alpha!) 
-                                                       </h1>
+ {% endif %}
+ <h1 class="">
+   Upload a file and get started! Only <strong class="has-text-grey-success">$0.08</strong> per minute (while in alpha!) 
+ </h1>
     </div>
   </div>
 
   <section class="section">
     <div class="container">
-      <form class="box" enctype="multipart/form-data" action="/setup-transcription" method='post'>
-
-
-        <div class="section">
-          <div class="field is-grouped is-fullwidth">
-            <div class="control">
-              <div class="file has-name">
-                <label class="file-label">
-                  <input class="file-input" id="inputFile" type="file" name="audio_file" accept="audio/*" onchange="getFileName()">
-                  <span class="file-cta"> <span class="file-icon"> <i class="fas fa-upload"></i> </span> <span class="file-label"> Choose a file… </span> </span> 
-                  <span class="file-name is-italic is-right" id="selectedFile">No File Selected</span>
-                </label>
-              </div>
-            </div>
-
-            <div class="control">
-              <button class="button is-link" id="fileSubmit" disabled onclick="displayUpload()">Submit</button>
-            </div>
-            <div class="control is-hidden" id="fileSubmission">
-              <label class="label is-warning">Getting Audio
-                Length<span class="icon"><i class="fas fa-spinner
-                fa-pulse"></i></label>
-            </div>
-          </div>
-        </div>
-      </form>
-      </div>
+      {% include 'upload_form.html' %}
+    </div>
   </section>
 </section>
 <script>

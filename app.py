@@ -15,7 +15,7 @@ import responder
 import s3
 import transcriber
 from faker import Faker
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 
 
 logging.basicConfig(level=logging.WARNING)
@@ -23,15 +23,16 @@ fake = Faker()
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        request.form['email']
+        print(request.form) # email is contained in form
+        print(request.files) # file data in request.files
+        s3.upload_audio_file
+
+
     return render_template("index.html")
-
-
-@app.route("/setup-transcription")
-async def setup_transcription(req, resp):
-    transcription_cost = 8
-    data = await req.media(format="files")
 
 
 @app.route("/submit")
@@ -79,4 +80,4 @@ def get_transcription_page(req, resp, *, key):
     )
 
 if __name__ == "__main__":
-    app.run(threaded=True, port=5000)
+    app.run(debug=True, threaded=True, port=5000)

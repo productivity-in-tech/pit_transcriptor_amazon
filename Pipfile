@@ -18,6 +18,7 @@ mutagen = "*"
 faker = "*"
 flask = "*"
 gunicorn = "*"
+pymongo = "*"
 
 [requires]
 python_version = "3.8"
