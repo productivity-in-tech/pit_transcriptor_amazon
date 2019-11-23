@@ -6,11 +6,13 @@ import os
 import tempfile
 
 import boto3
+from uuid import uuid4
 
 bucket = os.environ.get("BUCKET_NAME", True)
 storage = boto3.client("s3")
 
-def download_audio_file(key, data):
+def download_audio_file(data):
+    key = uuid4()
     return storage.download_obj(bucket, key, data)
 
 def upload_audio_file(key):

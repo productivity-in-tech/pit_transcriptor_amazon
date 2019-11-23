@@ -10,16 +10,9 @@ PIT Transcriptor
     <em>PIT Transcriptor</em> is a tool designed to create transcriptions of <em>dev-centric</em> audio content. 
     </p>
   </div>
-  <div class="container">
-    {% if message %}
-    <div class="notification has-text-primary">
-      {{message}}
-    </div>
-    <div class="hero is-small">
-      {{filename}} has been uploaded and queued up as <b><a
-     href="/transcriptions/{{job_name}}">{{job_name}}</a></b>.
 
- {% endif %}
+  <div class="container">
+
  <h1 class="">
    Upload a file and get started! Only <strong class="has-text-grey-success">$0.08</strong> per minute (while in alpha!) 
  </h1>
@@ -27,6 +20,17 @@ PIT Transcriptor
   </div>
 
   <section class="section">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="hero is-small">
+            {% for message in messages %}
+              <div class="notification has-text-primary">
+                <a href="#">{{message}}</a>
+              </div>
+            {% endfor %}
+          </div>
+         {% endif %}
+       {% endwith %}
     <div class="container">
       {% include 'upload_form.html' %}
     </div>

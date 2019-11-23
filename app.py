@@ -14,24 +14,20 @@ import json_builder
 import responder
 import s3
 import transcriber
-from faker import Faker
-from flask import Flask, request, render_template
+from flask import Flask, flash, request, render_template
 
 
 logging.basicConfig(level=logging.WARNING)
-fake = Faker()
 
 app = Flask(__name__)
+app.secret_key = 'This is a test'
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         request.form['email']
-        print(request.form) # email is contained in form
-        print(request.files) # file data in request.files
-        s3.upload_audio_file
-
-
+        filename = request.files['audio_file'].filename
+        flash=(f'{filename} has been uploaded.')
     return render_template("index.html")
 
 
