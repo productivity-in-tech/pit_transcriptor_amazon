@@ -5,22 +5,10 @@
       <header class="card-header">
         <div class="level">
           <div class="level-item">
-            <h1 class="subtitle">{{job['TranscriptionJobName']}}</h1>
-          </div>
-          {% if status == "COMPLETED" %}
-          <div class="level-item">
-            <div class="icon is-large has-text-dark">
-              <a href="{{job['Transcript']['TranscriptFileUri']}}"><i class="fas fa-download"></i></a> 
-            </div>
+            <h1 class="title is-3">{{job['TranscriptionJobName']}}</h1>
           </div>
 
-          <div class="level-item">
-            <audio controls>
-              <source src="{{job['Media']['MediaFileUri']}}">Your Browser Does Not Support this Element</source> 
-            </audio>
-          </div>
-
-          {% elif status == "IN_PROGRESS" %}
+          {% if status == "IN_PROGRESS" %}
           <div class="level-item">
             <span class="has-text-is-grey-lighter">
               <i class="fas fa-spinner fa-pulse" alt="loading"></i>
@@ -36,6 +24,29 @@
           {% endif %}
         </div>
       </header>
+
+      {% if job['status'] == "COMPLETED" %}
+      <div class="card-body is-light">
+        {% include 'card-data.html' %}
+      </div>
+
+      {% elif job['status'] == "IN_PROGRESS" %}
+        <div class="card-body is-light">
+          <h1 class="title is-2">Generating Transcript</h1>
+          <h1 class="title is-1">
+          <span class="has-text-is-grey-lighter">
+            <i class="fas fa-spinner fa-pulse" alt="loading"></i>
+            </span>
+          </h1>
+
+      {% else %}
+      {{job}}
+
+      {% endif %}
+        </div>
+
+      {% endif %}
+
       <div class="card-footer">
         <div class="card-footer-item column is-2">
           <div class="tags has-addons">
