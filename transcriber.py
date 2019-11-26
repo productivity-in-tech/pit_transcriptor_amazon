@@ -45,7 +45,7 @@ def start_transcription(
     storage=storage,
     transcribe=transcribe,
     bucket=bucket,
-    ChannelIdentification=True,
+    channel_identification=True,
 ):
     transcribe_job_uri = f"{storage.meta.endpoint_url}/{bucket}/{key}"
     transcribe.start_transcription_job(
@@ -53,7 +53,7 @@ def start_transcription(
         Media={"MediaFileUri": transcribe_job_uri},
         MediaFormat=Path(key).suffix[1:],
         LanguageCode=language,
-        Settings={"ChannelIdentification": True},
+        Settings={"ChannelIdentification": channel_identification},
     )
     return key
 
@@ -62,7 +62,7 @@ def get_key(file_path):
     return Path(file_path).name.replace(" ", "")
 
 
-def get_job(transcribe, key):
+def get_job(key, transcribe=transcribe):
     return transcribe.get_transcription_job(TranscriptionJobName=key)
 
 

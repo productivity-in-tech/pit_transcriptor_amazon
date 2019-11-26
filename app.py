@@ -1,12 +1,8 @@
-import json
+from pathlib import Path
 import logging
 import math
 import os
-import tempfile
 import time
-import urllib.parse
-from pathlib import Path
-from uuid import uuid4
 
 import maya
 
@@ -16,80 +12,78 @@ import mongo
 import responder
 import s3
 import transcriber
-from flask import Flask, flash, render_template, request
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileRequired
-from wtforms.fields.html5 import EmailField
-from wtforms.fields import FileField
-import wtforms.validators
+from flask import (
+        Flask,
+        flash,
+        render_template,
+        request,
+        session,
+        )
+from forms.forms import SetupForm, UploadForm
 from werkzeug.utils import secure_filename
+import wtforms.fields as fields
+import wtforms.validators as validators
 
 logging.basicConfig(level=logging.WARNING)
 
 app = Flask(__name__)
 app.secret_key = "This is a test"
 
-class UploadForm(FlaskForm):
-    email = EmailField('email', [wtforms.validators.InputRequired()])
-    audio_file = description= FileField('Audio File', [FileRequired]) 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
-    if request.method == "POST":
-        email = request.form.get("email")
-        data = request.files.get("audio_file")
-
-        if not email:
-            flash("Please Enter your email to Continue", "error")
-
-        if not data:
-            flash("Please Enter a file to Continue", "error")
-
-        if email and data:
-            key = s3.get_key(data)
-            # s3.upload_audio_file(key, data)
-            # mongo.add_audio(email, key, language)
-            flash(f"{data.filename} transcription started")
-
-        return render_template("setup.html", email=email, key=key)
-
-    if request.method == "GET":
-        form = UploadForm()
-        return render_template("index.html", form=form)
+    """ Go to the homepage. On Submit Upload the file to s3, create celery task and and set billing price."""
+    form = UploadForm()
+    return render_template("index.html", form=form)
 
 
-@app.route("/setup-transcription/{key}", methods=["GET", "POST"])
-def setup_transcription_page(*, key: str):
-    email = request.headers.get("email")
-    job = mongo.get_transcription_job(email, key)
-    return render_template("setup.html") 
+@app.route("/setup-transcription", methods=["POST"])
+def setup_transcription_page():
+    """Add more information to the transcription"""
+
+    filename = Path(request.files['audio_file'].filename)
+
+    class UpdatedSetupForm(SetupForm):
+        project_name = fields.StringField(
+            "Project Name",
+            default=filename.stem,
+            filters=[lambda x:x.title()],
+            validators=[validators.InputRequired()],
+        )
+
+    form = UpdatedSetupForm()
+
+    session['key'] = s3.get_key(filename)
+
+    return render_template("setup.html", form=form)
 
 
-@app.route("/transcription/{key}", methods=["GET", "POST"])
-def get_transcription_page(*, key: str):
-    transcription = transcription_collection.find_one({"key": key})
-    job = transcription["TranscriptionJob"]
-    status = job["TranscriptionJobStatus"]
-    job["CreationTime"] = maya.parse(job["CreationTime"]).slang_time()
+@app.route("/verify-setup", methods=["POST"])
+def confirm_transcription():
+    form = SetupForm()
+    return render_template("verify_setup.html", form=form)
 
-    if job.get("CompletionTime"):  # If not yet complete there will be no data
-        job["CompletionTime"] = maya.parse(job["CompletionTime"]).slang_time()
 
-    if "versions" in transcription:  # Not written until the transcription is finished
-        # TODO: Create Javascript Version of JSON Builder
-        transcription_json = transcription["versions"][-1]
-        transcript = json_builder.build_transcript(transcription_json)
-
-    else:
-        transcript = ""
-
-    resp.html = app.template(
-        "transcript.html",
-        job=job,
-        flags=transcriber.flags,
-        status=status,
-        transcript=transcript,
+@app.route("/start_transcription", methods=["POST"])
+def start_transcription():
+    language = request.form["language"]
+    storage = request.form["storage"]
+    transcribe = request.form["transcribe"]
+    channel_identification = request.form["channel_identification"]
+    job = transcriber.start_transcription(
+        key=session['key'],
+        language=language,
+        storage=storage,
+        transcribe=transcribe,
+        channel_identification=channel_identification,
     )
+    return url_for('get_transcription_page', key=key)
+
+@app.route('/transcription/<key>')
+def get_transcription_page(key):
+    flags = transcriber.flags
+    job = transcriber.get_job(key)
+    return render_template('transcript.html', flags=flags, job={})
 
 
 if __name__ == "__main__":

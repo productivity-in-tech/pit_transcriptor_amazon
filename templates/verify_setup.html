@@ -4,13 +4,14 @@
 <section class="section">
   <div class="container">
       <div class='hero is-secondary'>
-        <h1 class="subtitle is-2">Setup New Project</h1>
+        <h1 class="subtitle is-2">Confirm Project: <span class="has-text-weight-bold has-text-link">{{
+            request.form['project_name']}}</span></h1>
       </div>
   </div>
 
   <section class="section">
     <div class="container">
-      {% include 'setup_form.html' %}
+      {% include 'verify_setup_form.html' %}
     </div>
   </section>
 </section>

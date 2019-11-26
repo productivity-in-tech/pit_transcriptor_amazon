@@ -18,7 +18,5 @@ def download_audio_file(key, data):
 def upload_audio_file(key, data):
     return storage.upload_fileobj(data, Key=key, Bucket=bucket)
 
-def get_key(data):
-    filename = Path(data.filename)
-    extension = filename.suffix
-    return str(uuid4()) + extension
+def get_key(filename):
+    return str(uuid4()) + filename.extension

@@ -1,5 +1,4 @@
-      <form class="box" action="/verify-setup" method='post'>
-        {{ form.csrf_token }}
+<div class="hero is-light">
         <div class="section">
           <div class="field">
             <div class="control">
@@ -7,7 +6,7 @@
               <label>
                 {{form.project_name.label}}:
               </label>
-              {{form.project_name(size=120)}}
+              {{request.form['project_name']}}
             </div>
           </div>
 
@@ -17,7 +16,7 @@
               <label>
                 {{form.email.label}}:
               </label>
-              {{form.email()}}
+              {{request.form['email']}}
             </div>
           </div>
 
@@ -27,35 +26,40 @@
               <label>
                 {{form.language.label}}:
               </label>
-              {{form.language()}}
+              {{request.form['language']}}
             </div>
           </div>
 
           {# Speaker Options #}
           <div class="field">
-            {# Speaker Count #}
             <div class="control">
               <label>
                 {{form.speakers.label}}:
               </label>
-              {{form.speakers()}}
-              <p class="help">{{form.speakers.description}}</p>
+              {{request.form['speakers']}}
             </div>
           </div>
-
           <div class="field">
-            {# Channel Identification #}
             <div class="control">
               <label>
                 {{form.channel_identification.label}}:
               </label>
-              {{form.channel_identification()}}
+                {{request.form['channel_identification']}}:
             </div>
           </div>
-
-          <div class="control">
-            <input type="submit" class="button is-link" value="Start Transcription" />
+          <form>
+            <div class="field is-grouped">
+              <div class="control">
+                <a class="button is-warning" id="fileSubmit"> Edit Project </a>
+              </div>
+              <div class="control">
+                <input type="submit" class="button is-link" id="fileSubmit" value="Start Transcription" />
+              </div>
+              <div class="control">
+                <a type="submit" class="button is-small is-danger" id="fileSubmit">Delete</a>
+              </div>
+            </div>
+          </form>
           </div>
         </div>
         </div>
-      </form>
