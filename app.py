@@ -82,7 +82,8 @@ def start_transcription():
 @app.route('/transcription/<key>')
 def get_transcription_page(key):
     flags = transcriber.flags
-    job = transcriber.get_job(key)
+    job = transcriber.get_job(key)['TranscriptionJob']
+
     return render_template('transcript.html', flags=flags, job={})
 
 
