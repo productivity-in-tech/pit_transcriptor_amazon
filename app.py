@@ -84,7 +84,7 @@ def get_transcription_page(key):
     flags = transcriber.flags
     job = transcriber.get_job(key)['TranscriptionJob']
 
-    return render_template('transcript.html', flags=flags, job={})
+    return render_template('transcript.html', flags=flags, job=job)
 
 
 if __name__ == "__main__":
