@@ -12,6 +12,13 @@ PIT Transcriptor
   </div>
 
   <div class="container">
+      <div class="hero is-small">
+        {% for message in get_flashed_messages() %}
+          <div class="notification has-text-primary">
+            <a href="#">{{message}}</a>
+          </div>
+        {% endfor %}
+      </div>
 
  <h1 class="">
    Upload a file and get started! Only <strong class="has-text-grey-success">$0.08</strong> per minute (while in alpha!) 
@@ -20,17 +27,6 @@ PIT Transcriptor
   </div>
 
   <section class="section">
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          <div class="hero is-small">
-            {% for message in messages %}
-              <div class="notification has-text-primary">
-                <a href="#">{{message}}</a>
-              </div>
-            {% endfor %}
-          </div>
-         {% endif %}
-       {% endwith %}
     <div class="container">
       {% include 'upload_form.html' %}
     </div>
