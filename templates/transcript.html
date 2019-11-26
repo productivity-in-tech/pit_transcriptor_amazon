@@ -101,17 +101,5 @@
     </div>
   </div>
 
-  {% if status == "COMPLETED" %}
-  <div >
-    <h2 class="subtitle">Transcription Text</h2>
-    <div>
-      {{transcript}}
-    </div>
-  </div>
-  {% else %}
-  <div class="">
-    <h2 class="subtitle is-3 is-italic has-text-grey-light"> We are generating your transcript!</h2>
-  </div>
-  {% endif %}
 </section>
 {% endblock %}
