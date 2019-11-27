@@ -1,0 +1,65 @@
+<div class="hero is-light">
+        <div class="section">
+          <div class="field">
+            <div class="control">
+              {# Project Name #}
+              <label>
+                {{form.project_name.label}}:
+              </label>
+              {{request.form['project_name']}}
+            </div>
+          </div>
+
+          {# Email #}
+          <div class="field">
+            <div class="control">
+              <label>
+                {{form.email.label}}:
+              </label>
+              {{request.form['email']}}
+            </div>
+          </div>
+
+          {# Language #}
+          <div class="field">
+            <div class="control">
+              <label>
+                {{form.language.label}}:
+              </label>
+              {{request.form['language']}}
+            </div>
+          </div>
+
+          {# Speaker Options #}
+          <div class="field">
+            <div class="control">
+              <label>
+                {{form.speakers.label}}:
+              </label>
+              {{request.form['speakers']}}
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label>
+                {{form.channel_identification.label}}:
+              </label>
+                {{request.form['channel_identification']}}:
+            </div>
+          </div>
+          <form>
+            <div class="field is-grouped">
+              <div class="control">
+                <a class="button is-warning" id="fileSubmit"> Edit Project </a>
+              </div>
+              <div class="control">
+                <input type="submit" class="button is-link" id="fileSubmit" value="Start Transcription" />
+              </div>
+              <div class="control">
+                <a type="submit" class="button is-small is-danger" id="fileSubmit">Delete</a>
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
+        </div>

@@ -1,0 +1,25 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+responder = "*"
+boto3 = "*"
+click = "*"
+stripe = "*"
+certifi = "*"
+markdown = "*"
+sendgrid = "*"
+maya = "*"
+mutagen = "*"
+flask = "*"
+gunicorn = "*"
+pymongo = "*"
+wtforms = "*"
+flask-wtf = "*"
+
+[requires]
+python_version = "3.8"

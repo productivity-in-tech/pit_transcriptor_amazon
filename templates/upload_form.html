@@ -1,0 +1,25 @@
+      <form class="box" action='/setup-transcription' enctype="multipart/form-data" method='post'>
+        {{ form.csrf_token }}
+        <div class="section">
+          <div class="field">
+            <div class="control">
+              {{ form.email(placeholder='email') }}
+            </div>
+          </div>
+          <div class="field is-grouped is-fullwidth">
+            <div class="control">
+                  {{form.audio_file()}}
+              </div>
+            </div>
+
+            <div class="control">
+              <input type="submit" class="button is-info" id="fileSubmit" value="Submit" />
+            </div>
+            <div class="control is-hidden" id="fileSubmission">
+              <label class="label is-warning">Getting Audio
+                Length<span class="icon"><i class="fas fa-spinner
+                fa-pulse"></i></label>
+            </div>
+          </div>
+        </div>
+      </form>

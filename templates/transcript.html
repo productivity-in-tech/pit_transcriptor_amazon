@@ -1,0 +1,110 @@
+{% extends 'base.html' %} {% block title %} PIT Transcriptor {% endblock %} {% block content%} 
+<section class="section">
+  <div class="container">
+    <div class="card">
+      <header class="card-header">
+        <div class="level">
+          <div class="level-item">
+            <h1 class="title is-3">{{job['TranscriptionJobName']}}</h1>
+          </div>
+
+          {% set status = job['TranscriptJobStatus'] %}
+
+          {% if status == "IN_PROGRESS" %}
+          <div class="level-item">
+            <span class="has-text-is-grey-lighter">
+              <i class="fas fa-spinner fa-pulse" alt="loading"></i>
+            </span>
+          </div>
+
+          {% elif status == "FAILED" %}
+          <div class="level-item">
+            <span class="has-text-is-danger">
+              <i class="fas fa-skull-crossbones" alt="Failed"></i>
+            </span>
+          </div>
+          {% endif %}
+
+        </div>
+      </header>
+
+      {% if status == "COMPLETED" %}
+      <div class="card-body is-light">
+        {% include 'card-data.html' %}
+      </div>
+
+      {% elif status == "IN_PROGRESS" %}
+        <div class="card-body is-light">
+          <h1 class="title is-2">Generating Transcript</h1>
+          <h1 class="title is-1">
+          <span class="has-text-is-grey-lighter">
+            <i class="fas fa-spinner fa-pulse" alt="loading"></i>
+            </span>
+          </h1>
+
+      {% else %}
+
+
+			<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+	</script>
+        <div class="card-body is-warning" id="transcriptionApp">
+					{^ transcription ^}
+        </div>
+			{% include 'transcription.js' %}
+
+      {% endif %}
+
+      </div>
+
+      <div class="card-footer">
+        <div class="card-footer-item column is-2">
+          <div class="tags has-addons">
+            <div class="tag is-primary">
+              Submitted: 
+            </div>
+            <div class="tag">
+              {{job['CreationTime']}} 
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-item is-2">
+          <div class="tags has-addons">
+            <div class="tag is-dark">
+              Completed: 
+            </div>
+            <div class="tag">
+              {% if job['Media'] %}
+              {{job['CompletionTime']}}
+              {% else %}
+              <span class="has-text-warning">In Progress</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-item is-2">
+          <div class="tags has-addons">
+            <div class="tag is-dark">
+              Language: 
+            </div>
+            <div class="tag">
+              {{flags[job['LanguageCode']]}} 
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-item is-2">
+          <div class="tags has-addons">
+            <div class="tag is-dark">
+              FileType: 
+            </div>
+            <div class="tag">
+              {{job['MediaFormat']}} 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+{% endblock %}

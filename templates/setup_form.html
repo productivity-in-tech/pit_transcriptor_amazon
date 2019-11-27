@@ -1,0 +1,61 @@
+      <form class="box" action="/verify-setup" method='post'>
+        {{ form.csrf_token }}
+        <div class="section">
+          <div class="field">
+            <div class="control">
+              {# Project Name #}
+              <label>
+                {{form.project_name.label}}:
+              </label>
+              {{form.project_name(size=120)}}
+            </div>
+          </div>
+
+          {# Email #}
+          <div class="field">
+            <div class="control">
+              <label>
+                {{form.email.label}}:
+              </label>
+              {{form.email()}}
+            </div>
+          </div>
+
+          {# Language #}
+          <div class="field">
+            <div class="control">
+              <label>
+                {{form.language.label}}:
+              </label>
+              {{form.language()}}
+            </div>
+          </div>
+
+          {# Speaker Options #}
+          <div class="field">
+            {# Speaker Count #}
+            <div class="control">
+              <label>
+                {{form.speakers.label}}:
+              </label>
+              {{form.speakers()}}
+              <p class="help">{{form.speakers.description}}</p>
+            </div>
+          </div>
+
+          <div class="field">
+            {# Channel Identification #}
+            <div class="control">
+              <label>
+                {{form.channel_identification.label}}:
+              </label>
+              {{form.channel_identification()}}
+            </div>
+          </div>
+
+          <div class="control">
+            <input type="submit" class="button is-link" value="Start Transcription" />
+          </div>
+        </div>
+        </div>
+      </form>

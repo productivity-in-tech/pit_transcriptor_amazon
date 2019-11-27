@@ -1,0 +1,86 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<section class="section">
+<div class="container">
+    <div class="content">
+        <h2 class="title is-2">Settings for {{filename}}</h2>
+    </div>
+    </div>
+
+<div class="container box">
+		<form class="form">
+    <div class="field">
+			<div class="control">
+        <label class="label">Email: </label>
+        <input class="input" type="email">
+			</div>
+		</div>
+
+    <div class="field">
+			<label class="label">Speaker Options: </label>
+    </div>
+    <div class="field is-grouped">
+			<div class="control">
+			</div>
+			<div class="control">
+        <input type="checkbox" name="MultipleSpeakers" value="Yes" checked>
+        <label class="checkbox"> Multiple Speakers</label>
+			</div>
+
+			<div class="control">
+        <input type="checkbox" name="ChannelSpeakerDetection" value="Yes">
+        <label class="checkbox">One Speaker Per Channel</label>
+			</div>
+		</div>
+
+			<div class="control">
+				<label class="label">Number of Speakers</label>
+				<input class="input" type="number" name="MaxNumberOfSpeakers" value="1"
+        min="1" max="10">
+			</div>
+
+    <div class="field">
+        <label class="label">Language:</label>
+					<div class="select">
+            <select>
+                <option class="option" value="en-US">US English</option>
+                <option class="option" value="en-GB">British English</option>
+                <option class="option" value="en-AU">Australian English</option>
+                <option class="option" value="es-ES">Spanish</option>
+                <option class="option" value="es-US">US Spanish</option>
+                <option class="option" value="it-IT">Italian</option>
+                <option class="option" value="fr-FR">French</option>
+                <option class="option" value="fr-CA">Candian French</option>
+                <option class="option" value="pt-BR">Brazilian Portuguese</option>
+                <option class="option" value="de-DE">German</option>
+                <option class="option" value="ar-SA">Modern Standard Arabic</option>
+                <option class="option" value="ru-RU">Russian</option>
+                <option class="option" value="ko-KR">Korean</option>
+                <option class="option" value="en-IN">Indian English</option>
+                <option class="option" value="hi-IN">Indian Hindi</option>
+                <option class="option" value="zh-CN">Mandarin Chinese</option>
+            </select>
+        </div>
+    </div>
+		<div class="field">
+		<div class="control">
+		</div>
+		</div>
+</form>
+</div>
+<div class="container">
+			<button class="button is-success" id="transcriptionPay">Pay ${{cost}}
+        & Begin Transcription!</button>
+</div>
+</section>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  document.querySelector("#transcriptionPay").addEventListener('click', function () {
+    stripe.redirectToCheckout({sessionId: '{{session_id}}'}).then(function(result){})
+    });
+  var stripe = Stripe('{{stripe_public_key}}')
+</script>
+
+{% endblock %}
