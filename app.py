@@ -83,8 +83,11 @@ def start_transcription():
 def get_transcription_page(key):
     flags = transcriber.flags
     job = transcriber.get_job(key)['TranscriptionJob']
-    transcription = transcriber.get_transcript(job)['results']['channel_labels']
-    return render_template('transcript.html', flags=flags, job=job, transcription=transcription,
+    channels = transcriber.get_transcript(job)['results']['channel_labels']['channels']
+    for channel_label, items in channels:
+        for item in items:
+            item['channel_label'] = channel_label
+    return render_template('transcript.html', flags=flags, job=job, transcription=channels[items],
     )
 
 
