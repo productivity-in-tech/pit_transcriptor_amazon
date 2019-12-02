@@ -27,7 +27,7 @@ def build_transcript(transcript_json):
                     if speaker != voices[ch]:
                         speaker = voices[ch]
                         start_time = str(datetime.timedelta(seconds=round(float(item['start_time']))))
-                        text_lines.append(f'\n\n{speaker}:\n\n{start_time}\n')
+                        text_lines.append(f'\n\n{speaker}:\n\n{start_time}:\n\n')
 
                     if float(item['alternatives'][0]['confidence']) < 0.85:
                         content = f'**{content}**'
