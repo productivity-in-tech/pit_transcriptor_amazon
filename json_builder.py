@@ -13,7 +13,7 @@ def build_transcript(transcript_json):
 
     voices = {'ch_0': 'speaker 1', 'ch_1': 'speaker 2'}
     speaker = voices['ch_0']
-    text_lines = [f'{speaker}\n']
+    text_lines = [f'{speaker}\n\n']
 
     for item in json_results['items']:
 
