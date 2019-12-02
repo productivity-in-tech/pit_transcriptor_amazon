@@ -83,7 +83,7 @@ def start_transcription():
 def get_transcription_page(key):
     flags = transcriber.flags
     job = transcriber.get_job(key)['TranscriptionJob']
-    transcript = json_builder.build_transcript(job)
+    transcript = json_builder.build_transcript(transcriber.get_transcription(job))
     return render_template('transcript.html', flags=flags, job=job, transcription=channels,
     )
 

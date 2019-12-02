@@ -8,8 +8,6 @@ import sys
 
 
 def build_transcript(transcript_json):
-    logging.debug(transcript_json['results']['transcripts'][0]['transcript'])
-
     json_results = transcript_json['results']
     channels = json_results['channel_labels']['channels']
 
