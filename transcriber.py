@@ -73,7 +73,7 @@ and just checks the status for the file"""
     return job_status
 
 
-def get_transcript(job):
+def get_transcription(job):
     if "TranscriptFileUri" in job["Transcript"]:
         job_uri = job["Transcript"]["TranscriptFileUri"]
         r = requests.get(job_uri)
