@@ -7,6 +7,7 @@ import re
 import sys
 
 
+
 def build_transcript(transcript_json):
     json_results = transcript_json['results']
     channels = json_results['channel_labels']['channels']
@@ -25,7 +26,7 @@ def build_transcript(transcript_json):
                 if item['type'] != 'punctuation':
                     if speaker != voices[ch]:
                         speaker = voices[ch]
-                        start_time = round(float(item['start_time']))
+                        start_time = str(datetime.timedelta(seconds=round(float(item['start_time']))))
                         text_lines.append(f'\n\n{speaker}: {start_time}\n')
 
                     if float(item['alternatives'][0]['confidence']) < 0.85:
