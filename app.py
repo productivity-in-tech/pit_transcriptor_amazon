@@ -84,18 +84,18 @@ def start_transcription():
 @app.route('/transcription/<key>')
 def get_transcription_page(key):
     flags = transcriber.flags
-    transcript = mongo.transcription_collection.find_one({'key': key})
+    transcript = mongo.transcription_collection.find_one({'key': key, 'transcripts': {'$exists': True})
 
     if not transcript:
-        transcript = transcriber.get_job(key)
-        mongo.transcription_collection.insert_one(
-                {'key': key, 'job':transcript }
+        job = transcriber.get_job(key)
+        transcript = mongo.transcription_collection.insert_one(
+                {
+                    'key': key,
+                    'job':transcript,
+                    'transcription': {'original': json_builder.build_transcript(job)}
                 )
 
-    job = transcript['TranscriptionJob']
-    transcription_text = json_builder.build_transcript(
-            transcriber.get_transcription(job),
-            )
+    transcription_text = transcript['transcription']['original']
 
     class EditTranscriptionForm(FlaskForm):
         transcription = fields.TextAreaField('Transcription', default=transcription_text)
