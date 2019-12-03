@@ -74,7 +74,7 @@ and just checks the status for the file"""
 
 
 def get_transcription(job):
-    if "TranscriptFileUri" in job["Transcript"]:
+    if job["status"] == 'Complete':
         job_uri = job["Transcript"]["TranscriptFileUri"]
         r = requests.get(job_uri)
         logging.debug(r.json())
