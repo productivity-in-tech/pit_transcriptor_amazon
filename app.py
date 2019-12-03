@@ -77,7 +77,9 @@ def start_transcription():
 @app.route('/transcription/<key>')
 def get_transcription_page(key):
     flags = transcriber.flags
-    transcript = mongo.transcription_collection.find_one({'key': key, 'transcripts': {'$exists': True}})
+    transcript = mongo.transcription_collection.find_one(
+            {'key': key,'transcripts': {'$exists': True}}
+    )
 
     if not transcript:
         job = transcriber.get_job(key)
