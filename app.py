@@ -79,15 +79,15 @@ def start_transcription():
 def get_transcription_page(key):
     flags = transcriber.flags
     transcript = mongo.transcription_collection.find_one(
-            {'key': key,'transcripts': {'$exists': True}}
+            {'key': key, 'transcriptions': {'$exists': True}}
     )
 
     if not transcript:
-        job = transcriber.get_job(key)
+        job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=Key)
         transcript = mongo.transcription_collection.insert_one(
                 {
                     'key': key,
-                    'job':transcript,
+                    'job': job,
                     'transcription': {datetime.utcnow(): transcriber.get_transcription(job)},
                     })
 
