@@ -88,6 +88,8 @@ def get_transcription_page(key):
 
     if not transcript:
         transcript = transcriber.get_job(key)
+        mongo.transcription_collection.insert_one(
+                {'key': key, 'job':transcript }
 
     job = transcript['TranscriptionJob']
     transcription_text = json_builder.build_transcript(
