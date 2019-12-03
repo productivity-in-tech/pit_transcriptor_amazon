@@ -1,9 +1,6 @@
 textarea {
-    position: fixed;
-    left: 10px;
-    top: 10px;
     max-width: 100%;
     min-width: 100%;
-    height: calc(100vh - 20em);
+    height: calc(100vh - 2em);
     resize: none;
 }
