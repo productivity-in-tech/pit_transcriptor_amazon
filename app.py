@@ -85,8 +85,6 @@ def start_transcription():
 def get_transcription_page(key):
     flags = transcriber.flags
     job = transcriber.get_job(key)['TranscriptionJob']
-    base_transcription = transcriber.get_transcription(job)['results']
-    base_transcription = base_transcription['channel_labels']['channels']
     transcription_text = json_builder.build_transcript(transcriber.get_transcription(job))
 
     class EditTranscriptionForm(FlaskForm):
@@ -97,7 +95,6 @@ def get_transcription_page(key):
             'transcript.html',
             flags=flags,
             job=job,
-            base_transcription=base_transcription,
             form = EditTranscriptionForm()
     )
 
