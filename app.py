@@ -29,7 +29,6 @@ import wtforms.validators as validators
 logging.basicConfig(level=logging.WARNING)
 
 app = Flask(__name__)
-Session(app)
 app.secret_key = "This is a test"
 
 
