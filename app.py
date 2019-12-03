@@ -89,7 +89,7 @@ def get_transcription_page(key):
                 {
                     'key': key,
                     'job': job,
-                    'transcription': {datetime.utcnow(): transcriber.get_transcription(job)},
+                    'transcription': {str(datetime.utcnow()): transcriber.get_transcription(job)},
                     })
 
     transcription_text = json_builder.build_transcript(transcript['transcription'])
