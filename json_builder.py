@@ -38,5 +38,5 @@ def build_transcript(transcript_json):
 
     content = ' '.join(text_lines)
     content, count = re.subn(r' (?=[\.\,\?\!])', '', content)
-    return Markup(markdown(content))
+    return content
 
