@@ -87,10 +87,10 @@ def get_transcription_page(key):
     job = transcriber.get_job(key)['TranscriptionJob']
     base_transcription = transcriber.get_transcription(job)['results']
     base_transcription = base_transcription['channel_labels']['channels']
-    transcription = json_builder.build_transcript(transcriber.get_transcription(job))
+    transcription_text = json_builder.build_transcript(transcriber.get_transcription(job))
 
     class EditTranscriptionForm(FlaskForm):
-        transcription = fields.TextAreaField('Transcription', default=transcription)
+        transcription = fields.TextAreaField('Transcription', default=transcription_text)
         submit = fields.SubmitField('Submit Changes')
 
     return render_template(
