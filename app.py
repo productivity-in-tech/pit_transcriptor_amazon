@@ -82,17 +82,21 @@ def get_transcription_page(key):
             {'key': key, 'transcriptions': {'$exists': True}}
     )
 
-    if not transcript:
+    if transcript:
+        transcription = sorted(lambda x,y:x, transcript['transcriptions'].items())[-1]
+
+    else:
         job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
-        logging.warning(job)
-        transcript = mongo.transcription_collection.insert_one(
+        logging.debug(job)
+        transcription = transcriber.get_transcription(job)},
+        mongo.transcription_collection.insert_one(
                 {
                     'key': key,
                     'job': job,
-                    'transcription': {datetime.utcnow().strftime('%Y%m%d'): transcriber.get_transcription(job)},
-                    })
+                    'transcriptions': {datetime.utcnow().strftime('%Y%m%d'): transcription},
+                })
 
-    transcription_text = json_builder.build_transcript(transcript['transcription'])
+    transcription_text = json_builder.build_transcript(transcription)
 
     class EditTranscriptionForm(FlaskForm):
         transcription = fields.TextAreaField('Transcription', default=transcription_text)
