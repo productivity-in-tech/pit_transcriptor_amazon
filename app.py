@@ -22,7 +22,7 @@ from flask import (
 
 from forms.forms import SetupForm, UploadForm
 from werkzeug.utils import secure_filename
-from flask-wtf import FlaskForms
+from flask_wtf import FlaskForm
 import wtforms.fields as fields
 import wtforms.validators as validators
 
