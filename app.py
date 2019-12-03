@@ -84,7 +84,11 @@ def start_transcription():
 @app.route('/transcription/<key>')
 def get_transcription_page(key):
     flags = transcriber.flags
-    transcription_text = mongo.transcription_collection.find({'key': key})
+    transcription_text = mongo.transcription_collection.find_one_and_update(
+            {'key': key},
+            {'$set': {'job': job}},
+            )
+
     if not transcription_text:
         job = transcriber.get_job(key)['TranscriptionJob']
         transcription_text = json_builder.build_transcript(
