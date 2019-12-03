@@ -19,6 +19,7 @@ from flask import (
         request,
         session,
         )
+
 from forms.forms import SetupForm, UploadForm
 from werkzeug.utils import secure_filename
 import wtforms.fields as fields
@@ -86,12 +87,17 @@ def get_transcription_page(key):
     base_transcription = transcriber.get_transcription(job)['results']
     base_transcription = base_transcription['channel_labels']['channels']
     transcription = json_builder.build_transcript(transcriber.get_transcription(job))
+
+    class EditTranscriptionForm(FlaskForm):
+        transcription = fields.TextAreaField('Transcription', default=transcription)
+        submit = fields.SubmitField('Submit Changes')
+
     return render_template(
             'transcript.html',
             flags=flags,
             job=job,
             base_transcription=base_transcription,
-            transcription=transcription,
+            form = EditTranscriptionForm()
     )
 
 
