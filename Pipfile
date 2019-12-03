@@ -21,6 +21,7 @@ gunicorn = "*"
 pymongo = "*"
 wtforms = "*"
 flask-wtf = "*"
+flask-session = "*"
 
 [requires]
 python_version = "3.8"

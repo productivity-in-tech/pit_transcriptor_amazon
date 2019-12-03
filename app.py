@@ -29,6 +29,7 @@ import wtforms.validators as validators
 logging.basicConfig(level=logging.WARNING)
 
 app = Flask(__name__)
+Session(app)
 app.secret_key = "This is a test"
 
 
@@ -85,7 +86,15 @@ def start_transcription():
 def get_transcription_page(key):
     flags = transcriber.flags
     job = transcriber.get_job(key)['TranscriptionJob']
-    transcription_text = json_builder.build_transcript(transcriber.get_transcription(job))
+
+    if 'transcription_text' in session:
+        transcription_text = session['transcription_text']
+
+    else:
+        transcription_text = json_builder.build_transcript(
+                transcriber.get_transcription(job),
+                )
+        session['transcription_text'] = transcription_text
 
     class EditTranscriptionForm(FlaskForm):
         transcription = fields.TextAreaField('Transcription', default=transcription_text)
