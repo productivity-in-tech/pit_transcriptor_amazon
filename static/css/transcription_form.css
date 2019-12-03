@@ -4,3 +4,7 @@ textarea {
     height: calc(100vh - 2em);
     resize: none;
 }
+
+form {
+	min-height: 100%;
+}
