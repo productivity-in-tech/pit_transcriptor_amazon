@@ -7,7 +7,6 @@ import re
 import sys
 
 
-
 def build_transcript(transcript_json):
     json_results = transcript_json['results']
     channels = json_results['channel_labels']['channels']
