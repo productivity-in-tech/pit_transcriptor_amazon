@@ -1,12 +1,9 @@
 {% extends 'base.html' %} {% block title %} PIT Transcriptor {% endblock %} {% block content%} 
 <section class="section">
   <div class="container">
-    <div class="card">
-      <header class="card-header">
         <div class="container"
             <h1 class="title is-3">{{job['TranscriptionJobName']}}</h1>
           </div>
-
           {% set status = job['TranscriptJobStatus'] %}
 
           {% if status == "IN_PROGRESS" %}
@@ -25,8 +22,8 @@
           {% endif %}
 
         </div>
-      </header>
 
+        <div class="hero is-large">
       {% if status == "COMPLETED" %}
       <div class="card-body is-light">
         {% include 'card-data.html' %}
@@ -42,8 +39,6 @@
           </h1>
 
       {% else %}
-
-        <div class="card-body is-warning container">
           <form>
                 <div class="field">
                   <div class="control">
