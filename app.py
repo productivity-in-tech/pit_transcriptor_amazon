@@ -84,6 +84,7 @@ def get_transcription_page(key):
 
     if not transcript:
         job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
+        logging.warning(job)
         transcript = mongo.transcription_collection.insert_one(
                 {
                     'key': key,
