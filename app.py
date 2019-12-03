@@ -88,10 +88,10 @@ def get_transcription_page(key):
                 {
                     'key': key,
                     'job':transcript,
-                    'transcription': {datetime.utcnow(): json_builder.build_transcript(job)},
+                    'transcription': {datetime.utcnow(): json_builder.get_transcription(job)},
                     })
 
-    transcription_text = transcript['transcription']['original']
+    transcription_text = json_builder.build_transcript(transcript['transcription'])
 
     class EditTranscriptionForm(FlaskForm):
         transcription = fields.TextAreaField('Transcription', default=transcription_text)
