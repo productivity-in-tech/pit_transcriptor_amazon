@@ -1,8 +1,8 @@
-from pathlib import Path
 import logging
 import math
 import os
 import time
+from pathlib import Path
 
 import maya
 
@@ -12,19 +12,12 @@ import mongo
 import responder
 import s3
 import transcriber
-from flask import (
-        Flask,
-        flash,
-        render_template,
-        request,
-        session,
-        )
-
-from forms.forms import SetupForm, UploadForm
-from werkzeug.utils import secure_filename
-from flask_wtf import FlaskForm
 import wtforms.fields as fields
 import wtforms.validators as validators
+from flask import Flask, flash, render_template, request, session
+from flask_wtf import FlaskForm
+from forms.forms import SetupForm, UploadForm
+from werkzeug.utils import secure_filename
 
 logging.basicConfig(level=logging.WARNING)
 
@@ -84,7 +77,7 @@ def start_transcription():
 @app.route('/transcription/<key>')
 def get_transcription_page(key):
     flags = transcriber.flags
-    transcript = mongo.transcription_collection.find_one({'key': key, 'transcripts': {'$exists': True})
+    transcript = mongo.transcription_collection.find_one({'key': key, 'transcripts': {'$exists': True}})
 
     if not transcript:
         job = transcriber.get_job(key)
@@ -92,8 +85,8 @@ def get_transcription_page(key):
                 {
                     'key': key,
                     'job':transcript,
-                    'transcription': {'original': json_builder.build_transcript(job)}
-                )
+                    'transcription': {datetime.utcnow(): json_builder.build_transcript(job)},
+                    })
 
     transcription_text = transcript['transcription']['original']
 
