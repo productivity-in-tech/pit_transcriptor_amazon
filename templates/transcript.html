@@ -5,6 +5,7 @@
           <h1 class="title is-2">{{job['TranscriptionJobName']}}</h1>
           {% set status = job['TranscriptJobStatus'] %}
 
+          <div class=hero-body>
           {% if status == "IN_PROGRESS" %}
           <div class="level-item">
             <span class="has-text-is-grey-lighter">
