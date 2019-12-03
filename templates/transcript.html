@@ -6,7 +6,6 @@
           <h1 class="title is-2">{{job['TranscriptionJobName']}}</h1>
           {% set status = job['TranscriptJobStatus'] %}
 
-          <div class="hero is-large">
           {% if status == "IN_PROGRESS" %}
           <div class="level-item">
             <span class="has-text-is-grey-lighter">
@@ -24,7 +23,6 @@
 
         </div>
 
-        <div class="hero is-large">
       {% if status == "COMPLETED" %}
       <div class="card-body is-light">
         {% include 'card-data.html' %}
