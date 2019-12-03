@@ -2,7 +2,7 @@ import os
 
 import pymongo
 
-client = pymongo.MongoClient(f'{os.environ.get("MONGODB_URI")}?retryWrites=False')
+client = pymongo.MongoClient(f'{os.environ.get("MONGODB_URI")}?retryWrites=false')
 db = client.get_default_database()
 transcription_collection = db["transcriptions"]
 
