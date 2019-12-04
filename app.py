@@ -15,10 +15,9 @@ import s3
 import transcriber
 import wtforms.fields as fields
 import wtforms.validators as validators
-from flask import Flask, flash, render_template, request, session
+from flask import Flask, flash, render_template, request, session, Markup
 from flask_wtf import FlaskForm
 from forms.forms import SetupForm, UploadForm
-from werkzeug.utils import secure_filename
 
 logging.basicConfig(level=logging.WARNING)
 
@@ -133,7 +132,7 @@ def get_transcription_page(key):
                 version_date = arrow.get(version_date, 'YYYYMMDDHHmmss').format('DD MMM, YYYY HH:ss'),
                 form = EditTranscriptionForm(),
                 count = len(re.findall(r'\*.*\*', transcription_text)),
-                diff = [x for x in diff],
+                diff = Markup(diff),
         )
 
 
