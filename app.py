@@ -105,7 +105,7 @@ def get_transcription_page(key):
                     {
                         'key': key,
                         'job': job,
-                        'transcriptions': { transcription},
+                        'transcriptions': {version_date: transcription},
                     })
 
             transcription_text = json_builder.build_transcript(transcription)
