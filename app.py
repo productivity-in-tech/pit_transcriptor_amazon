@@ -129,6 +129,7 @@ def get_transcription_page(key):
                 version_date = arrow.get(version_date, 'YYYYMMDDHHmmss').format('DD MMM, YYYY HH:ss'),
                 form = EditTranscriptionForm(),
                 count = len(re.findall(r'\*.*\*', transcription_text)),
+                diff = diff,
         )
 
 
