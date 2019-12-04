@@ -124,6 +124,7 @@ def get_transcription_page(key):
                 'transcript.html',
                 flags=flags,
                 job=job,
+                version_date = version_date,
                 form = EditTranscriptionForm(),
                 count = len(re.findall(r'\*.*\*', transcription_text))
         )
