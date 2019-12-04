@@ -108,7 +108,7 @@ def get_transcription_page(key):
                         'transcriptions': { transcription},
                     })
 
-        transcription_text = json_builder.build_transcript(transcription)
+            transcription_text = json_builder.build_transcript(transcription)
 
     class EditTranscriptionForm(FlaskForm):
         transcription = fields.TextAreaField('Transcription', default=transcription_text)
