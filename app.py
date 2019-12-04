@@ -115,7 +115,7 @@ def get_transcription_page(key):
         update_version = fields.HiddenField('Update_Version', default=version_date)
         submit = fields.SubmitField('Submit Changes')
 
-        return render_template(
+    return render_template(
                 'transcript.html',
                 flags=flags,
                 job=job,
