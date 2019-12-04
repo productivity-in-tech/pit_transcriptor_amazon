@@ -114,7 +114,7 @@ def get_transcription_page(key):
 
     if len(transcriptions) > 1:
         previous_version = transcriptions[-2][-1]
-        diff = difflib.HtmlDiff().make_table(
+        diff = difflib.HtmlDiff().make_file(
                 previous_version.splitlines(keepends=True),
                 transcription_text.splitlines(keepends=True),
                     )
