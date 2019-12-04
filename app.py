@@ -1,14 +1,10 @@
 from datetime import datetime
-import collections
 import logging
 import math
 import os
 import time
 from pathlib import Path
 
-import maya
-
-import celery_tasker
 import json_builder
 import mongo
 import responder
@@ -88,8 +84,7 @@ def get_transcription_page(key):
 
     else:
         job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
-        transcription = transcriber.get_transcription(job),
-        logging.warning(transcription)
+        transcription = transcriber.get_transcription(job)
         mongo.transcription_collection.insert_one(
                 {
                     'key': key,
