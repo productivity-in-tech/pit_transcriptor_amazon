@@ -6,6 +6,8 @@
           <h1 class="title is-2">{{job['TranscriptionJobName']}}</h1>
     </div>
               <form>
+            {{form.csrf}}
+            {{form.update_version}}
             <div class="field">
               <div class="control">
                 {{form.transcription(class_="textarea")}}

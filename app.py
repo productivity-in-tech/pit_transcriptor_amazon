@@ -72,40 +72,55 @@ def start_transcription():
     )
     return url_for('get_transcription_page', key=key)
 
-@app.route('/transcription/<key>')
+@app.route('/transcription/<key>', methods=['GET', 'POST'])
 def get_transcription_page(key):
-    flags = transcriber.flags
-    transcript = mongo.transcription_collection.find_one(
-            {'key': key, 'transcriptions': {'$exists': True}}
-    )
+    version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S'):
 
-    if transcript:
-        transcription = sorted(transcript['transcriptions'].items(), key=lambda x:x[0])[-1][-1]
-        job = transcript['job']
-
-    else:
-        job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
-        logging.debug(job)
-        transcription = transcriber.get_transcription(job)
-        mongo.transcription_collection.insert_one(
-                {
-                    'key': key,
-                    'job': job,
-                    'transcriptions': {datetime.utcnow().strftime('%Y%m%d'): transcription},
+    if request.method == 'POST':
+        mongo.transcription_collection.find_one_and_update(
+                {'key': key}, 
+                {'$set':
+                    {f"transcriptions.{version_date}":
+                    transcription},
                 })
 
-    transcription_text = json_builder.build_transcript(transcription)
+
+
+
+    if request.method == 'GET':
+        flags = transcriber.flags
+        transcript = mongo.transcription_collection.find_one(
+                {'key': key, 'transcriptions': {'$exists': True}}
+        )
+
+        if transcript:
+            version_date, transcription = sorted(transcript['transcriptions'].items(), key=lambda x:x[0])[-1]
+            job = transcript['job']
+
+        else:
+            job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
+            logging.debug(job)
+            transcription = transcriber.get_transcription(job)
+            mongo.transcription_collection.insert_one(
+                    {
+                        'key': key,
+                        'job': job,
+                        'transcriptions': { transcription},
+                    })
+
+        transcription_text = json_builder.build_transcript(transcription)
 
     class EditTranscriptionForm(FlaskForm):
         transcription = fields.TextAreaField('Transcription', default=transcription_text)
+        update_version = fields.HiddenField('Update_Version', default=version_date)
         submit = fields.SubmitField('Submit Changes')
 
-    return render_template(
-            'transcript.html',
-            flags=flags,
-            job=job,
-            form = EditTranscriptionForm()
-    )
+        return render_template(
+                'transcript.html',
+                flags=flags,
+                job=job,
+                form = EditTranscriptionForm()
+        )
 
 
 if __name__ == "__main__":
