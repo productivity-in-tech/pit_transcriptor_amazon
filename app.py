@@ -78,7 +78,7 @@ def get_transcription_page(key):
     flags = transcriber.flags
 
     if request.method == 'POST':
-        transcription_text = request.form['teanscription']
+        transcription_text = request.form['transcription']
         post = mongo.transcription_collection.find_one_and_update(
                 {'key': key}, 
                 {'$set':
