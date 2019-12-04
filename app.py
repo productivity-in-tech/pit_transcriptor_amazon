@@ -75,17 +75,19 @@ def start_transcription():
 @app.route('/transcription/<key>', methods=['GET', 'POST'])
 def get_transcription_page(key):
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
+    flags = transcriber.flags
 
     if request.method == 'POST':
         transcription_text = request.form['teanscription']
-        mongo.transcription_collection.find_one_and_update(
+        post = mongo.transcription_collection.find_one_and_update(
                 {'key': key}, 
                 {'$set':
                     {f"transcriptions.{version_date}": transcription_text},
                 })
+        job = post['job']
+
 
     if request.method == 'GET':
-        flags = transcriber.flags
         transcript = mongo.transcription_collection.find_one(
                 {'key': key, 'transcriptions': {'$exists': True}}
         )
