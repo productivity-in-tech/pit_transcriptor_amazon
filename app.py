@@ -91,8 +91,9 @@ def get_transcription_page(key):
         )
 
         if transcript:
-            version_date, transcription = sorted(transcript['transcriptions'].items(), key=lambda x:x[0])[-1]
+            version_date, transcription_text = sorted(transcript['transcriptions'].items(), key=lambda x:x[0])[-1]
             job = transcript['job']
+
 
         else:
             job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
