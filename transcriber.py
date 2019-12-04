@@ -81,6 +81,9 @@ def get_transcription(job):
         r.raise_for_status()
         return r.json()
 
+    else:
+        'Error Error'
+
 
 if __name__ == "__main__":
     start_transcription()
