@@ -111,7 +111,7 @@ def get_transcription_page(key):
     job = transcript['job']
 
 
-    if len(transcriptions['transcriptions']) > 1:
+    if len(transcriptions) > 1:
         previous_version = transcription[-2]
 
 
