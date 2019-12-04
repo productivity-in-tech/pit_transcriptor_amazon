@@ -4,6 +4,7 @@
 <section class="section hero is-light is-fullheight">
     <div class="hero-head">
           <h1 class="title is-2">{{job['TranscriptionJobName']}}</h1>
+          <h2 class="subtitle is-6">Last Edited: {{version_date}}</h2>
     </div>
               <form method='POST'>
             {{form.csrf}}
@@ -20,7 +21,6 @@
               </div>
             </div>
 
-            <h2 class="subtitle is-4">Last Edited: {{version_date}}</h2>
           </form>
 
       <div class="hero-foot">
