@@ -77,11 +77,11 @@ def get_transcription_page(key):
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
 
     if request.method == 'POST':
+        transcription_text = request.form['teanscription']
         mongo.transcription_collection.find_one_and_update(
                 {'key': key}, 
                 {'$set':
-                    {f"transcriptions.{version_date}":
-                    request.form['transcription']},
+                    {f"transcriptions.{version_date}": transcription_text},
                 })
 
     if request.method == 'GET':
