@@ -82,8 +82,7 @@ def get_transcription_page(key):
             {'key': key, 'transcriptions': {'$exists': True}}
     )
 
-    if transcript:
-        transcription = sorted(lambda x:x[0], key=transcript['transcriptions'].items())[-1]
+    transcription = transcript['transcriptions'].items()[0]
 
     else:
         job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
