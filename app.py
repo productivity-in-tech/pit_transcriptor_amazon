@@ -97,7 +97,6 @@ def get_transcription_page(key):
                     'transcriptions': {datetime.utcnow().strftime('%Y%m%d'): transcription},
                 })
 
-    logging.warning(transcription)
     transcription_text = json_builder.build_transcript(transcription)
 
     class EditTranscriptionForm(FlaskForm):
