@@ -83,7 +83,7 @@ def get_transcription_page(key):
     )
 
     if transcript:
-        transcription = sorted(lambda x:x, key=transcript['transcriptions'].items())[-1]
+        transcription = sorted(lambda x:x[0], key=transcript['transcriptions'].items())[-1]
 
     else:
         job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
