@@ -112,7 +112,7 @@ def get_transcription_page(key):
 
 
     if len(transcriptions) > 1:
-        previous_version = transcription[-2]
+        previous_version = transcriptions[-2][-1]
 
 
     class EditTranscriptionForm(FlaskForm):
