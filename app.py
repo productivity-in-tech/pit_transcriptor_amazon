@@ -1,4 +1,5 @@
 from datetime import datetime
+import collections
 import logging
 import math
 import os
@@ -83,7 +84,7 @@ def get_transcription_page(key):
     )
 
     if transcript:
-        transcription = transcript['transcriptions'].items()[0]
+        transcription = sorted(transcript['transcriptions'].items())[-1]
 
     else:
         job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
