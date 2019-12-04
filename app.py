@@ -1,4 +1,5 @@
 from datetime import datetime
+import arrow
 import re
 import logging
 import math
@@ -124,7 +125,7 @@ def get_transcription_page(key):
                 'transcript.html',
                 flags=flags,
                 job=job,
-                version_date = datetime.datetime.strptime(version_date, '%Y%m%d%H%M%S')
+                version_date = arrow(version_date, 'YYYYMMDDHHMMSS')).friendly(),
                 form = EditTranscriptionForm(),
                 count = len(re.findall(r'\*.*\*', transcription_text))
         )
