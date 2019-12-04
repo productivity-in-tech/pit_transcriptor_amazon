@@ -80,7 +80,7 @@ def get_transcription_page(key):
 
     if request.method == 'POST':
         transcription_text = request.form['transcription']
-        post = mongo.transcription_collection.find_one_and_update(
+        transcriptions = mongo.transcription_collection.find_one_and_update(
                 {'key': key}, 
                 {'$set':
                     {f"transcriptions.{version_date}": transcription_text},
@@ -93,22 +93,26 @@ def get_transcription_page(key):
                 {'key': key, 'transcriptions': {'$exists': True}}
         )
 
-        if transcript:
-            version_date, transcription_text = sorted(transcript['transcriptions'].items(), key=lambda x:x[0])[-1]
-            job = transcript['job']
-
-
-        else:
+        if not transcript:
             job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
             logging.debug(job)
             transcription = transcriber.get_transcription(job)
             transcription_text = json_builder.build_transcript(transcription)
-            mongo.transcription_collection.insert_one(
+            transcript = {version_date: transcription_text}
+            transcriptions = mongo.transcription_collection.insert_one(
                     {
                         'key': key,
                         'job': job,
-                        'transcriptions': {version_date: transcription_text},
+                        'transcriptions': transcript,
                     })
+
+    transcriptions = sorted(transcript['transcriptions'].items(), key=lambda x:x[0])
+    version_date, transcription_text = transcriptions[-1]
+    job = transcript['job']
+
+
+        if len(transcriptions['transcriptions'] > 1:
+            previous_version = transcription[-2]
 
 
     class EditTranscriptionForm(FlaskForm):
