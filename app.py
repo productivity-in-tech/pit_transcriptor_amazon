@@ -81,11 +81,8 @@ def get_transcription_page(key):
                 {'key': key}, 
                 {'$set':
                     {f"transcriptions.{version_date}":
-                    transcription},
+                    request.form['transcription']},
                 })
-
-
-
 
     if request.method == 'GET':
         flags = transcriber.flags
