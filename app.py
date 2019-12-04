@@ -74,7 +74,7 @@ def start_transcription():
 
 @app.route('/transcription/<key>', methods=['GET', 'POST'])
 def get_transcription_page(key):
-    version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S'):
+    version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
 
     if request.method == 'POST':
         mongo.transcription_collection.find_one_and_update(
