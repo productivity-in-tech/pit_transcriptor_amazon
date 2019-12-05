@@ -22,7 +22,9 @@
             </div>
 
           </form>
-          {{diff}}
+          {% for diff in diffs %}
+          {{diff}}</br>
+          {% endfor %}
 
       <div class="hero-foot">
           <div class="tags has-addons">
