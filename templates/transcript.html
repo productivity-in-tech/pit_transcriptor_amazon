@@ -36,7 +36,7 @@
             <div class="tag is-info">
               Version: 
             </div>
-            <div class="tag">
+            <div class="tag is-grey-lighter">
             {{version_count}}
             </div>
           </div>
@@ -45,9 +45,19 @@
             <div class="tag is-primary">
               Potential Issues: 
             </div>
-            <div class="tag">
+
+            {% if issue_count < 10 %}
+            {% set issue_count_color = 'is_success' %}
+            {% elif issue_count < 50 %}
+            {% set issue_count_color = 'is_warning' %}
+            {% else %}
+            {% set issue_count_color = 'is_danger' %}
+            {% endif %}
+
+            <div class="tag {{issue_count_color}}">
               {{issue_count}}
             </div>
+
           </div>
 
           <div class="tags has-addons">
