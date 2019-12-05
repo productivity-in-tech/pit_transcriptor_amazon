@@ -74,52 +74,43 @@ def start_transcription():
     )
     return url_for('get_transcription_page', key=key)
 
-@app.route('/transcription/<key>', methods=['GET', 'POST'])
-def get_transcription_page(key):
+@app.route('/post-transcription/', methods=['POST'])
+def post_transcription_page(key):
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
     flags = transcriber.flags
 
-    if request.method == 'POST':
-        transcription_text = request.form['transcription'].strip()
-        transcriptions = mongo.transcription_collection.find_one_and_update(
-                {'key': key}, 
-                {'$set':
-                    {f"transcriptions.{version_date}": transcription_text},
+    transcription_text = request.form['transcription'].strip()
+    transcriptions = mongo.transcription_collection.find_one_and_update(
+            {'key': key}, 
+            {'$set':
+                {f"transcriptions.{version_date}": transcription_text},
+            })
+    job = transcriptions['job']
+    return url_for('/transcription/', key=key)
+
+
+@app.route('/transcription/<key>')
+def get_transcription_page(key):
+    transcript = mongo.transcription_collection.find_one(
+            {'key': key, 'transcriptions': {'$exists': True}}
+    )
+
+    if not transcript:
+        job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
+        logging.debug(job)
+        transcription = transcriber.get_transcription(job)
+        transcription_text = json_builder.build_transcript(transcription).strip()
+        transcript = {version_date: transcription_text}
+        transcriptions = mongo.transcription_collection.insert_one(
+                {
+                    'key': key,
+                    'job': job,
+                    'transcriptions': transcript,
                 })
-        job = transcriptions['job']
-
-
-    if request.method == 'GET':
-        transcript = mongo.transcription_collection.find_one(
-                {'key': key, 'transcriptions': {'$exists': True}}
-        )
-
-        if not transcript:
-            job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
-            logging.debug(job)
-            transcription = transcriber.get_transcription(job)
-            transcription_text = json_builder.build_transcript(transcription).strip()
-            transcript = {version_date: transcription_text}
-            transcriptions = mongo.transcription_collection.insert_one(
-                    {
-                        'key': key,
-                        'job': job,
-                        'transcriptions': transcript,
-                    })
 
     transcriptions = sorted(transcript['transcriptions'].items(), key=lambda x:x[0])
     version_date, transcription_text = transcriptions[-1]
     job = transcript['job']
-
-
-    class EditTranscriptionForm(FlaskForm):
-        transcription = fields.TextAreaField('Transcription', default=transcription_text)
-        update_version = fields.HiddenField('Update_Version', default=version_date)
-        submit = fields.SubmitField('Submit Changes')
-
-    class SearchandReplaceForm(FlaskForm):
-        search_phrase = fields.StringField('Replace All')
-        replace_phrase = fields.StringField('Replace With')
 
     return render_template(
                 'transcript.html',
