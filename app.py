@@ -81,6 +81,7 @@ def start_transcription():
 @app.route('/post-transcription', methods=['POST'])
 def post_transcription_edit():
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
+    key = request.form['job_name']
     transcription_text = request.form['transcription'].strip()
     transcriptions = mongo.transcription_collection.find_one_and_update(
             {'key': key},
