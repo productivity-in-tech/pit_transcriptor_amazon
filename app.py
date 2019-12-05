@@ -9,6 +9,7 @@ import time
 from pathlib import Path
 
 import json_builder
+import pymongo
 import mongo
 import responder
 import s3
@@ -111,11 +112,13 @@ def search_and_replace(key):
             transcription_text,
             flags=re.IGNORECASE,
             )
+    logging.WARNING(transcription_text)
     transcriptions = mongo.transcription_collection.find_one_and_update(
             {'key': key},
             {'$set':
                 {f"transcriptions.{version_date}": transcription_text},
-            })
+            },
+            )
     job = transcriptions['job']
     return redirect(url_for('get_transcription_page', key=key))
 
