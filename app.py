@@ -22,6 +22,7 @@ from flask import (
         request,
         session,
         Markup,
+        redirect,
         url_for,
         )
 from flask_wtf import FlaskForm
