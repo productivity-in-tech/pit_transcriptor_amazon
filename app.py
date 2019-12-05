@@ -102,22 +102,6 @@ def post_transcription_edit():
 
 @app.route('/search-replace', methods=['GET', 'POST'])
 def search_and_replace():
-    # version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
-    key = request.form['job_name']
-    # project = mongo.transcription_collection.find_one({'key': key})
-    # transcription_text = project['transcriptions'][request.form['update_version']]
-    # modified_transcription_text = re.sub(
-    #        request.form['search_phrase'],
-    #        request.form['replace_phrase'],
-    #        transcription_text,
-    #        flags=re.IGNORECASE,
-    #        )
-    #transcriptions = mongo.transcription_collection.find_one_and_update(
-#            {'key': key},
-#            {'$set':
-#                {f"transcriptions.{version_date}": transcription_text},
-#            },
-#            )
     return "Hello World"
 
 
