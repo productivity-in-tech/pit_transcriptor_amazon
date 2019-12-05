@@ -79,7 +79,7 @@ def start_transcription():
     return url_for('get_transcription_page', key=key)
 
 @app.route('/post-transcription/', methods=['POST'])
-def post_transcription_page(key):
+def post_transcription_edit(key):
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
 
     transcription_text = request.form['transcription'].strip()
