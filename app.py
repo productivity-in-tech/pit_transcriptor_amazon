@@ -108,7 +108,9 @@ def search_and_replace(key):
     transcription_text = re.sub(
             request.form['search_text'],
             request.form['replace_text'],
-            re.IGNORECASE)
+            transcription_text,
+            flags=re.IGNORECASE,
+            )
     transcriptions = mongo.transcription_collection.find_one_and_update(
             {'key': key},
             {'$set':
