@@ -17,8 +17,12 @@ import wtforms.fields as fields
 import wtforms.validators as validators
 from flask import Flask, flash, render_template, request, session, Markup
 from flask_wtf import FlaskForm
-from forms.forms import SetupForm, UploadForm, EditTranscriptionForm,
-SearchandReplaceForm
+from forms.forms import (
+        SetupForm,
+        UploadForm,
+        EditTranscriptionForm,
+        SearchandReplaceForm,
+        )
 
 logging.basicConfig(level=logging.WARNING)
 
