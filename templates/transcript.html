@@ -21,12 +21,7 @@
               </div>
             </div>
 
-          </form>
-          {% for diff in diffs %}
-          {{diff}}
-					<hr>
-          {% endfor %}
-
+					<form
       <div class="hero-foot">
           <div class="tags has-addons">
             <div class="tag is-primary">
@@ -81,6 +76,19 @@
 
         </div>
         </div>
+
+				<form>
+					<div class="field">
+						<div class="control">
+						{{search_form.search_phrase()}}
+						</div>
+						</div>
+					<div class="field">
+						<div class="control">
+						{{search_form.replace_phrase()}}
+						</div>
+						</div>
+				</form>
 
 </section>
 {% endblock %}

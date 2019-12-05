@@ -112,19 +112,14 @@ def get_transcription_page(key):
     job = transcript['job']
 
 
-    if len(transcriptions) > 1:
-        previous_version = transcriptions[0][-1]
-        diffs = list(difflib.unified_diff(
-                previous_version.splitlines(),
-                transcription_text.splitlines(),
-                n=2,
-                    ))
-
-
     class EditTranscriptionForm(FlaskForm):
         transcription = fields.TextAreaField('Transcription', default=transcription_text)
         update_version = fields.HiddenField('Update_Version', default=version_date)
         submit = fields.SubmitField('Submit Changes')
+
+    class SearchandReplaceForm(FlaskForm):
+        search_phrase = fields.StringField('Replace All')
+        replace_phrase = fields.StringField('Replace With')
 
     return render_template(
                 'transcript.html',
@@ -132,6 +127,7 @@ def get_transcription_page(key):
                 job=job,
                 version_date = arrow.get(version_date, 'YYYYMMDDHHmmss').format('DD MMM, YYYY HH:ss'),
                 form = EditTranscriptionForm(),
+                search_form = SearchandReplaceForm(),
                 count = len(re.findall(r'\*.*\*', transcription_text)),
                 diffs = diffs,
         )
