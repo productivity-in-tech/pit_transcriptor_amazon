@@ -147,7 +147,7 @@ def get_transcription_page(key):
         job_name = fields.HiddenField('Transcription_Job_Name',
                 default=key)
         update_version = fields.HiddenField('Update_Version', default=version_date)
-        submit = fields.SubmitField('Find/Replace', _class="is-warning")
+        submit = fields.SubmitField('Find/Replace')
 
 
     return render_template(

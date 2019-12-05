@@ -1,0 +1,364 @@
+speaker 2 : 0
+ So the first thing I'd like to say, John, is thank you ever so much for taking some time out of your Monday evening. 
+
+speaker 1: 6
+ my pleasure. 
+
+speaker 2: 7
+ It's always a great pleasure talking to anyone in the .Net space. And if you don't mind me saying , you know you're a bit of a celebrity and it's a great pleasure to be talking to you. 
+
+speaker 1: 17
+ It's my pleasure. It's a very weird situation , being this sort of weird micro celebrity that if you're not within development , you have never heard of me at all. My wife is a Children's author. So far , far more people have heard of Holly. But within the developer community , obviously there is this a strange perception off me. I'm not nearly as smart as people seem to expect or want me to be. But , hey , it gets me on podcasts. It gets me to conferences and things , so I will take advantage of that while I can. 
+
+speaker 2: 46
+I Don't blame you at all. So I was wondering if you could maybe introduce yourself to the listeners. I know that there's going to be very few people who have maybe heard of you and don't know who you are. But I was wondering , Could you maybe give us a couple of minutes ? 
+
+speaker 1: 61
+ Sure. So my name's John Skeet. I work for Google out of the London office , although I spend most of my time where I am right now , which is in my shed at the end of my garden , which is a lovely home office on. I currently work on the Google Cloud client libraries for .Net , which is fantastic. I've been doing that for three or four years now , which means I get to work for Google , which I love doing , and I've been a Google for 11 years , but I still get to work with .Net and C# , which are my passions in terms of technology. So it's best of both worlds on. I love being. I love working in developer relations , which is the area that I'm in because it means that my customers are other developers. So I care about the same things that my customers already care about, which is a great position to be in. So that's that's work work. For fun, I write to the Date/Time Library. I dabble in all kinds of things. I am hobbyist in terms of the C# language design. So I'm proud to be the convener of the ECMA Standardization Committee, which a couple of years ago standardized C# 5. So now, given that C# 8 has now come out with a little bit behind. But basically working on tooling and things to take things forward for future versions that C#. I'm a committed Christian on Methodist local preacher. I have a family. I have a wife and three Children or other. I am married to a lovely woman... I hate that "I have a wife sounds so "ownership-y.  But I am the husband off a wonderful woman called Holly. Um , I thoroughly enjoying musicals and other shows. It feels like **I** must be missing something. Oh , and yeah , Stack overflow is probably where people have heard of me. So I'm a big contributor on stack overflow. An I have a book on C# called C# in Depth , which is currently in its fourth edition , and I should really get started on the fifth edition soon. 
+
+speaker 2: 191
+ Well , it's a very long list of achievements. I have to say. 
+
+speaker 1: 196
+That's a list of stuff I do on and I would challenge each of your listeners if you're thinking , "Wow , how does **John** get it all done ?" Because people ask me this. I don't do any more than other people. It's just it's **all** visible , so stop , stop what you're doing now. pause the playback on. Think of all the things that if you were to give a reasonably exhaustive list of stuff you do in your life , I'm sure all the listeners would have just as long a list. So this is It's not achievements , **really**. It's just stuff. I do.
+
+speaker 2: 225
+I like that. **I** **like** that. I think **you** I think you're right in that , **um** , you know that there's a reason why a lot of people in the technology space people like Scott Hanselman and yourself, create projects for people to use or create blog posts, go on podcasts , video **streams** go **to** talks and things. **It's** to spread that knowledge , isn't it ? I guess , to give back to say I created this thing and here **are** the good parts. And **here** **are** the **bad** **parts** is **where** difficult and here is what was easy. 
+
+speaker 1: 253
+ Yeah , and to basically have fun. So one thing I didn't mention just now is As of July , I started learning the drums. **So** I'm a terrible , terrible **drummer**. But I'm having loads of fun playing with my electronic drum kit on **and** writing code that can interact with this in terms of the configuration **and** things. So it's a matter of why do you think I do well is **try** to bring the whole of myself to everything I do. So I'll bring the coding side of myself to the drums , the drumming side of myself to music. when I'm listening to music, Now I hear the drum part much more than I do. But other times I bring my faith **into** , hopefully , everything I do without sort of forcing it down anyone's **throat**. I do find that if you can make all of your life sort of pull in one direction , even if that's in many , many different ways **thing** you get a lot of benefits because things just rip off each other. 
+
+speaker 2: 308
+ **I** like that too. It wasn't that long ago I interviewed a man called Thomas **Bets who is** a fantastic engineer and he said along the lines off study something that is outside of your **co**fatum** **and You can then bring that knowledge that information that that experience into your regular practice off whatever it is that you do. and the example he gave **for** studying the **liberal** arts. So go and study something that **has** nothing to do with engineering. And when you come back to your engineering job , you will see that your understanding of how the way that you and your team do things, and they way **you** **as** a collective do things is like that because of a set of very specific reasons And maybe you **can** bring the ideas and the experience you have from looking at something from a different perspective into that team and maybe change the way that everything works. 
+
+speaker 1: 332
+ Absolutely 
+
+speaker 1: 356
+And that's one specific aspect of the **liberal** arts. I would encourage everyone , **to**, do some aspect , particularly if you're if you're relatively young on your choosing , your **majors** **and** **minors** at university , **whatever** it is , don't go so tech **focused** that you lose love of the written word or **love** of communication because I tend to view the difficult bits of **software** engineering tend to be communication. So how do you communicate requirements precisely but not **too** dogmatically. How do you communicate when you write code ? **You're** communicating to the computer and to whoever's reading the code later on. When you're talking in meetings , or the writing **emails** to your colleagues , all of these things are communication on. That's actually a much bigger **part** of a **reasonably** senior **software** **engineers** job. Then **you're** writing **four** loops , **et** **cetera**. The logic part. Don't get me wrong. It's still very , very important. But if you can communicate when you're having trouble on , when you do know things and you're trying to mental someone else , the communication is much more important than do I know a particular **API**. 
+
+speaker 2: 441
+ Absolutely. I agree with you 100% on that **and** I think I'll lean on your **ah** **blog** posts on ""how to ask **a** question"" for proof of that. 
+
+speaker 1: 450
+Sounds good to me , 
+
+speaker 2: 453
+ the excellent I definitely agree with you on **ah** , communication being a very important part of the work that I suppose anybody does on **day**. One of the things that I did **at** university was I studied **a** Japanese language for a bunch of reasons , but one of them was **it** is so different from English language that it gave me, I guess , that third person perspective on the language they use **every** **day** understanding. Oh , I get it. That's a verb. That's an **adjective**. And if I **mix** them up , somebody doesn't know what I'm talking about , you know ""which Which is which"". You know?
+
+speaker 1: 480
+ And you get to see how the language that you can use to express **yourself** **effect** what you what you do express. **It's** to give a very **concrete** , technical example in Java and C# , reasonably similar languages. They both have virtual methods and non-virtual methods , but in Java for methods are virtual by default on in C# , **they're** non virtual by default. **and**. People tend to go with the **defaults** so you can see how **The** language they're using , despite having the same capabilities in that particular example changes what **you're** expressing , what you **bother** **to** bring out. In other cases , **there** **may** **be** human languages that don't have appropriate ways off expressing a particular feeling or a particular situation. And what you can express just **changes** your way of looking at things. So the more different perspectives you can get absolutely the better.
+
+speaker 2: 548
+ **excellent**. **I'd** really like that. Anytime anyone **wants** to tell me , go and learn more about a language. I'm **onboard**. I Do love the learning how we communicate as a species , you know , the different have different groups of people with different words and phrases that'll mean different things. I read an article today about how the **use** **off** masculine **words** can actually home certain groups , and I completely I can see where **that's** going , where they're coming from. **I** totally understand that Which has now made me take us that back and go right. **Okay**. So how do I approach the word when I'm talking to a group of individuals. All right , **OK** , so I'll use this word. Maybe in the future , I'll force myself to use a different word. Or maybe actually **asked** that group of individuals. Is it **okay** if I use this noun  or** this group phrase what's the best way to communicate with everyone so that we're all **on** **board** ? 
+
+speaker 1: 588
+ Yes. **Yeah** , because that could be very cultural as well. So I certainly in the **US** being in rooms with 90% women. Where the woman presenting **as** **the** right guys , I thought , **What** what ? Hang on. Isn't that gendered ? **That's** like No. Well Maybe not in a situation where most of **rumors** women anyway. **Whereas** maybe in with some of the same people still in the US. And I think this is part of **a** US / UK difference. But if the room had bean only 10% women that maybe guys would have bean **more** gendered because it would have emphasized that Disparity **more**. So yeah , It can be absolutely fascinating. I should say , by the way , that **I** **am** a complete hypocrite on this. In terms of I only know English I am terribly monolingual on , even in suffer engineering. I love the idea of being a **polyglot** programmer , but basically I know C# **and** Java , and it's been quite a long time since I've done **a** **real** Java. So if you look at any of the python or **bash** scripts that I've written in the last couple of years , they are primitive in the extreme. I get **what** I can. **I** copy **based** quite a bit. Yes , so do as I recommend , not necessarily as I do when it comes to language. But I do think that communication is worth spending effort in I I do put time and effort into it , just not in terms of learning a different language , 
+
+speaker 2: 683
+that's fair enough. I do like the idea of being good enough to be dangerous in the language , because that's how I have to do. Somebody says to me , "**Oh** , can you create me a bash **script** that **will** do this" and I sit there and say Yes. I'm sitting in front of my **linux** machine on **I** know what bash is but I guess that's what stack over **first** for **it**. 
+
+speaker 1: 708
+ I have copied so many bits of bash **on** fighting from stack overflow , absolutely on **C#** **and** **Java** , because there are things that you don't **know** **how** to do. **It's** **usually** not in terms of the language , but **whatever** API you're using , people sometimes act surprised when I say , Oh , I looked something up on stack overflow. **Well** , of course I did!. It's It's sort of like science. I can't remember when it was, but There was a period of history where it would be reasonable for a scientist to know kind of all of science that have **been** discovered and worked out, but that time is long , long since **passed**. So if you take the finest scientific minds on the planet. On **and** , **they're** still gonna be asking colleagues for all kinds of things because no one knows everything. 
+
+speaker 2: 760
+ precisely. I'll bet I'll be willing to bet that even people who work at Microsoft on the dot net APIs probably have to ask their colleagues about something or other. 
+
+speaker 1: 774
+ Yeah , yeah , **I'm** probably not about their own pet (project), the bit of the API that they work on. But if you're working in globalization and you know everything about one particular calendar system and how the numbers are represented within that or **whatever** it is and you need to find someone who's got WCF experience well they're Galaxies apart , 
+
+speaker 2: 797
+Precisely. I guess that leads us on to part of the topic. We're going to talk about it. Did you feel that segue. So you mentioned it earlier on You mentioned Noda Time earlier on on **and**. I've done a bit of investigation , just thinking , without sounding **confrontational**. Why would I use **Noda Time in place off , say , system.datetime ? 
+
+speaker 1: 835
+ right. So it's **it's** probably worth going into the history of this back when Stack overflow was relatively young. I can't remember the exact date , but I **can** **find** it **cause** I wrote **a** blogpost about it Shortly afterwards. There were stack overflow conferences around the world , and I spoke at a London one on and the talk **was** called "Humanity, epic Fail". This was the first time I had used "Tony the Pony", which is a little sock puppet that I **used** in some talks. Great fun. **And** the premise of the talk was that if you take the basic units of data that almost everything else is made up , off numbers text **and** dates and times , that kind of represents a huge amount of the data we **work** with and humanity , whether it's people entirely outside computing or **architects of** , how we represent dates and **text** **and** numbers and things. Oh , **your** **lowly** engineer **who's** trying to work with this mess. We all mess it up , and we have made things worse and worse. And **West** **And**. Frankly , **it's** wonder that **the** software ever works **at** **all** , sometimes so as part of that mostly **lighthearted** talk , but with a few hopefully grains of truth in there as part of that I was saying , You need to use the right tool for the job. So if you're in Java , then you should absolutely not use **Java** util date java util calendar because they are terrible. Instead , use **Joda** time. That was before the java.time API **on** **and** , I said , And if you're using dot net well , you kind of scuppered there's no equivalent of **Joda time. I went away from the conference and thought , "I sort of don't want to do this , but I feel having identified the problem , I really need to Address it". 
+ 
+So basically , date and time are far harder , far more complex than the system. datetime. And even system.datetime offset types make them out to be. partly because there's there's a sort of effort within a lot of software to spot patterns. "Well , this thing over here looks like that thing over there , so I will combine them in a common type", and in many cases , that's a good thing to do. But in other cases, it hides fairly important differences , **and** that's the case for **datetime**. So in .Net, you've got  datetime , datetime **offset** time span , time zone info , and that's kind of it. Whereas in Noda Time we say you know what ? There are lots of different things. A date is different from a date **in** time , so currently it's the 14th of Octoebr 2019  That's a date on **it** in the Gregorian calendar system. On the local time , as I'm talking to you is 9 21 on the 14th October 2019 **on** the local time Part of that is just 9:21 **p.m.** And so we've already identified various different things. So in Noda Time just to list off the top of my head , some of the types that we have we have local date , local datetime , local time zone , **datetime** offset datetime , instant, duration, period , time zone, sorry ** datetime** zone on various providers , calendar systems , et cetera. And The point is , there's a lot to learn there **on. That's a good thing , because you need to be aware off what the data you're working with might be on. Then work out what it is and make the right decision. 
+
+So some **API designers take **an** approach of. "Don't make me think. Don't make the **user** think , make it all so obvious that you just do the right thing."" **And** , that's great and I try to apply **it** within Noda Time. I **tried** to make it hard to do the wrong thing , **and** I'll give an example of that later. But sometimes you need to make the user think. I don't know if you've got a piece of data saying 9:22 **p.m.** 2019 14th October Well , is that 9:22 **p.m.**UTC Is it 9 22 **PM** in some specified time zone? Is it 9:22 **p.m.** In some arbitrary time zone that we don't really need to record because it's not part of the data **we're** interested in at the moment. Do we have an offset ? I'm not sure whether even mentioned offset date **offset** **datetime** or offset time. So there are all kinds of choices , and I think when when an API can't make the right choice automatically and **reliably** , then it should force the developer to make the choice. So there's a steep learning curve. In Noda Time. you're suddenly faced with this barrage of types and you need to look **at** the information in your program and say , "Well , which of these **umpteen** different types am I meant to use." **And** hopefully that's where the documentation comes in and makes it **a** **bit** easier to understand. But  you are forced to think , and then hopefully **once** you made your choice , then the second half of my job is is make those choices really easy to express. So once you do know what you're trying to achieve in Noda Time , hopefully we make it **really** easy to achieve that **on** **to** not go wrong. I mentioned some mentioned earlier on that you try to avoid people doing the wrong thing. One thing I've seen several people do is called datetime.ahead. So if you say you take now and you want to add five minutes to it , you could declare a variable **here** datetime.now equals datetime.now on then. Now.add minutes(5) and you look at that code and that sounds **okay** , doesn't it ? Well , until you know that **datetime** is a **value** type , and all the add methods return a new value. But if you just read the code , it sounds **okay**. The equivalent code in in Noda Time would be local datetime now equals , and then you'd probably **users own** clock. I won't go into the clock aspect , but it tries to encourage you to **write** **testable** **code**. So we get localdatetime.now() and then. If you write `now.` then intellisense will suggest , Well , there's no add method , but there is a plus method , **and** if you do , I can't remember **off** **hand** whether there is a `plus minutes` But assuming there is , if not , there are multiple other ways you could do it if you do now.plus_minutes(5) and have that **as** a statement in its own right. Sounds kind of wrong because , Plus , is something you do to get a result. You wouldn't write `5+2` and just do nothing with it. You need to assign it back to something. 
+
+So we're trying to make wrong code **look** wrong on **and** , even if it's just a subtle as well  "What method name do you give ?" Don't make a method name that sounds like it modifies **a** value if actually it just returns **a** **new** value. 
+
+So in general , Noda Time tries to force you to make the right decisions with date and time. **It** also has somewhat side benefits that are actually some of the reasons that people do like to use it. So the Windows TimeZone Database is quite different from the Ayana or TZData TimeZone Database that kind of the rest of the world outside Windows uses. so the timezone I'm in, I would normally refer to **as** `Europe/London` and that's **the** time zone. identifier and Linux Systems or UNIX systems all over the world will know what that is On and. It **can** be really annoying if you can't get that from Windows because Windows only knows it is **as** British standard time or **whatever** it would say so Noda Time allows you to use the Ayana timezone database. 
+
+We also allow you to **use** the data. We **publish** the data from the Timezone database in a Noda Time specific nicely compressed format. So when the timezone data is updated , which happens several times a year , we can publish a new file **onto** the website. We do publish a new **NuGet** package as well , So if you just keep your NuGet **references** up to date , you will get the right **data**. But equally you could. You could have something on a device where you can't change the code easily , but you can make network calls. So if you have your application **polling** , Noda Time.org/tzt/db.latest.txt That will give you the URL that you can use to fetch the latest data , and it's a fairly horrible way of polling it **to** just **return** the URL. I'm not using e tags or anything that would probably be **nicer**. This was a fairly quick and dirty but quite effective way of doing it. You can then download the latest data **and** Load that **into** Noda Time , even within the same process , and you've got a new datetimezone** provider and, if your application does that automatically , you may well be getting the latest **time** **zone** data before 99% of the applications on the planet because normally most of the time operating systems have timezone data , and **they're** **are** **only** updated when the operating system updates on **and** many **days** in time , **maybe** I don't let you load from specific data sources. So those were just sort of almost tangential benefits. **And** I mentioned using an iclock for testability. So don't use the system time. Inject the idea of a service that provides the system time. inject **that** as you would any other dependency. And then it's **really** easy to fake out and say , Well , I wonder what would happen if my code is running at the time when there's a time zone transition at the end of autumn or **whatever** it is , you **can** really easily test that , whereas if you've got a hard coded `system.datetime.UTC.now()` or just `datetime.now()`  it's much harder to to test that. 
+
+So these were somewhat tangential benefits , but it was mostly around , allowing you to express the data that your application uses in a really , **really** clear way , so that if your code only has a date and  only **wants** a date , then don't let me find the seconds and the minutes **and** the hours because they're irrelevant. They're completely meaningless. Likewise , if I only want **the** time of day while don't make me express that as a time span , which is sort of a duration of time , and it's just a bit wrong. So it's mostly about expression , which **so** it comes back to the communication idea really wrong. **I** **am** very , very keen on clear communication and in this particular case , it's clear communication off what exact date and time concept you're trying to represent , 
+
+Sorry that was a very long answer. 
+
+speaker 2: 1522
+No , I like it. It's a very comprehensive answer is how we'll put it. 
+
+I do like that. Like you say , it's It's making the API communicate to the consumer, "Hey , this this may not do what you think it's going to do, and it's worded specifically so that it makes you as the consumer think about what you're doing." 
+
+I like that. 
+
+speaker 1: 1556
+Right and we avoid... Another example of where we **force** you to make a choice is you can take a local **datetime**. So it's now 9:30 p.m. **and** , as I mentioned , that's in the Europe London time zone. So we're currently one hour ahead of UTC, and you may want to convert from a zoned datetime , which is a , local **date and** time in a particular time zone. Sorry from a local **datetime** , which is **a** local date and timezone without **a** particular **times**. then say, "right ? Well , when did that occur ? When did that local datetime happen on the **timeline**  as an instant?"  Most APIs that I've seen **will** just let you convert **on** **and**. If you're lucky , they'll document what happens if the local **date** **and** time that you're converting is either skipped or ambiguous  and to go into what that means. At the in spring , we in the **UK** **skip** forward from one o'clock in the morning to two o'clock in the morning. So on that day , 1:30 in the morning doesn't exist. Where is later in ,**its** in November ? **It's** the kind of thing I really should know off the top of my head , but I don't know **when** we fall back we go. **It** goes 1:58 1:59 1 **o'clock**. So we **skipped** back from total back to one o'clock , which means 1 30 in the morning happens twice. 
+
+ So if you've got 1:30 in the morning on that date and you say , Well , what instant does that represent like Well , I don't know , it could be one of two things , or in spring , well , that didn't happen at all. 
+
+So we force you to decide. Well , do you want to sort of do it in a lenient way ? So if there are two choices old , just take the later one. If there **are** no choices at all , then you take , uh , that point on our later or **whatever**. **Whatever** it is , I can't remember the rules off what the lenient **timezone resolver** does. But it's all clearly and very precisely documented. All. You **can** be strict and say , Well , if it if it doesn't **map** **to** exactly one thing , just go bang or you can express the whole thing. In terms of this , **let's** **zoom** datetime resolver that knows howto for the vast majority of things where there's only one thing it doesn't need to consult any custom code. But you can say , Well , if it's ambiguous , then I will do this. If it's skipped , then I will do that , and you can provide your own delegates **toe** **to** do whatever you want. So maybe if it's if it's **skipped** , you go **onto** the whole next day or **whatever** it is. But you can't there's no just default. You have to choose which of those things you're going to do , because **otherwise** you're making code that will run fine , except for two hours per year. Now , **what** **are** the chances of you picking up on those two hours per year in testing ? Almost none. What are the chances of your application being used during those two hours per year ? Well , **that** entirely depends on the on the application. If it's some accounting software , then maybe you're fine. In other cases , you definitely wouldn't be. And so you may find that you've got a bug that you **weren't aware of for sort of 10 years on. Then something terrible happens on you have no idea why it's wrong , and it's a choice that you weren't asked to make. And you should be 
+
+speaker 2: 1764
+ I like that. It reminds me the description **there** of you know this one in 10 year book reminds me off **their** was. I believe it was a bug with **openoffice** where on specific , I think it's under a very specific set of circumstances. On a Tuesday afternoon at 3 p.m.** No one could print anything because of something to do with **datetime's** 
+
+speaker 1: 1785
+ right. Uh , I remember one of my first date in time bugs. I **don't** know whether **it** **was** in code that I was writing or something else , but there was the **program** crash every Wednesday , and it turns out it's because the name "Wednesday" is longer than all of the other days of the week on. So there was a buffer overrun. Yeah , you **could** get weird things , so that States **in** time and localization **at** same time. 
+
+speaker 2: 1810
+ Yeah , So I guess then to be able to create Noda Time , you have to go and learn a lot about time zones and dates and things like this. 
+
+speaker 1: 1823
+ So I started off... It ended up a little bit like the broom that you say. Yes , I'm using the same broom that I've been using for 10 years. I've replaced the handle five times and **replaced** **the** head six times , But it's still the same **broom**. 
+
+ **And** I **started** with the **Joda** time API **on** **and**. I thought , right. "How far will I get Just porting *Joda Time*?" **Okay** , **we'll** start with the engine, keep the engine the same. When I say engine. I mean , the bits of code that **do** the complex calendrical computations. The simplest example being "is this year a leap here", but they're **they are** really complex things , particularly for some of the different calendars. 
+
+So I started thinking , **Okay** , well , **I'll** port all of that code and make it internal, because a lot of **joda Time**, Almost everything was a public type. **And** I thought , I **really** don't want people messing with this too much , So I made lots of things internal and** sort of redesigned the public API partly because in java you **don't** **have** struts , whereas we obviously do in C# and they're a good fit for many date and time things and that changed **the** the class hierarchy , and **Joda** Time **is** very , very deep. So by the time you get to local **date** , that's **about** eight levels down , possibly exaggerating a little. So I had to redesign a bit on. There are a few things that it handled **Nulls** **as** a sort of a "well, "I'll just use system default **times then," But now I want to be a bit stricter than this. So I redesigned the public API while keeping the engine internal. Then oh , I think in something like the 1.2 time** **frame** , I completely changed out the engine. I thought , Well , now I know what I'm doing. A bit like I did a lot of the initial work without understanding the code at all. I **really** didn't know much **about* date and time. I was just **porting** in a fairly wrote fashion. But by the end of this , I knew kind of what I was doing on , so I thought , "Well , I wonder whether I can make things significantly simpler and more efficient if I rewrite the engine." And so I did that and it worked **really** well. And then I rewrote the internal data structures. So not just the computations , but how you store things. I used to store almost everything as time from the **UNIX** **Epoch**. So originally that was Windows **ticks** since the UNIX **Epoch** I'm and then later on it , it became nanoseconds. But I was **storing** local datetime as **ticks** since this sort of locally **pocket** it was a bit weird , but it was still **okay**. I will store three year 2019 as kind of 49 years as a duration that made a lot of the competition's really , really painful , because what do you typically ask? Dates and times you **ask** ? Well , what's the year ? What's the month ? What's the day ? What's the **hour** ? What's the **minutes** **and** what's the second ? If **you're** formatting a date **in** time , you've got to ask for those six thins and maybe the fraction of a second on **and** for each of those things , certainly the year , month and date I was finding. I was doing a load of different computation , so I thought , well , What about if we just stored the year as a few bits in an integer on the month is a few bits in **an** **integer** on the day as a few bits **here**. Let's assume that there won't be more than 31 days in a month , or at least not more than 32 So store **a** six **bit** **integer** on **and** **we're** away. I might mean **five bit**. yes , I do mean **five** **bit**. So we store the day as five bits we **store**. The month also **has** five bits because there are some counter systems with more than 16 months. Um , on **and**. The year is , however many bits we need for that. That means that when you convert from , say , an instant in time , which doesn't have a **calendar** system associated with it into a local **datetime** **or its** own **datetime** or whatever it is , then **there's** a one time. Okay , now we've got to work out the year , month and day , But after that , it's blazingly fast just getting it. The what's **the** day ? I **can** do that really , **really** quickly. What's the month ? I could do that really quickly , so that was a **really** interesting bit of redesign because **I've** always assumed that it was just appropriate to use this still information dense but annoying **format** of Just **Ticks** , **its** **units**. Epoch **and** I was really pleased that I was able to do that without changing the public API at all. **So** that was , I think , between 1.3 and 1.4 , or possibly 1.2 **on** 1.3 on and. It was a great example for me. If people ask about encapsulation on information hiding , that's a really good example for me. And do you want public **fields** ? No , absolutely not. If the field of being public , I could not have made that change so* , that was a sort of secondary engine that I did , and by that time I **didn't** know pretty much what I was doing. In terms of dates and times , there are still things that surprised me. So it was actually fairly shortly before two point was **released** that I started learning **about** wondrous calendar , which has 19 months. So that's where we needed to adjust the implementation of it so that we could handle a month number up to 19. But other than a few bits like that. **There** haven't mean too many little tweaks , 
+
+speaker 2: 2179
+ I think it goes back , I guess , **to** looking outside of our comfort zones because , like you say , you know , most of the time , **um** , **we** creating , **you** **know** , our business line enterprise **line** **ApPS** **are** for want of a better phrase forms over data. And you , you know , you're assuming that the data is correct in whatever **form** **that** **you're** receiving it. But **you** **know** what ? If your company does business with another company who are in a completely different time zone using **a** different calendar ? 
+
+speaker 1: 2211
+ right ? Yeah. Yeah , And you need to think , What do you want to store and in particular , there's this sort of silver bullet that people say **of** **great**. **We'll** just store **UTC** in the database and everything will be fine. Well , but sometimes good advice. If you're storing past events , that's usually **not** always , but that's usually fine. You might want to stall the time zone in which the the event was recorded as well , in case you need to know that. But that's usually fine. But if you're storing future events , then recording **UTC** may be entirely the wrong thing to do on. I've **got** **a** **blog** **post** that goes into much more detail , so I assume we can link that in the show notes. But knowing that time zone rules do change over time. So the European Union , we think , is going to stop observing daylight saving time sometime in the next few years. So if you're trying to plan an event that's in three years time and you say I know I will convert your 9 **a.m.** in Paris into the **UTC** instant that it will be at nine o'clock in Paris , and then you turn up at that UTC instant in three years time. You may well find that it's 10 o'clock or eight o'clock because things aren't quite as you thought they would be. **No** , you you made a guess based on the current **time** **zone**. Rules on those may not be in place in three years time , so it's **really** about thinking quite deeply about what data are you really , **really** , **really** trying to express ? What's the user told you ? If you are throwing away any of the information that the user told you , Are you sure you want to throw it away ? **And** you need to be aware off when you **are** **throwing** things away versus when you want ? So many people **were** **assumed** that converting to T. C is not throwing away **any** information. But if what's really important is the time that the user entered , then just be aware that you're using **time** **zone** rules that can change over time. 
+
+speaker 2: 2337
+ Yes , yes , exactly. Remember , **watching **a** wonderful video by Tom Scott , where he talks about the difficulty off time zones and calendars. **I've** **gotta** think I've got a link in my notes for the conversation , so we'll put that in the show **notes**. 
+
+speaker 1: 2354
+ It's ah , it's a great video. I I'll confess my my bit of geekiness in that was watching , **and** I think he says on then you've got time zones like Nepal. That's five hours and 15 minutes from **UTC**. I was screaming at video. **Say** "no. It's 5 hours 45 minutes". Things , **time** **zone** trivia. I **happen** to that. But no , it's It's a great video. **Yeah** , that one Mistake aside , **it's** 
+
+speaker 2: 2371
+ **Hey** , **yeah** , it's it **really** is. It **really** is. And then I remember **reading** about is it Fiji or one of those islands that **are** on the international **date** **line** ? And now the mayor or **whatever** decided that today **we're** on this side of the international **date** **line**. Whereas tomorrow when you wake up , it is two days hence because we've moved over the international timeline , 
+
+speaker 1: 2399
+ yes , absolutely Yes , yes. So in Noda Time we do account for that that the we have an idea of a local date , which is just a date on , you can say right , give me that in **a** particular time zone at the start of the day , we don't say at midnight because it might not be midnight like Brazil changes when it does the spring forward. It would go 11:58 11:59 1 o'clock in the morning , so there's no midnight in that day , so we have **a** time A localdate.atStartOfDay. **I** **knew** **passing** **and** **times** **they** , but **for** Samoa , if you pass in the day that **was** skipped , it will say **no** that **date** didn't exist. There's no start of that day at all. It was skipped entirely , 
+
+speaker 2: 2448
+ **That's** **it**. **Sorry**. **A** Samoa. And then I I know that **there's** a time period in Japan's history Post World War Two **where** **we** shifted forward , I think a few months or something like that. 
+
+speaker 1: 2462
+ so I don't know **about** that. The bit I do know about Japan that confuse things 
+
+speaker 2: 2463
+ **Answer**. 
+
+speaker 1: 2468
+ is that I think it was three years around 1949. I could be wrong , very definitely **over** **on** this. But the officially the day before the fall back. So **you** **know** when you're going to put the **clocks** back , went on for 25 hours and you put your clocks back from 25 **o'clock** to midnight of the next day on **DDE**. I think probably almost every **date** **and** time **a** **P** I in the world , including **notice** time models this as well. We'll just we'll change the date on. Then at one o'clock in the morning , we'll go back to midnight. But that's no really quite right , so I'm completely making up the date now. So say it was Third of July. So say the **third** **of** **July** is the 25 **hour** date. That means if you have a birthday if you were born **at** , say , half past 12 on the third half past 12 so **there's** **am** then **PM**. Then I guess I am again the third half **a** **swell** on July the third , then you were born on July the third. That should be your birthday , whereas most **state** **in** time AP Eyes would say you were born **on** July the fourth. Now that could affect when you get your driving **license**. It could affect whether you get a pension. **It** could affect so many legal things. It's quite scary to think that there's there will be this population in Japan that was born during that one hour , which I guess , in many legal documents **etcetera** may have the wrong date of birth. **I** **know** , but times in , well , not just time zones , but **Karen** Systems and everything. **Date** **in** time is just so full of trivia. It's wonderful. I've got a **page** on the **Notre** Time documentation that is just full of trivia on There's so much **the** later even going to so I don't handle leap seconds at all , I just notice. I'm pretends that leap seconds do not exist on That's problematic in various ways , but for business line of business **haps** , it's mostly fine **on** **every** every so often someone will call me up. **In** that **sense** , **I** well , what do you actually mean about this ? I know. Well , it gets kind of tricky. I don't **really** mean **t** I and I don't really mean **UTC** **it's** **I** fudge it 
+
+speaker 2: 2608
+ **Yeah**. 
+
+speaker 1: 2608
+ and it's It's mostly fine. I don't think **I've** had anyone seriously say **no**. I can't use Noda Time because it doesn't handle leap seconds properly. But leap seconds are just a real pain , even in terms of how do you think about them ? Because we sort of assumed that you need some , **uh** , some rock to base everything else on. And when you try to do that with leap seconds , my brain just doesn't **cook** **with** **it**. Maybe you'd be fine with it. I'm sure many of the listeners would be absolutely fine and **will** be writing **and** no **leap** seconds **of** dead. Easy , **John** , 
+
+speaker 2: 2640
+ **15**. 
+
+speaker 1: 2642
+ In which case **you're** better **development**. I am. Please come **in** and tell me what we should do in **no** **time** without hurting developers who don't want to use the seconds and don't need to know. 
+
+speaker 2: 2654
+ They **see** Well , I mean , Noda Time is open source , isn't it ? So maybe someone 
+
+speaker 1: 2657
+ It certainly is. Yeah. 
+
+speaker 2: 2659
+ maybe someone could , could submit a **pull** request with 
+
+speaker 1: 2662
+ Yeah , **Well** , the tricky **bit** **isn't** giving people what they might need for leap seconds without forcing that complexity onto a bunch of people who don't need deep seconds on the same could be true way. Make **current** systems pass off theeighty **I** everywhere , but we default to the Gregorian calendar.Net**default** **s'more** to the Gregorian coming so you can pass the datetime constructor a calendar. And then it says , **Okay** , I will do the conversion for you on. There's no sign that it was ever constructed with **that** calendar , so you can pass something in with a particular year on. Then ask immediately for the year and it'll give you a different value because it's done the conversion to Gregorian for you originally , **whereas** we thought , Well , no , it's it's useful to be able to say this is a date in this calendar even though 90% of people **nice** **center** developers **aren't** going to need that way wanted to make that reasonably feasible without being too distracting. My guess is that leap seconds. It would be very hard to make **a** leap seconds work without breaking a lot of code. And that's really what I want to **have** **waiting**. 
+
+speaker 2: 2735
+ **you** See ? So I guess , **um** if leap seconds is your requirement , maybe look **a** different times on a p I 
+
+speaker 1: 2742
+ Absolutely. Yes , yes. **Ah** **nde**. You're likely to be writing quite specialised software at that point. So probably half the things in Noda Time wouldn't be useful to you anyway. 
+
+speaker 2: 2752
+ **our** **legal** maybe maybe someone needs **Thio** **fork** **Note** **the** time and come up **with** 
+
+speaker 1: 2758
+ **Yeah** , 
+
+speaker 2: 2758
+ science. Physic **noted** time I don't know. 
+
+speaker 1: 2761
+ by who knows who knows ? 
+
+speaker 2: 2762
+ **Okay** , So I wonder if I can ask you a few questions about your role with **Eckman** **Z** shop on. Hopefully we won't go all the way into your evening and and ruin your evening. **A** **spot**. So So with the Khmer Technical group for C# 
+
+speaker 1: 2776
+ Sure. **Yeah** **Huh**. 
+
+speaker 2: 2790
+ e **I** think you touched on it earlier. **Run** **in** your sort of introduction , **you** said that the **ECMO** **group** sort of **standardizes** C# 
+
+speaker 1: 2794
+ Yeah. Yes , it is 
+
+speaker 2: 2798
+ is this **story** 
+
+speaker 1: 2801
+ **no** go. 
+
+speaker 2: 2801
+ Well , what I was gonna ask is , Is this different to the work that goes on in and say that the public **can** get home ? **Report** **the** **four** **seas** **up** 
+
+speaker 1: 2810
+ So 
+
+speaker 2: 2812
+ **Good** **day**. 
+
+speaker 1: 2813
+ the work that goes on in the public repose , **Maur** before **standardization** and before specifications. **It's** sort of deciding the shape of **the** language and certainly what has happened in the past , and we're aiming to streamline this. But what's happened in the past is that Mike Soft have designed the language **implemented**. It come out with a new version of visual studio **or** whatever on ships , the specifications as a **word** document **on** **and**. That's it. And then the group has made the same changes that say , between C# **too** , and C# three made the same changes that **were** in the specifications. We pour those over to the standard , **and** while the standard **of** **the** specifications have , they are strongly similar. But there are some differences and bringing the ECMO standard from C# , **too** , to **see** **Sharp** five Waas , a multiyear effort from many people **of** **Vietnam**. **A** working group is mostly Mike Soft folks now , although some of those **fakes** **were** not in **Mike** Soft when they **joined** the **ECMO** group but have now been hired by **Microsoft** , other people such as myself , Nothing. **Mike** , soft on the idea is **really** to go through what has previously being done with a fine tooth comb and pick out there. **There** **are** little mistakes and problems and bits that are ambiguous or whatever on and **try** to nail it down a bit further. Eventually , we were like **Maur** of , ah , sort of open source **of** **field** **two** things where the standard is the one and only document on **DDE**. In an ideal world , the any proposed features would be in the form off. Well , here's a patch to the standard **on** **and** **I** , obviously with a lot of design work beforehand and community input , because the the process of writing standard appropriate language that has to be really , **really** precise and cover every example every possible look and **creamy**. That's not how you wanted to originally come up with features. You want to get sort of the well , what's the 90% case ? And then we'll focus on the other bits. **Slept** later , make sure they all fit in , but ideally , the language feature would be in terms of his a patch to the standard on. Then those **will** be collected , and then we have **whatever** it is C# 10 **on**. Maybe that would be the draft standard , and then the machine could come behind on. Just say , **OK** , **we'll** we'll just do an extra level of code review on this off **spec** **review** effectively on **and**. Check that we've got everything appropriately **on**. This could be much more of a single living document , which we would. We would like to go that way instead of having a separate specifications. That's from **Microsoft** **and** **then** the standard that's **wrecked** when **these** all slightly different versions off the same thing. 
+
+speaker 2: 2995
+ See , I **say** , **you** **know** , that would help to bring greater agility , I guess , to How we get from here is Microsoft's version. The version that is shipped **with** visual studio to **here** is the **ECMO** standard version. 
+
+speaker 1: 3009
+ Yes , **and** many people , to be absolutely honest. Many people don't need to care about that agility **at** **all** , **Buddy**. It feels like it's the right thing to do for the ecosystem. And there there will be people who can't use **a** language unless **it's** standardized. So maybe stuck on **C** **shot** five until we stand that **I** C# 6789 **etcetera**. So those people **who** care very greatly everyone else should sort of care that this work is going on behind the scenes because it can fix bugs. It confined bugs in the **Rosen** compiler. We found some really interesting corner cases over the years , but yeah , it's it's good to have this kind of work being done **and** done mostly in the open with **it**. We have teleconferences that are not not recorded , **no** published where people can a **certain** things that turn out to be wrong without feeling embarrassed to do so. But but the results are still effectively public , 
+
+speaker 2: 3067
+ Sure , that makes sense. What if the one of the books that I come back to **and** **it's** **it** several times a year , is the version of **C** shop in depth that I have ? I have had several versions of it over the years and **lead** them out to **a** slightly more junior developers than I never got them back , which I suppose helps them but doesn't help you. Then 
+
+speaker 1: 3096
+ right ? Oh , no. If you're replacing it with another copy for **yourself** and it's it's all helping me , it's 
+
+speaker 2: 3104
+ how are they of it ? But it genuinely is a book that I come back to several times a year on **and** every time **they** come back to it. There is something new in there because obviously there's only so much information that we could take in at once on. And also , you know , I'm 
+
+speaker 1: 3111
+ get good. Absolutely. 
+
+speaker 2: 3121
+ I'm an auditory learner. So I would have to have someone read the **spec** **to** me , which is perhaps something we can come back to another time when you read this back. You know ? But 
+
+speaker 1: 3129
+ **All** right , 
+
+speaker 2: 3132
+ do you do you as a **seashell** ? **Develop** **Rosalie**.Netdeveloper as a developer of Noda Time as a developer on all round developer is and I believe this might be a leading question. But is it worth developers reading the specifications document for the language that they **are** **looking** in , or should they just rely on **Okay** , I'm going to go learn this language either by looking **a** **plural** **site** or looking at , I mean any other training provider or **read** **sandbox** And just just trust that what has been said is correct and just work with that. Or is it worth maybe after reaching a certain point **in** **your** **career** , looking at the specifications going Ah , yes , I get why that happens there. 
+
+speaker 1: 3175
+ right. So it's definitely specifications are not designed for learning **on**. That's the first thing to say you you don't generally learn a language by reading **the** **speck** because it's usually presented in a way that makes it feasible **to** find things as a reference on **DDE**. Make sure that things are exhaustive , so if you're writing a compiler , **et** **cetera** , you could do the right thing. But I think it is important that you know where to find the **specifications** **on** **and**. It's worth dipping into it. So next time you have some question about Well , what does what does this do in C# ? Then maybe sure. Reach for C# in **depth** for a central **C#. **will** C# in **a** natural. There are lots of good books available but also decide you make a conscious decision. I will check that. I know how to find that in the specifications on. It's an acquired skill. It takes a while to get used to the **spec** terminology , which I tried to follow in C# in death to sort of make it easier to get into this back if you want to. But finding your way around it can be a bit daunting to start with. But if you just do it occasionally when your job doesn't depend on it , if you see **what** **I** **mean** , then one day you may find that you **really** , **really** need to get the answer to that now. **And** by now I mean sort of in the next half hour , **because** sometimes it can take. It can easily take half an hour to find the **answer** to a particularly tricky question , particularly , there's **overload** resolution and generic type inference going on **and** all kinds of things. If you've already looked at the speck in your kind of familiar with how it's structured and how **it** how things tend to be explained , then you'll be in a much better position to have a look. So yeah , definitely. Whatever language **you** **are** looking at , check that there is a specifications on then. Yeah , dip into it when you can. 
+
+speaker 2: 3296
+ **Okay**. Yeah , I like that. I do remember the the date when I found the **seashore** respect loaded into my visual studio 2008 and **get** **work**. 
+
+speaker 1: 3306
+ **Okay**. Right. Right. 
+
+speaker 2: 3306
+ And **I** just like , Oh , **what's** this ? Oh , wow. Oh , **Well** , document. These **are** a bunch of words I don't understand. 
+
+speaker 1: 3312
+ Uh , yeah. 
+
+speaker 2: 3314
+ Excellent. **Okay** , so , **yeah** , it's **it's** **it's** worth having a look. I guess , if you will do as it were , sort of level up a little bit , dip in and dip out to see what things you can understand , I guess. I guess it gives 
+
+speaker 1: 3325
+ Yes , Absolutely. 
+
+speaker 2: 3326
+ hey gives readers a chance to go. Oh , I wonder what this word means and **go** **and** look **up**. Um , 
+
+speaker 1: 3330
+ Right. Yes. 
+
+speaker 2: 3332
+ which one is it is not. What's the word is **no** **ID** important ? It's the oh dear is to do with parameter. 
+
+speaker 1: 3340
+ Oh , **uh** , in various **contrarians** and co **variants** and generic variance in general. Yes , 
+
+speaker 2: 3343
+ That's the one. Yet **all** of that stuff **it** gives you a **tends** to go. It takes you out of thea 
+
+speaker 1: 3346
+ Yes , 
+
+speaker 2: 3350
+ unknown unknowns in tow , I guess. Known unknowns. You don't know what it **may** **be**. You know that it exists 
+
+speaker 1: 3354
+ right ? Yes , yes , yes. There are some bit suspect terminology that you never need really outside the **spec**. So some of definitions around generics are really for the sake of the **spec** itself. Not in terms of variants , but some of the open constructed types , **etcetera**. **It** **is** all a bit obscure , but there's plenty that isn't **quest** obscure on it can really open your eyes to a site for anything else. How beautifully designed the languages. 
+
+speaker 2: 3384
+ Fantastic. **Okay** , so I'll encourage listeners to go and have a look at the **back** if they want and figure those kinds of things **that** I guess **that's** **pretty** and obviously definitely Go get , **see** , **sharpened** up. 
+
+speaker 1: 3393
+ Yeah , absolutely. Thank you. 
+
+speaker 2: 3397
+ **Hey** , definitely , **OK** , **eso** last couple of **really** **short** questions , then what's the best way for listeners to keep up with what's happening with you in terms of maybe the development work you're doing. Maybe with Noda Time that could , I think , **what's** the best way to find out more **about** **John** 
+
+speaker 1: 3404
+ **Uh** huh. **S** **o** I'm on Twitter as John Skeet on Twitter. I have a pair of blocks **s** **Oh** , my coding **block** is **Kurt** **Bloch** **Dr** **on** **Skeeter** **UK**. **Andi** , I've got just **blocked** **dr** **on** **skeet** dot UK , which I **usually** **used** **to** **write** about feminism. **Onda** , frankly , I haven't written for a little while and I need to I think the last thing I did was a couple of **terror**. **And** through recipes. So not **really** **feminism** **on** that front. 
+
+speaker 2: 3439
+ **2** **50** ? 
+
+speaker 1: 3440
+ Yeah. Those are probably the best ways of keeping up with what's going on for Noda Time. You can subscribe to the notice I'm mailing **list** **on** **and** , given that most of my work is open Source. If you go **thio** , get up dot com slash **google** cloud platform slash bugle dash cloud dash dot net. You can see me work in real time. Pretty much. 
+
+speaker 2: 3461
+ Fantastic. I'll make sure to put links into the show notes so that for people who **may** **be** driving into work , they don't have to dive across **their** car together a note pad 
+
+speaker 1: 3465
+ Yeah , Yeah , yeah. 
+
+speaker 2: 3471
+ because we don't want people **crushing** that **guys**. Excellent. **Okay** , Um , well , 
+
+speaker 1: 3473
+ No , 
+
+speaker 2: 3476
+ that's essentially all of the questions that I that I have. John , thank you ever so much for being on the show. We've gone a little bit **over** **time** , which I feel **it's** a little bit relevant. But thank you ever so much for sticking around **him**. And , **uh** , if it's okay with you , I'd like to ask 
+
+speaker 1: 3483
+ you might **think**. **Hey** , **uh** , 
+
+speaker 2: 3494
+ in the future , when you have some more time , maybe we can come back **on** , talk a little bit more about C# **in** a little bit 
+
+speaker 1: 3500
+ yes , definitely. Definitely. 
+
+speaker 2: 3501
+ about the sort of diversity and inclusivity. If there's any advice , you can give on that because that is a very I think I said to you before we started the interview. **It** **is** a very spiky and scary subject , and it's a very important subject , **and** I don't I think perhaps it shouldn't have to be a scary one. But like I was saying to you **really** **run** **when** planning this out , I was worried about Have I said something in my notes that I sent across to you , That is , 
+
+speaker 1: 3519
+ Right 
+
+speaker 2: 3527
+ you know , would it be considered a bad **subject** to talk about **or** something and 
+
+speaker 1: 3531
+ now. Another name ? Definitely. We should absolutely **talk** about it. Yeah. 
+
+speaker 2: 3534
+ definitely is a conversation that needs to happen , I think in all walks of life , you know. 
+
+speaker 1: 3537
+ Yeah , 
+
+speaker 2: 3539
+ But **we** leave that perhaps for another time , 
+
+speaker 1: 3542
+ indeed , indeed. 
+
+speaker 2: 3543
+ yes , but yes , I think **you're** very much **done**. **It's** been an absolute pleasure talking to you. 
+
+speaker 1: 3547
+ Thank you. My pleasure .
