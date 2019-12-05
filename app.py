@@ -117,6 +117,7 @@ def get_transcription_page(key):
         diffs = list(difflib.Differ().compare(
                 previous_version.splitlines(),
                 transcription_text.splitlines(),
+                n=2,
                     ))
 
 
