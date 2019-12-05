@@ -40,10 +40,17 @@ app.secret_key = "This is a test"
 
 @app.route("/")
 def index():
-    """ Go to the homepage. On Submit Upload the file to s3, create celery task and and set billing price."""
     form = UploadForm()
     return render_template("index.html", form=form)
 
+
+@app.route("/upload-file")
+def upload_file():
+    email = request.form['email'] 
+    filename = Path(request.files['audio_file'].filename)
+    key = session['key'] = s3.get_key(filename)
+    s3.upload_audio_file(key, request.files['audio_file'])
+    return render_template('upload_in_progress.html')
 
 @app.route("/setup-transcription", methods=["POST"])
 def setup_transcription_page():
@@ -61,7 +68,6 @@ def setup_transcription_page():
 
     form = UpdatedSetupForm()
 
-    session['key'] = s3.get_key(filename)
 
     return render_template("setup.html", form=form)
 
