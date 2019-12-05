@@ -86,11 +86,17 @@
 
             <form action="/edit/find-and-replace", method="POST">
 					<div class="field">
+            <div class="label">
+              {{search_form.search_phrase.label}}
+              <div>
 						<div class="control">
 						{{search_form.search_phrase()}}
 						</div>
 						</div>
 					<div class="field">
+            <div class="label">
+              {{search_form.replace_phrase.label}}
+              <div>
 						<div class="control">
 						{{search_form.replace_phrase()}}
 						</div>
