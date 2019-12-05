@@ -97,7 +97,7 @@ def post_transcription_edit():
                 {f"transcriptions.{version_date}": transcription_text},
             })
     job = transcriptions['job']
-    return url_for('get_transcription_page', key=key)
+    return redirect(url_for('get_transcription_page', key=key))
 
 
 @app.route('/transcription/<key>')
