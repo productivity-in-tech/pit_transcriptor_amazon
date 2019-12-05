@@ -129,7 +129,6 @@ def get_transcription_page(key):
                 form = EditTranscriptionForm(),
                 search_form = SearchandReplaceForm(),
                 count = len(re.findall(r'\*.*\*', transcription_text)),
-                diffs = diffs,
         )
 
 
