@@ -30,7 +30,6 @@ from flask_wtf import FlaskForm
 from forms.forms import (
         SetupForm,
         UploadForm,
-        SearchandReplaceForm,
         )
 
 logging.basicConfig(level=logging.WARNING)
