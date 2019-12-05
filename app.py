@@ -50,7 +50,7 @@ def upload_file():
     filename = Path(request.files['audio_file'].filename)
     key = session['key'] = s3.get_key(filename)
     s3.upload_audio_file(key, request.files['audio_file'])
-    return redirect('setup_transcription_page')
+    return redirect(url_for('setup_transcription_page'))
 
 @app.route("/setup-transcription", methods=["POST"])
 def setup_transcription_page():
@@ -78,7 +78,7 @@ def confirm_transcription():
     return render_template("verify_setup.html", form=form)
 
 
-@app.route("/start_transcription", methods=["POST"])
+@app.route("/start-transcription", methods=["POST"])
 def start_transcription():
     language = request.form["language"]
     storage = request.form["storage"]
