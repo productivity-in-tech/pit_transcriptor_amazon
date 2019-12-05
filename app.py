@@ -150,11 +150,15 @@ def get_transcription_page(key,):
 
     class EditTranscriptionForm(FlaskForm):
         transcription = fields.TextAreaField('Transcription', default=transcription_text)
-        job_name = fields.HiddenField('Transcription_Job_Name',
-                default=key)
+        job_name = fields.HiddenField('Transcription_Job_Name', default=key)
         update_version = fields.HiddenField('Update_Version', default=version_date)
         submit = fields.SubmitField('Save Changes')
 
+    class SearchandReplaceForm(FlaskForm):
+        job_name = fields.HiddenField('Transcription_Job_Name', default=key)
+        search_phrase = fields.StringField('Replace All')
+        replace_phrase = fields.StringField('Replace With')
+        submit = fields.SubmitField('Find/Replace')
 
     return render_template(
                 'transcript.html',

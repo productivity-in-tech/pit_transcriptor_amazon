@@ -43,7 +43,3 @@ class SetupForm(FlaskForm):
     )
 
 
-class SearchandReplaceForm(FlaskForm):
-    search_phrase = fields.StringField('Replace All')
-    replace_phrase = fields.StringField('Replace With')
-    submit = fields.SubmitField('Find/Replace')
