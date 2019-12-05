@@ -97,7 +97,6 @@ def post_transcription_edit():
             {'$set':
                 {f"transcriptions.{version_date}": transcription_text},
             })
-    job = transcriptions['job']
     return redirect(url_for('get_transcription_page', key=key))
 
 
@@ -105,21 +104,20 @@ def post_transcription_edit():
 def search_and_replace():
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
     key = request.form['job_name']
-    transcription_text = request.form['transcription'].strip()
-    transcription_text = re.sub(
+    project = mongo.transcription_collection.find_one({'key': key})
+    transcription_text = project['transcriptions'][request.form['update_version']
+    modified_transcription_text = re.sub(
             request.form['search_phrase'],
             request.form['replace_phrase'],
             transcription_text,
             flags=re.IGNORECASE,
             )
-    logging.WARNING(transcription_text)
     transcriptions = mongo.transcription_collection.find_one_and_update(
             {'key': key},
             {'$set':
                 {f"transcriptions.{version_date}": transcription_text},
             },
             )
-    job = transcriptions['job']
     return redirect(url_for('get_transcription_page', key=key))
 
 
@@ -154,6 +152,7 @@ def get_transcription_page(key,):
         submit = fields.SubmitField('Save Changes')
 
     class SearchandReplaceForm(FlaskForm):
+        update_version = fields.HiddenField('Update_Version', default=version_date)
         job_name = fields.HiddenField('Transcription_Job_Name', default=key)
         search_phrase = fields.StringField('Replace All')
         replace_phrase = fields.StringField('Replace With')
