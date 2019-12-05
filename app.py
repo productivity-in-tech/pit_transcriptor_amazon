@@ -15,7 +15,15 @@ import s3
 import transcriber
 import wtforms.fields as fields
 import wtforms.validators as validators
-from flask import Flask, flash, render_template, request, session, Markup
+from flask import (
+        Flask,
+        flash,
+        render_template,
+        request,
+        session,
+        Markup,
+        url_for,
+        )
 from flask_wtf import FlaskForm
 from forms.forms import (
         SetupForm,
