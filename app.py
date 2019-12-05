@@ -20,7 +20,6 @@ from flask_wtf import FlaskForm
 from forms.forms import (
         SetupForm,
         UploadForm,
-        EditTranscriptionForm,
         SearchandReplaceForm,
         )
 
@@ -116,6 +115,12 @@ def get_transcription_page(key):
     transcriptions = sorted(transcript['transcriptions'].items(), key=lambda x:x[0])
     version_date, transcription_text = transcriptions[-1]
     job = transcript['job']
+
+    class EditTranscriptionForm(FlaskForm):
+        transcription = fields.TextAreaField('Transcription', default=transcription_text)
+        update_version = fields.HiddenField('Update_Version', default=version_date)
+        submit = fields.SubmitField('Submit Changes')
+
 
     return render_template(
                 'transcript.html',
