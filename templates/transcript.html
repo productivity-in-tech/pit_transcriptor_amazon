@@ -33,11 +33,20 @@
 
       <div class="hero-foot">
           <div class="tags has-addons">
-            <div class="tag is-primary">
-              Potential Issues: {{count}}
+            <div class="tag is-info">
+              Version: 
             </div>
             <div class="tag">
-              {{job['CreationTime']}} 
+            {{version_count}}
+            </div>
+          </div>
+
+          <div class="tags has-addons">
+            <div class="tag is-primary">
+              Potential Issues: 
+            </div>
+            <div class="tag">
+              {{issue_count}}
             </div>
           </div>
 
@@ -49,20 +58,6 @@
               {{job['CreationTime']}} 
             </div>
           </div>
-
-          <div class="tags has-addons">
-            <div class="tag is-dark">
-              Completed: 
-            </div>
-            <div class="tag">
-              {% if job['Media'] %}
-              {{job['CompletionTime']}}
-              {% else %}
-              <span class="has-text-warning">In Progress</span>
-              {% endif %}
-            </div>
-          </div>
-        </div>
 
          <div class="tags has-addons">
             <div class="tag is-dark">
@@ -89,21 +84,21 @@
               <label class="label">Find All and Replace</label>
             </div>
             <div class="field-body">
-					<div class="field">
-            <div class="label">
-              {{search_form.search_phrase.label}}
-              <div>
-						<div class="control">
-						{{search_form.search_phrase()}}
-						</div>
-						</div>
-					<div class="field">
-            <div class="label">
-              {{search_form.replace_phrase.label}}
-              <div>
-						<div class="control">
-						{{search_form.replace_phrase()}}
-						</div>
+              <div class="field">
+                <div class="label">
+                {{search_form.search_phrase.label}}
+                  </div>
+                <div class="control">
+                {{search_form.search_phrase()}}
+                </div>
+              </div>
+            <div class="field">
+              <div class="label">
+                {{search_form.replace_phrase.label}}
+                </div>
+              <div class="control">
+              {{search_form.replace_phrase()}}
+              </div>
 						</div>
             <div class="field">
               <div class="control">

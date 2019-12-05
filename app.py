@@ -157,7 +157,8 @@ def get_transcription_page(key,):
                 version_date = arrow.get(version_date, 'YYYYMMDDHHmmss').format('DD MMM, YYYY HH:ss'),
                 form = EditTranscriptionForm(),
                 search_form = SearchandReplaceForm(),
-                count = len(re.findall(r'\*.*\*', transcription_text)),
+                issue_count = len(re.findall(r'\*.*\*', transcription_text)),
+                version_count = len(transcriptions),
         )
 
 
