@@ -3,12 +3,12 @@
         <div class="section">
           <div class="field">
             <div class="control">
-              {{ form.email(placeholder='email') }}
+              {{ form.email(_class='input', placeholder='email') }}
             </div>
           </div>
           <div class="field is-grouped is-fullwidth">
             <div class="control">
-                  {{form.audio_file()}}
+                  {{form.audio_file(_class="file")}}
               </div>
             </div>
 
