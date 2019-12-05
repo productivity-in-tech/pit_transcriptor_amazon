@@ -119,7 +119,6 @@ def search_and_replace():
 #            },
 #            )
     return "Hello World"
-    return redirect(url_for('get_transcription_page', key=key))
 
 
 
