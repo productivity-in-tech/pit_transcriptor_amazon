@@ -120,7 +120,7 @@ def search_and_replace(key):
 
 
 @app.route('/transcription/<key>')
-def get_transcription_page(key):
+def get_transcription_page(key,):
     transcript = mongo.transcription_collection.find_one(
             {'key': key, 'transcriptions': {'$exists': True}}
     )
@@ -147,7 +147,7 @@ def get_transcription_page(key):
         job_name = fields.HiddenField('Transcription_Job_Name',
                 default=key)
         update_version = fields.HiddenField('Update_Version', default=version_date)
-        submit = fields.SubmitField('Find/Replace')
+        submit = fields.SubmitField('Save Changes')
 
 
     return render_template(
