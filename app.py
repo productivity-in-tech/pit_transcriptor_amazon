@@ -86,7 +86,7 @@ def get_transcription_page(key):
                 {'$set':
                     {f"transcriptions.{version_date}": transcription_text},
                 })
-        job = post['job']
+        job = mongo['job']
 
 
     if request.method == 'GET':
