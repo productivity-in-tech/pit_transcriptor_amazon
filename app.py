@@ -85,7 +85,7 @@ def start_transcription():
         transcribe=transcribe,
         channel_identification=channel_identification,
     )
-    return url_for('get_transcription_page', key=key)
+    return redirect(url_for('get_transcription_page', key=key))
 
 @app.route('/post-transcription', methods=['POST'])
 def post_transcription_edit():
@@ -99,6 +99,24 @@ def post_transcription_edit():
             })
     job = transcriptions['job']
     return redirect(url_for('get_transcription_page', key=key))
+
+
+def search_and_replace(key):
+    version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
+    key = request.form['job_name']
+    transcription_text = request.form['transcription'].strip()
+    transcription_text = re.sub(
+            request.form['search_text'],
+            request.form['replace_text'],
+            )
+    transcriptions = mongo.transcription_collection.find_one_and_update(
+            {'key': key},
+            {'$set':
+                {f"transcriptions.{version_date}": transcription_text},
+            })
+    job = transcriptions['job']
+    return redirect(url_for('get_transcription_page', key=key))
+
 
 
 @app.route('/transcription/<key>')
