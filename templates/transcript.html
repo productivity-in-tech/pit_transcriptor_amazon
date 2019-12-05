@@ -3,7 +3,8 @@
 {% block content%}
 <section class="section hero is-light is-large">
     <div class="hero-head">
-          <h1 class="title is-2">{{job}}</h1>
+          <h1 class="title
+            is-2">{{job['TranscriptionJob']['TranscriptionJobName']}}</h1>
           <h2 class="subtitle is-5">Last Edited: {{version_date}}</h2>
     </div>
               <form method='POST'>
