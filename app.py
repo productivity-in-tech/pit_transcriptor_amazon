@@ -78,7 +78,7 @@ def start_transcription():
     )
     return url_for('get_transcription_page', key=key)
 
-@app.route('/post-transcription/', methods=['POST'])
+@app.route('/post-transcription', methods=['POST'])
 def post_transcription_edit(key):
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
 
@@ -89,7 +89,7 @@ def post_transcription_edit(key):
                 {f"transcriptions.{version_date}": transcription_text},
             })
     job = transcriptions['job']
-    return url_for('/transcription/', key=key)
+    return url_for('get_transcription_page', key=key)
 
 
 @app.route('/transcription/<key>')
