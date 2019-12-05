@@ -106,11 +106,6 @@ def search_and_replace():
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
     update_version = request.form['update_version']
     key = request.form['job_name']
-    transcriptions = mongo.transcription_collection.find_one_and_update(
-            {'key': key},
-            {'$set':
-                {f"transcriptions.{version_date}": transcription_text},
-            })
     return redirect(url_for('get_transcription_page', key=key))
 
 
