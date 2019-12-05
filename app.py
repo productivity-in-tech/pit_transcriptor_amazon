@@ -118,6 +118,7 @@ def search_and_replace():
 #                {f"transcriptions.{version_date}": transcription_text},
 #            },
 #            )
+    return "Hello World"
     return redirect(url_for('get_transcription_page', key=key))
 
 
