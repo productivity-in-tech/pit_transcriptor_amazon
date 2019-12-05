@@ -100,9 +100,10 @@ def post_transcription_edit():
     return redirect(url_for('get_transcription_page', key=key))
 
 
-@app.route('/search-replace', methods=['GET', 'POST'])
+@app.route('/search-replace', methods=['POST'])
 def search_and_replace():
-    return "Hello World"
+    key =  request.form['job_name']
+    return key
 
 
 
