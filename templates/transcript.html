@@ -93,7 +93,9 @@
 
         <div class="box is-grey-lighter">
           <form action="/search-replace", method="POST">
-            {{search_form.job_name}}
+            {{form.csrf}}
+            {{form.job_name}}
+            {{form.update_version}}
 
             <div class="field is-horizontal">
 
