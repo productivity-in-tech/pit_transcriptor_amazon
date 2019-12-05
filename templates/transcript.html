@@ -1,10 +1,10 @@
 {% extends 'base.html' %} {% block title %} PIT Transcriptor {% endblock %}
 {% block styler %}<link rel="stylesheet" href="/static/css/transcription_form.css">{% endblock %}
 {% block content%}
-<section class="section hero is-light is-fullheight">
+<section class="section hero is-light is-large">
     <div class="hero-head">
-          <h1 class="title is-2">{{job['TranscriptionJobName']}}</h1>
-          <h2 class="subtitle is-6">Last Edited: {{version_date}}</h2>
+          <h1 class="title is-2">{{job}}</h1>
+          <h2 class="subtitle is-5">Last Edited: {{version_date}}</h2>
     </div>
               <form method='POST'>
             {{form.csrf}}
@@ -21,7 +21,7 @@
               </div>
             </div>
 
-					<form
+
       <div class="hero-foot">
           <div class="tags has-addons">
             <div class="tag is-primary">
@@ -77,7 +77,7 @@
         </div>
         </div>
 
-				<form>
+            <form action="/edit/find-and-replace", method="POST">
 					<div class="field">
 						<div class="control">
 						{{search_form.search_phrase()}}
