@@ -85,7 +85,12 @@
         </div>
         </div>
 
-            <form action="/edit/find-and-replace", method="POST">
+          <form action="/edit/find-and-replace", method="POST">
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Find All and Replace</label>
+            </div>
+            <div class="field-body">
 					<div class="field">
             <div class="label">
               {{search_form.search_phrase.label}}
@@ -106,6 +111,7 @@
               <div class="control">
                 {{search_form.submit(class_="button")}}
               </div>
+            </div>
             </div>
 				</form>
 
