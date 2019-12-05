@@ -108,8 +108,8 @@ def search_and_replace():
     key = request.form['job_name']
     transcription_text = request.form['transcription'].strip()
     transcription_text = re.sub(
-            request.form['search_text'],
-            request.form['replace_text'],
+            request.form['search_phrase'],
+            request.form['replace_phrase'],
             transcription_text,
             flags=re.IGNORECASE,
             )
