@@ -42,10 +42,6 @@ class SetupForm(FlaskForm):
             many different speakers to detect. Will be ignored if Channel Identification is turned on.",
     )
 
-    class EditTranscriptionForm(FlaskForm):
-        transcription = fields.TextAreaField('Transcription', default=transcription_text)
-        update_version = fields.HiddenField('Update_Version', default=version_date)
-        submit = fields.SubmitField('Submit Changes')
 
     class SearchandReplaceForm(FlaskForm):
         search_phrase = fields.StringField('Replace All')
