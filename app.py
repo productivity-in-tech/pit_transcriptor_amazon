@@ -104,10 +104,13 @@ def post_transcription_edit():
 @app.route('/search-replace', methods=['POST'])
 def search_and_replace():
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
-    update_version = request.form['update_version']
     key = request.form['job_name']
+    job = mongo.transcription_collection.find_one({'key': key})
+    transcription_text = re.sub(
+        request.form['search_phrase'],
+        request.form['replace_phrase'],
+        job['transcriptions'][request.form['update_version']])
     return redirect(url_for('get_transcription_page', key=key))
-
 
 
 @app.route('/transcription/<key>')
