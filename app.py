@@ -114,7 +114,7 @@ def get_transcription_page(key):
 
     if len(transcriptions) > 1:
         previous_version = transcriptions[0][-1]
-        diffs = list(difflib.Differ().compare(
+        diffs = list(difflib.unified_dif(
                 previous_version.splitlines(),
                 transcription_text.splitlines(),
                 n=2,
