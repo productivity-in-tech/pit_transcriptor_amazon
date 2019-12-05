@@ -100,7 +100,7 @@ def post_transcription_edit():
     return redirect(url_for('get_transcription_page', key=key))
 
 
-@app.route('/search-replace', methods=['POST'])
+@app.route('/search-replace', methods=['GET', 'POST'])
 def search_and_replace():
     # version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
     key = request.form['job_name']
