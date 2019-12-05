@@ -6,9 +6,16 @@
               {{ form.email(_class='input', placeholder='email') }}
             </div>
           </div>
-          <div class="field is-grouped is-fullwidth">
-            <div class="control">
+          <div class="file">
+            <label class="file-label">
                   {{form.audio_file(_class="file")}}
+                  <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                    Choose a file...
+                  </span>
+                  </span>
+            </label>
               </div>
             </div>
 
