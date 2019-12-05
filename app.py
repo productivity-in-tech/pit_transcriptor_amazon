@@ -107,8 +107,8 @@ def search_and_replace():
     key = request.form['job_name']
     job = mongo.transcription_collection.find_one({'key': key})
     transcription_text = re.sub(
-        request.form['search_phrase'],
-        request.form['replace_phrase'],
+        f"{request.form['search_phrase']}",
+        f"{request.form['replace_phrase']}",
         job['transcriptions'][request.form['update_version']],
         flags=re.IGNORECASE)
     transcriptions = mongo.transcription_collection.find_one_and_update(
