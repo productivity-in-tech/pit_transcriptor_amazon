@@ -81,7 +81,6 @@ def start_transcription():
 @app.route('/post-transcription/', methods=['POST'])
 def post_transcription_page(key):
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
-    flags = transcriber.flags
 
     transcription_text = request.form['transcription'].strip()
     transcriptions = mongo.transcription_collection.find_one_and_update(
@@ -124,7 +123,7 @@ def get_transcription_page(key):
 
     return render_template(
                 'transcript.html',
-                flags=flags,
+                flags=transcriber.flags,
                 job=job,
                 version_date = arrow.get(version_date, 'YYYYMMDDHHmmss').format('DD MMM, YYYY HH:ss'),
                 form = EditTranscriptionForm(),
