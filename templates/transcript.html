@@ -2,10 +2,16 @@
 {% block styler %}<link rel="stylesheet" href="/static/css/transcription_form.css">{% endblock %}
 {% block content%}
 <section class="section hero is-light is-large">
-    <div class="hero-head">
+    <div class="hero-head level">
+      <div class="level-item">
           <h1 class="title
-            is-2">{{job['TranscriptionJob']['TranscriptionJobName']}}</h1>
+            is-2">{{job['TranscriptionJob']['TranscriptionJobName']}}
+          </h1>
+      </div>
+      <div class="level-item">
           <h2 class="subtitle is-5">Last Edited: {{version_date}}</h2>
+      </div>
+
     </div>
               <form method='POST'>
             {{form.csrf}}
