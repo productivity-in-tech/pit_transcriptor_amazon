@@ -114,7 +114,7 @@ def get_transcription_page(key):
 
     if len(transcriptions) > 1:
         previous_version = transcriptions[-2][-1]
-        diff = list(d.compare(
+        diff = list(Differ().compare(
                 previous_version.splitlines(keepends=True),
                 transcription_text.splitlines(keepends=True),
                     ))
@@ -132,7 +132,7 @@ def get_transcription_page(key):
                 version_date = arrow.get(version_date, 'YYYYMMDDHHmmss').format('DD MMM, YYYY HH:ss'),
                 form = EditTranscriptionForm(),
                 count = len(re.findall(r'\*.*\*', transcription_text)),
-                diff = Markup(diff),
+                diff = diff,
         )
 
 
