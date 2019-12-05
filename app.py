@@ -80,7 +80,7 @@ def get_transcription_page(key):
     flags = transcriber.flags
 
     if request.method == 'POST':
-        transcription_text = request.form['transcription']
+        transcription_text = request.form['transcription'].strip()
         transcriptions = mongo.transcription_collection.find_one_and_update(
                 {'key': key}, 
                 {'$set':
@@ -98,7 +98,7 @@ def get_transcription_page(key):
             job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
             logging.debug(job)
             transcription = transcriber.get_transcription(job)
-            transcription_text = json_builder.build_transcript(transcription)
+            transcription_text = json_builder.build_transcript(transcription).strip()
             transcript = {version_date: transcription_text}
             transcriptions = mongo.transcription_collection.insert_one(
                     {
