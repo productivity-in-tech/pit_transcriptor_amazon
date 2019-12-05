@@ -79,12 +79,11 @@ def start_transcription():
     return url_for('get_transcription_page', key=key)
 
 @app.route('/post-transcription', methods=['POST'])
-def post_transcription_edit(key):
+def post_transcription_edit():
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
-
     transcription_text = request.form['transcription'].strip()
     transcriptions = mongo.transcription_collection.find_one_and_update(
-            {'key': key}, 
+            {'key': key},
             {'$set':
                 {f"transcriptions.{version_date}": transcription_text},
             })
@@ -117,6 +116,8 @@ def get_transcription_page(key):
 
     class EditTranscriptionForm(FlaskForm):
         transcription = fields.TextAreaField('Transcription', default=transcription_text)
+        job_name = fields.HiddenField('Transcription_Job_Name',
+                default=key)
         update_version = fields.HiddenField('Update_Version', default=version_date)
         submit = fields.SubmitField('Submit Changes')
 
