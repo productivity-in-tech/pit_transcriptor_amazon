@@ -48,11 +48,11 @@
             </div>
 
             {% if issue_count < 10 %}
-            {% set issue_count_color = 'is_success' %}
+            {% set issue_count_color = 'is-success' %}
             {% elif issue_count < 50 %}
-            {% set issue_count_color = 'is_warning' %}
+            {% set issue_count_color = 'is-warning' %}
             {% else %}
-            {% set issue_count_color = 'is_danger' %}
+            {% set issue_count_color = 'is-danger' %}
             {% endif %}
 
             <div class="tag {{issue_count_color}}">
@@ -66,7 +66,7 @@
               Submitted: 
             </div>
             <div class="tag">
-              {{job['CreationTime']}} 
+              {{job['TranscriptionJob']['CreationTime']}} 
             </div>
           </div>
 
@@ -75,7 +75,7 @@
               Language: 
             </div>
             <div class="tag">
-              {{flags[job['LanguageCode']]}} 
+              {{flags[job['TranscriptionJob']['LanguageCode']]}} 
             </div>
           </div>
 
@@ -84,14 +84,14 @@
             FileType: 
           </div>
 
-          <div class="tag">
-            {{job['MediaFormat']}} 
+          <div class="tag is-grey">
+            {{job['TranscriptionJob']['MediaFormat']}} 
           </div>
         </div>
         </div>
 
         <div class="box is-grey-lighter">
-          <form action="/edit/find-and-replace", method="POST">
+          <form action="/search-replace", method="POST">
 
             <div class="field is-horizontal">
 
