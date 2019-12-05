@@ -50,7 +50,7 @@ def upload_file():
     filename = Path(request.files['audio_file'].filename)
     key = session['key'] = s3.get_key(filename)
     s3.upload_audio_file(key, request.files['audio_file'])
-    return render_template('upload_in_progress.html')
+    return redirect('setup_transcription_page')
 
 @app.route("/setup-transcription", methods=["POST"])
 def setup_transcription_page():
