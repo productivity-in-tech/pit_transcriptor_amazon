@@ -110,6 +110,12 @@ def search_and_replace():
         request.form['search_phrase'],
         request.form['replace_phrase'],
         job['transcriptions'][request.form['update_version']])
+    transcriptions = mongo.transcription_collection.find_one_and_update(
+            {'key': key},
+            {'$set':
+                {f"transcriptions.{version_date}": transcription_text},
+            })
+
     return redirect(url_for('get_transcription_page', key=key))
 
 
