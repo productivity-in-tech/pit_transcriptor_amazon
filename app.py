@@ -105,7 +105,7 @@ def search_and_replace():
     version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
     key = request.form['job_name']
     project = mongo.transcription_collection.find_one({'key': key})
-    transcription_text = project['transcriptions'][request.form['update_version']
+    transcription_text = project['transcriptions'][request.form['update_version']]
     modified_transcription_text = re.sub(
             request.form['search_phrase'],
             request.form['replace_phrase'],
