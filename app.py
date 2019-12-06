@@ -49,6 +49,7 @@ def upload_file():
     email = request.form['email'] 
     filename = Path(request.files['audio_file'].filename)
     key = session['key'] = s3.get_key(filename)
+    logging.warning(key)
     s3.upload_audio_file(key, request.files['audio_file'])
     return redirect(url_for('setup_transcription_page'))
 
