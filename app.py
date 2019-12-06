@@ -44,7 +44,7 @@ def index():
     return render_template("index.html", form=form)
 
 
-@app.route("/upload-file")
+@app.route("/upload-file", methods=["POST"])
 def upload_file():
     email = request.form['email'] 
     filename = Path(request.files['audio_file'].filename)
