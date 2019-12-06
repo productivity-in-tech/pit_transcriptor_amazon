@@ -9,14 +9,29 @@ import tempfile
 from uuid import uuid4
 import boto3
 
-storage = boto3.resource("s3")
-bucket = storage.Bucket(os.environ.get("BUCKET_NAME", True))
+storage = boto3.client("s3")
+
+
+
 
 def download_audio_file(key, data):
     return storage.download_obj(bucket, key, data)
 
 def upload_audio_file(key, data):
-    return bucket.Object(key).put(Body=data)
+    bucket = os.environ.get('BUCKET_NAME'),
+    presigned_post = storage.generate_presigned_post(
+        Bucket = bucket,
+        Key = key,
+        Fields = {"acl": "public-read"},
+        Conditions = [{"acl": "public-read"}],
+        ExpiresIn = 3600,
+        )
+
+    return json.dumps({
+        'data':presigned_post,
+        'url': f'https://{bucket}.s3/amazonaws.com/{key}',
+        })
+
 
 def get_key(filename):
     return str(uuid4()) + filename.extension
