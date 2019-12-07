@@ -17,7 +17,7 @@ storage = boto3.client("s3")
 def download_audio_file(key, data):
     return storage.download_obj(bucket, key, data)
 
-def upload_audio_file(key, data):
+def upload_audio_file(key, file-type, data):
     bucket = os.environ.get('BUCKET_NAME'),
     presigned_post = storage.generate_presigned_post(
         Bucket = bucket,

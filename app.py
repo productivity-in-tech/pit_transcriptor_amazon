@@ -43,14 +43,21 @@ def index():
     form = UploadForm()
     return render_template("index.html", form=form)
 
+@app.route('/sign_s3/')
+def get_signed_s3_url():
+    key = session['key'] = s3.get_key(request.args.get('filename'))
+    file_type = request.args.get('file_type')
+    return  s3.upload_audio_file(
+            key=key,
+            file_type=file_type,
+            data=request.files['audio_file'],
+            )
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
     email = request.form['email'] 
     filename = Path(request.files['audio_file'].filename)
-    key = session['key'] = s3.get_key(filename)
     logging.warning(key)
-    # s3.upload_audio_file(key, request.files['audio_file'])
     return redirect(url_for('setup_transcription_page'))
 
 @app.route("/setup-transcription", methods=["POST"])
