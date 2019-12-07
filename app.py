@@ -57,7 +57,6 @@ def get_signed_s3_url():
 def upload_file():
     email = request.form['email'] 
     filename = Path(request.files['audio_file'].filename)
-    logging.warning(key)
     return redirect(url_for('setup_transcription_page'))
 
 @app.route("/setup-transcription", methods=["POST"])
