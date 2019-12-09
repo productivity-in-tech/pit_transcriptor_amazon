@@ -45,7 +45,7 @@ def index():
 
 @app.route('/sign_s3/')
 def get_signed_s3_url():
-    key = session['key'] = s3.get_key(request.args.get('filename'))
+    key = session['key'] = s3.get_key(request.args.get('file_name'))
     file_type = request.args.get('file_type')
     return  s3.upload_audio_file(
             key=key,
