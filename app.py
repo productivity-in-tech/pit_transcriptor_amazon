@@ -48,11 +48,13 @@ def get_signed_s3_url():
     filename = Path(request.args.get('file_name'))
     key = session['key'] = s3.get_key(filename)
     file_type = request.args.get('file_type')
-    return  s3.upload_audio_file(
-            key=key,
-            file_type=file_type,
-            data=request.files['audio_file'],
-            )
+    return 'Hi'
+
+#    return  s3.upload_audio_file(
+#            key=key,
+#            file_type=file_type,
+#            data=request.files['audio_file'],
+#            )
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
