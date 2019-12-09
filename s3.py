@@ -21,6 +21,8 @@ def upload_audio_file(key, file_type, data):
         ExpiresIn = 3600,
         )
 
+    print(presigned_post)
+
     return json.dumps({
         'data':presigned_post,
         'url': f'https://{bucket}.s3/amazonaws.com/{key}',
