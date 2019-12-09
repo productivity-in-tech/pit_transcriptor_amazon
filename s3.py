@@ -30,4 +30,4 @@ def upload_audio_file(key, file_type, data):
 
 
 def get_key(filename):
-    return str(uuid4()) + filename.extension
+    return str(uuid4()) + filename.suffix
