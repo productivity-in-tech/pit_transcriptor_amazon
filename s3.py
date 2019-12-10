@@ -16,15 +16,17 @@ def upload_audio_file(key, file_type):
     presigned_post = storage.generate_presigned_post(
         Bucket = bucket,
         Key = key,
-        Fields = {"acl": "public-read"},
-        Conditions = [{"acl": "public-read"}],
+        Fields = {"acl": "public-read",
+            "Content-Type": file_type},
+        Conditions = [{"acl": "public-read",
+            "Content-Type": file_type}],
         ExpiresIn = 3600,
         )
 
     print(presigned_post)
 
     return json.dumps({
-        'data':presigned_post,
+        'data': presigned_post,
         'url': f'https://{bucket}.s3/amazonaws.com/{key}',
         })
 
