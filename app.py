@@ -53,8 +53,7 @@ def get_signed_s3_url():
             file_type=file_type,
             data=request.files['audio_file'],
             )
-    print(item)
-    return item
+    return 'hi'
 
 
 @app.route("/upload-file", methods=["POST"])
