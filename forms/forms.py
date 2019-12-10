@@ -8,7 +8,6 @@ import transcriber
 from flask import request
 
 class UploadForm(FlaskForm):
-    email = html5.EmailField("email", [validators.InputRequired()])
     audio_file = flask_wtf.file.FileField(
         "Audio File", [flask_wtf.file.FileRequired]
     )
@@ -34,7 +33,7 @@ class SetupForm(FlaskForm):
         "Channel Identification",
     )
 
-    speakers = fields.IntegerField(
+    max_speakers = fields.IntegerField(
         "Number of Speakers",
         _name="speakers",
         validators=[validators.Optional(), validators.NumberRange(2, 10)],

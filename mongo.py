@@ -1,7 +1,9 @@
+import dotenv
 import os
 
 import pymongo
 
+dotenv.load_dotenv()
 client = pymongo.MongoClient(f'{os.environ.get("MONGODB_URI")}?retryWrites=false')
 db = client.get_default_database()
 transcription_collection = db["transcriptions"]

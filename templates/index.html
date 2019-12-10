@@ -41,19 +41,4 @@ PIT Transcriptor
     </div>
   </section>
 </section>
-<script>
-  var inputFile = document.querySelector('#inputFile');
-var selectedFile = document.querySelector('#selectedFile');
-
-function getFileName () {
-  var filename = inputFile.value.split('\\').pop();
-  selectedFile.innerText = filename;
-  document.querySelector('#fileSubmit').removeAttribute('disabled')
-}
-
-var displayUpload = function () {
-  var fileSubmission = document.querySelector('#fileSubmission');
-  fileSubmission.className = "control";
-}
-</script>
 {% endblock %}

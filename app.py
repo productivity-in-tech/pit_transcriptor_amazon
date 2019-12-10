@@ -1,17 +1,17 @@
+import os
+from dotenv import load_dotenv
 from datetime import datetime
 import difflib
 import arrow
 import re
 import logging
 import math
-import os
 import time
 from pathlib import Path
 
 import json_builder
 import pymongo
 import mongo
-import responder
 import s3
 import transcriber
 import wtforms.fields as fields
@@ -34,46 +34,42 @@ from forms.forms import (
 
 logging.basicConfig(level=logging.WARNING)
 
-app = Flask(__name__)
-app.secret_key = "This is a test"
+load_dotenv()
 
+app = Flask(__name__)
+app.secret_key = 'This is a test'
 
 @app.route("/")
 def index():
     form = UploadForm()
     return render_template("index.html", form=form)
 
-@app.route('/sign_s3/')
-def get_signed_s3_url():
-    filename = Path(request.args.get('file_name'))
-    key = session['key'] = s3.get_key(filename)
-    file_type = request.args.get('file_type')
-    item = s3.upload_audio_file(
-            key=key,
-            file_type=file_type,
-            )
-    return item
-
-
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
-    email = request.form['email'] 
-    filename = Path(request.files['audio_file'].filename)
-    return redirect(url_for('setup_transcription_page'))
+    email = request.form['email']
+    audio_file = request.files['audio_file']
+    filename = Path(audio_file.filename)
+    session['key'] = s3.get_key(filename)
+    s3.upload_audio_file(fileobj=audio_file, key=session['key'])
 
-@app.route("/setup-transcription", methods=["POST"])
-def setup_transcription_page():
+    return redirect(url_for('setup_transcription_page', key=session['key']))
+
+@app.route("/setup-transcription/<key>")
+def setup_transcription_page(key):
     """Add more information to the transcription"""
-
-    filename = Path(request.files['audio_file'].filename)
 
     class UpdatedSetupForm(SetupForm):
         project_name = fields.StringField(
             "Project Name",
-            default=filename.stem,
+            default=key,
             filters=[lambda x:x.title()],
             validators=[validators.InputRequired()],
         )
+        email = html5.EmailField(
+                "email",
+                [validators.InputRequired()],
+                default=request.form['email'],
+                )
 
     form = UpdatedSetupForm()
 
@@ -91,14 +87,24 @@ def confirm_transcription():
 def start_transcription():
     language = request.form["language"]
     storage = request.form["storage"]
-    transcribe = request.form["transcribe"]
     channel_identification = request.form["channel_identification"]
-    job = transcriber.start_transcription(
-        key=session['key'],
-        language=language,
-        storage=storage,
-        transcribe=transcribe,
-        channel_identification=channel_identification,
+    max_speakers = request.form['max_speakers']
+
+    if max_speakers and not channel_identification:
+        show_speaker_labels = True
+
+    else:
+        show_speaker_labels = False
+
+    transcriber.start_transcription(
+        job_name = request.form['project_name'],
+        language = language,
+        key = session['key'],
+        transcribe = transcribe,
+        channel_identification = channel_identification,
+        max_speakers = max_speakers,
+        show_speaker_labels = show_speaker_labels,
+        }
     )
     return redirect(url_for('get_transcription_page', key=key))
 
@@ -184,4 +190,4 @@ def get_transcription_page(key,):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, threaded=True, port=5000)
+    app.run(debug=True, threaded=True)

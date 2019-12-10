@@ -39,23 +39,39 @@ flags = {
 @click.argument("key")
 @click.option("--language", "-l", default="en-US")
 def start_transcription(
-    key,
+    job_name,
     *,
+    key,
     language,
+    channel_identification,
+    show_speaker_labels,
+    max_speaker_labels: int=0,
     storage=storage,
     transcribe=transcribe,
     bucket=bucket,
-    channel_identification=True,
 ):
+    settings={
+        "ChannelIdentification": channel_identification,
+        "ShowSpeakerLabels": True,
+        },
+
+    if channel_identification:
+        settings['show_speaker_labels'] = False
+        settings['max_speaker_labels'] = 0
+
+    elif show_speaker_labels and max_speaker_labels > 1:
+        settings['show_speaker_labels'] = show_speaker_labels
+        settings['max_speaker_labels'] = max_speaker_labels
+
+
     transcribe_job_uri = f"{storage.meta.endpoint_url}/{bucket}/{key}"
-    transcribe.start_transcription_job(
-        TranscriptionJobName=key,
+    return transcribe.start_transcription_job(
+        TranscriptionJobName=job_name,
         Media={"MediaFileUri": transcribe_job_uri},
-        MediaFormat=Path(key).suffix[1:],
+        MediaFormat=Path(key).suffix.lstrip('.'),
         LanguageCode=language,
-        Settings={"ChannelIdentification": channel_identification},
+        Settings=settings,
     )
-    return key
 
 
 def get_key(file_path):
