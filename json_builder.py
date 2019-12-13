@@ -6,37 +6,18 @@ import logging
 import re
 import sys
 
+def build_text(transcript_pair):
+    """Given a speaker ([0]), transcript ([1]) pair. Generate text block with the Speaker,
+    Start_time, and Content"""
+    speaker, transcript_data = transcript_pair
+    # Make the start time into 00:00:00 format
+    start_time = str(datetime.timedelta(seconds=round(float(transcript_data['start_time']))))
+    content = transcript_data['alternatives'][0]['transcript']
+    # Now sew it all together
+    return f"""{speaker} {start_time}
+{content}"""
 
-def build_transcript(transcript_json):
-    json_results = transcript_json['results']
-    channels = json_results['channel_labels']['channels']
-
-    voices = {'ch_0': 'speaker 1', 'ch_1': 'speaker 2'}
-    speaker = voices['ch_0']
-    text_lines = []
-
-    for item in json_results['items']:
-
-        for channel in channels:
-            if item in channel['items']:
-                ch = channel['channel_label']
-                content = item['alternatives'][0]['content']
-
-                if item['type'] != 'punctuation':
-                    if speaker != voices[ch]:
-                        speaker = voices[ch]
-                        start_time = str(datetime.timedelta(seconds=round(float(item['start_time']))))
-                        text_lines.append(f'\n## {speaker}: (@ {start_time}):\n\n')
-
-                    if float(item['alternatives'][0]['confidence']) < 0.85:
-                        content = f'**{content}**'
-
-                elif text_lines[-1] == content:
-                        continue
-
-                text_lines.append(content)
-
-    content = ' '.join(text_lines)
-    content, count = re.subn(r' (?=[\.\,\?\!])', '', content)
-    return content
-
+def build_speaker_transcript(transcript_json):
+    speaker_labels = transcript_json['results']['speaker_labels']['segments']
+    speakers = [x['speaker_label'].replace('spk', 'Speaker') for x in speaker_labels]
+    return list(zip(speakers, transcript_json['results']['segments']))

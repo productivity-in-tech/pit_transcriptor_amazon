@@ -6,6 +6,7 @@
             </div>
           </div>
 
+          <div class="field">
           <div class="file">
   <label class="file-label">
     <input class="file-input" type="file" id="audio_file" name="audio_file">
@@ -17,14 +18,30 @@
         Choose a file…
       </span>
     </span>
+     <span class="file-name" id="audio-filename">
+      No file uploaded
+    </span>
   </label>
+              <small style="margin: 1em;" class="has-text-grey-lighter">Files will be given a Randomized UUID an you will have to
+                assign a project name</small>
+</div>
 </div>
 
 <div class="field">
             <div class="control">
               <input type="submit" class="button is-info" id="fileSubmit" value="Submit" />
             </div>
-</div>
+        </div>
           </div>
         </div>
       </form>
+
+      <script>
+  const fileInput = document.querySelector('#audio_file');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#audio-filename');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+      </script>

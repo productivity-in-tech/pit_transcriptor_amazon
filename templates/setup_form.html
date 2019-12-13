@@ -1,4 +1,4 @@
-      <form class="box" action="/verify-setup" method='post'>
+      <form class="box" action="/start-transcription" method='post'>
         {{ form.csrf_token }}
         <div class="section">
           <div class="field">
@@ -36,10 +36,10 @@
             {# Speaker Count #}
             <div class="control">
               <label>
-                {{form.speakers.label}}:
+                {{form.max_speakers.label}}:
               </label>
-              {{form.speakers()}}
-              <p class="help">{{form.speakers.description}}</p>
+              {{form.max_speakers()}}
+              <p class="help">{{form.max_speakers.description}}</p>
             </div>
           </div>
 

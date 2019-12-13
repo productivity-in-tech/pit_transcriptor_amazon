@@ -12,6 +12,11 @@ class UploadForm(FlaskForm):
         "Audio File", [flask_wtf.file.FileRequired]
     )
 
+    email = html5.EmailField(
+        "Email",
+        [validators.InputRequired()],
+    )
+
 class SetupForm(FlaskForm):
     email = html5.EmailField(
         "Email",

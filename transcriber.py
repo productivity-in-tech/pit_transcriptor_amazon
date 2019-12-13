@@ -1,3 +1,4 @@
+import json_builder
 import json
 import logging
 import os
@@ -35,36 +36,35 @@ flags = {
     'zh-CN': 'Mandarin Chinese',
     }
 
-@click.command()
-@click.argument("key")
-@click.option("--language", "-l", default="en-US")
+
 def start_transcription(
-    job_name,
-    *,
-    key,
-    language,
-    channel_identification,
-    show_speaker_labels,
-    max_speaker_labels: int=0,
-    storage=storage,
-    transcribe=transcribe,
-    bucket=bucket,
-):
+        *,
+        job_name,
+        key,
+        language,
+        channel_identification,
+        show_speaker_labels,
+        max_speaker_labels: int=0,
+        storage=storage,
+        transcribe=transcribe,
+        bucket=bucket,
+    ):
     settings={
-        "ChannelIdentification": channel_identification,
-        "ShowSpeakerLabels": True,
-        },
+        "ShowAlternatives": True,
+        "MaxAlternatives": 2,
+        }
 
     if channel_identification:
-        settings['show_speaker_labels'] = False
-        settings['max_speaker_labels'] = 0
+        settings['ChannelIdentification'] = channel_identification
 
     elif show_speaker_labels and max_speaker_labels > 1:
-        settings['show_speaker_labels'] = show_speaker_labels
-        settings['max_speaker_labels'] = max_speaker_labels
+        settings['ShowSpeakerLabels'] = show_speaker_labels
+        settings['MaxSpeakerLabels'] = max_speaker_labels
+
+    transcribe_job_uri = f"https://{bucket}.s3.amazonaws.com/{key}"
+    print(transcribe_job_uri)
 
 
-    transcribe_job_uri = f"{storage.meta.endpoint_url}/{bucket}/{key}"
     return transcribe.start_transcription_job(
         TranscriptionJobName=job_name,
         Media={"MediaFileUri": transcribe_job_uri},
@@ -95,6 +95,15 @@ def get_transcription(job):
     logging.debug(r.json())
     r.raise_for_status()
     return r.json()
+
+
+def format_speaker_transcription(job):
+    transcript_json = transcriber.get_transcription(job)
+    speaker_transcription = build_speaker_transcript(transcription_json)
+    transcription_data = json_builder.build_speaker_transcript(transcript_json)
+    return '\n'.join(
+            list(map(json_builder.build_text, transcription_data))
+            )
 
 
 if __name__ == "__main__":

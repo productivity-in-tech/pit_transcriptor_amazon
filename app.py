@@ -9,11 +9,11 @@ import math
 import time
 from pathlib import Path
 
-import json_builder
 import pymongo
 import mongo
 import s3
 import transcriber
+from wtforms.fields import html5
 import wtforms.fields as fields
 import wtforms.validators as validators
 from flask import (
@@ -42,33 +42,44 @@ app.secret_key = 'This is a test'
 @app.route("/")
 def index():
     form = UploadForm()
-    return render_template("index.html", form=form)
+    recent_uploads = mongo.transcription_collection.find(
+            sort = [('job.CreationTime', pymongo.DESCENDING)],
+            limit = 5,
+            )
+    return render_template(
+            "index.html",
+            form=form,
+            recent_uploads=recent_uploads)
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
-    email = request.form['email']
+    email = request.form.get('email')
     audio_file = request.files['audio_file']
     filename = Path(audio_file.filename)
-    session['key'] = s3.get_key(filename)
-    s3.upload_audio_file(fileobj=audio_file, key=session['key'])
+    key = s3.get_key(filename)
+    s3.upload_audio_file(fileobj=audio_file, key=key)
 
-    return redirect(url_for('setup_transcription_page', key=session['key']))
+    return redirect(url_for('setup_transcription_page', key=key))
 
 @app.route("/setup-transcription/<key>")
 def setup_transcription_page(key):
     """Add more information to the transcription"""
 
     class UpdatedSetupForm(SetupForm):
+        if not session.get('project_key') == key:
+            session['project_key'] = key
+
         project_name = fields.StringField(
             "Project Name",
-            default=key,
+            default=session.get('project_key', key),
             filters=[lambda x:x.title()],
             validators=[validators.InputRequired()],
         )
+
         email = html5.EmailField(
                 "email",
-                [validators.InputRequired()],
-                default=request.form['email'],
+                validators=[validators.InputRequired()],
+                default=request.form.get('email', ''),
                 )
 
     form = UpdatedSetupForm()
@@ -86,27 +97,26 @@ def confirm_transcription():
 @app.route("/start-transcription", methods=["POST"])
 def start_transcription():
     language = request.form["language"]
-    storage = request.form["storage"]
-    channel_identification = request.form["channel_identification"]
-    max_speakers = request.form['max_speakers']
+    job_name = re.sub(r'[^0-9a-zA-Z]+', '-', request.form['project_name'])
+    channel_identification = request.form.get("channel_identification")
+    max_speaker_labels = int(request.form['max_speakers'])
 
-    if max_speakers and not channel_identification:
+    if max_speaker_labels and not channel_identification:
         show_speaker_labels = True
 
     else:
         show_speaker_labels = False
 
     transcriber.start_transcription(
-        job_name = request.form['project_name'],
+        job_name = job_name,
         language = language,
-        key = session['key'],
-        transcribe = transcribe,
+        key = session['project_key'],
         channel_identification = channel_identification,
-        max_speakers = max_speakers,
+        max_speaker_labels = max_speaker_labels,
         show_speaker_labels = show_speaker_labels,
-        }
     )
-    return redirect(url_for('get_transcription_page', key=key))
+
+    return redirect(url_for('get_transcription_page', key=job_name))
 
 @app.route('/post-transcription', methods=['POST'])
 def post_transcription_edit():
@@ -119,7 +129,6 @@ def post_transcription_edit():
                 {f"transcriptions.{version_date}": transcription_text},
             })
     return redirect(url_for('get_transcription_page', key=key))
-
 
 
 @app.route('/search-replace', methods=['POST'])
@@ -148,17 +157,26 @@ def get_transcription_page(key,):
     )
 
     if not transcript:
-        job = transcriber.transcribe.get_transcription_job(TranscriptionJobName=key)
-        logging.debug(job)
-        transcription = transcriber.get_transcription(job)
-        transcription_text = json_builder.build_transcript(transcription).strip()
-        transcript = {version_date: transcription_text}
-        transcriptions = mongo.transcription_collection.insert_one(
-                {
-                    'key': key,
-                    'job': job,
-                    'transcriptions': transcript,
-                })
+        version_date =  datetime.utcnow().strftime('%Y%m%d%H%M%S')
+        transcribe = transcriber.transcribe
+        job = transcribe.get_transcription_job(TranscriptionJobName=key)
+
+        if (status := transcriber.check(job)) != 'COMPLETED':
+            return f'<h1>Current Status for {key}</h1><h2>{status=}</h2>'
+
+        job_settings = job['TranscriptionJob']['Settings']
+        show_speaker_labels = job_settings['ShowSpeakerLabels']
+        channel_identification = job_settings['ChannelIdentification']
+
+        if show_speaker_labels and not channel_identification:
+            transcription_text = transcriber.format_speaker_transcription(job)
+            transcript = {version_date: transcription_text}
+            transcriptions = {
+                        'key': key,
+                        'job': job,
+                        'transcriptions': transcript,
+                    }
+            mongo.transcription_collection.insert_one(transcriptions)
 
     transcriptions = sorted(transcript['transcriptions'].items(), key=lambda x:x[0])
     version_date, transcription_text = transcriptions[-1]
@@ -190,4 +208,4 @@ def get_transcription_page(key,):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, threaded=True)
+    app.run(host='0.0.0.0', debug=True, threaded=True)

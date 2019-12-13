@@ -1,0 +1,10 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Recent Uploads</h1>
+    <ul>
+    {% for upload in recents %}
+    <li><a
+          href="/transcriptions/{{upload['key']}}">{{upload['project_name']}}</a></li>
+    {% endfor %} 
+  </div>
+</section>
