@@ -1,8 +1,4 @@
-## Version - 2019.09.03
-* Add [Click]() for command-line usage
-* Made Pushover Notifications Optional with `-n/--notifications` flag
-* `ChannelIdentification` switch `-c (--channels) 1/2`
-
+# Transcriptor CLI
 ## Step 0
 1. Define your aws credentials in the ~/.aws/credentials
 2. Define your default region in the ~/.aws/config
