@@ -98,7 +98,7 @@ def bulk_transcription(
     transcribe = boto3.client('transcribe')
 
 
-    for path in Path(directory).glob(f'*.{file_format}'):
+    for path in Path(directory).rglob(f'*.{file_format}'):
         key = path.name.replace(' ', '')
 
         if check:
@@ -115,7 +115,7 @@ def bulk_transcription(
 
                 click.echo(f'Job: {key} complete and written')
 
-            return # Terminates the script
+            continue # Terminates the script
 
         storage.upload_file(
                 Filename=str(path),
